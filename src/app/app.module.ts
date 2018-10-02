@@ -3,21 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+// Importacion de pages a usar
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import {UserGatePage} from '../pages/user-gate/user-gate';
+import {AdminHomePage} from '../pages/admin-home/admin-home';
+import { AdminLocalPage } from '../pages/admin-local/admin-local';
+import { AdminComprasPage } from '../pages/admin-compras/admin-compras';
+import { AdminPlatillosPage } from '../pages/admin-platillos/admin-platillos';
+import { AdminBandejaPage } from '../pages/admin-bandeja/admin-bandeja';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+
+
+
+
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage
+    UserGatePage,   // se colocan las paginas importadas a usar en aplicacion
+    AdminHomePage,
+    AdminLocalPage,
+    AdminComprasPage,
+    AdminPlatillosPage,
+    AdminBandejaPage
   ],
   imports: [
     BrowserModule,
@@ -26,10 +37,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage
+    HomePage,          // se colocan las paginas importadas a usar en aplicacion
+    UserGatePage,
+    AdminHomePage,
+    AdminLocalPage,
+    AdminComprasPage,
+    AdminPlatillosPage,
+    AdminBandejaPage
   ],
   providers: [
     StatusBar,

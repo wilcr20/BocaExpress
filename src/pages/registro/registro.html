@@ -15,38 +15,64 @@
 
 <ion-content padding>
 
+    <ion-item>
+        <ion-label>Tipo de usuario</ion-label>
+        <ion-select [(ngModel)]="userOption" (ionChange)="onItemSelection($event)">
+            <ion-option [value]="item" *ngFor="let item of option">{{item.name}}</ion-option>
+        </ion-select>
+    </ion-item>
 
-    <ion-list>
-        <ion-item>
-            <ion-label>Tipo de usuario</ion-label>
-            <ion-select [(ngModel)]="toppings" cancelText="Nah" okText="Okay!">
-                <ion-option value="peppers">Cliente</ion-option>
-                <ion-option value="mushrooms">Restaurante</ion-option>
-            </ion-select>
-        </ion-item>
-    </ion-list>
+    <div *ngIf="estado  == 'Cliente'">
 
-    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-        <ion-row>
-            <ion-col>
-                <ion-list inset>
-                    <ion-item>
-                        <ion-input placeholder="Email" name="username" id="loginField" type="text" required [(ngModel)]="username" #email></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password"></ion-input>
-                    </ion-item>
-                </ion-list>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-                <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login
+        <form #loginForm="ngForm" autocomplete="off">
+            <ion-row>
+                <ion-col>
+                    <ion-list inset>
+                        <ion-item>
+                            <ion-input placeholder="Email" name="username" id="loginField" type="text" required #email></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required></ion-input>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Registrar
                 </button>
-            </ion-col>
-        </ion-row>
-    </form>
+                </ion-col>
+            </ion-row>
+        </form>
 
+    </div>
+
+    <div *ngIf="estado  == 'Restaurante'">
+
+        <form #loginForm="ngForm" autocomplete="off">
+            <ion-row>
+                <ion-col>
+                    <ion-list inset>
+                        <ion-item>
+                            <ion-input placeholder="Nombre de empresa" name="username" id="loginField" type="text" required #email></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input placeholder="Email" name="username" id="loginField" type="text" required #email></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required></ion-input>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Registrar
+                        </button>
+                </ion-col>
+            </ion-row>
+        </form>
+
+    </div>
 
 </ion-content>

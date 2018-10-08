@@ -14,6 +14,12 @@ import { LoginPage } from '../login/login';
 })
 export class UserPrincipalPage {
 
+  /*
+  tab1Root = AdminHomePage;
+  tab2Root = AdminHomePage;
+  tab3Root = LoginPage;
+  tab4Root = LoginPage;
+  */
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -23,6 +29,7 @@ export class UserPrincipalPage {
     console.log('ionViewDidLoad UserPrincipalPage');
   }
 
+  
   adminVentana() {
     
     var jsonPrueba = {  // Prueba de como funcionan los envios de Json entre Pages
@@ -31,8 +38,10 @@ export class UserPrincipalPage {
     };
     this.navCtrl.push(AdminHomePage, {jsonPrueba});  // el navCtrl funciona como redireccion de paginas
   }
+  
 
   loginVentana(){
     this.navCtrl.push(LoginPage);
   }
+  
 }

@@ -4,9 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { UserPrincipalPage } from '../pages/user-principal/user-principal';
-import { UserCercanosPage } from '../pages/user-cercanos/user-cercanos';
 import { UserHistorialComprasPage } from '../pages/user-historial-compras/user-historial-compras';
-import { UserFavoritosPage } from '../pages/user-favoritos/user-favoritos';
+import {  TabsPage} from '../pages/tabs/tabs';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,24 +13,25 @@ import { UserFavoritosPage } from '../pages/user-favoritos/user-favoritos';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = UserPrincipalPage;
+  //rootPage: any = UserPrincipalPage;
+  rootPage: any = TabsPage;
 
   pages: Array<{title: string, component: any}>;
 
   constructor(public menuCtrl: MenuController,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
 
+    
     //habilitar este menu para las demas paginas
     this.menuCtrl.swipeEnable(true, 'main-menu');
 
-    this.initializeApp();
-
     this.pages = [
-      { title: 'Cercanos',  component: UserCercanosPage},
-      { title: 'Favoritos', component: UserFavoritosPage },
       { title: 'Historial', component: UserHistorialComprasPage },
     ];
 
+    this.initializeApp();
+    
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -41,7 +41,7 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
-
+  
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
@@ -54,4 +54,5 @@ export class MyApp {
       this.nav.push(page.component);
     }
   }
+
 }

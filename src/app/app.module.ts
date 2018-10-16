@@ -18,6 +18,7 @@ import { CompraPage } from '../pages/compra/compra';
 import {LoginPage} from '../pages/login/login';
 import { RegistroPage } from '../pages/registro/registro';
 import {  TabsPage } from '../pages/tabs/tabs';
+import {  ListaPage } from '../pages/lista/lista';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -42,7 +43,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CompraPage,
     RegistroPage,
     LoginPage,
-    TabsPage
+    TabsPage,
+    ListaPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CompraPage,
     RegistroPage,
     LoginPage,
-    TabsPage
+    TabsPage,
+    ListaPage
   ],
   providers: [
     StatusBar,

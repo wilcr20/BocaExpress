@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { UserPrincipalPage } from '../user-principal/user-principal';
-import { LoginPage } from '../login/login';
+import { ListaPage } from '../lista/lista';
 import { UserFavoritosPage } from '../user-favoritos/user-favoritos';
 import { UserCercanosPage } from '../user-cercanos/user-cercanos';
 /**
@@ -23,7 +23,7 @@ export class TabsPage {
   tab1Root = UserPrincipalPage;
   tab2Root = UserCercanosPage;
   tab3Root = UserFavoritosPage;
-  tab4Root = LoginPage;
+  tab4Root = ListaPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

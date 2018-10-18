@@ -3,6 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+
+// Mapa
+import { Geolocation } from '@ionic-native/geolocation';
+
+
 // Importacion de pages a usar
 import {AdminHomePage} from '../pages/admin-home/admin-home';
 import { AdminLocalPage } from '../pages/admin-local/admin-local';
@@ -72,6 +77,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

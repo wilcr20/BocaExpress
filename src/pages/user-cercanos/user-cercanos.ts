@@ -15,7 +15,7 @@ export class UserCercanosPage {
   map: any;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     private geolocation: Geolocation) {
   }
@@ -38,7 +38,7 @@ export class UserCercanosPage {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     console.log(latitude, longitude);
-    
+
     // create a new map by passing HTMLElement
     let mapEle: HTMLElement = document.getElementById('map');
 

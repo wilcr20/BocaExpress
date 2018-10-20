@@ -22,12 +22,27 @@ import { AdminBandejaPage } from '../admin-bandeja/admin-bandeja';
 export class AdminHomePage {
 
   jsonUser:any; // Variable para recibir el json enviado desde userGate
+  tabBarElement:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
     this.jsonUser= this.navParams.get('jsonPrueba'); // se usa el navParams.get para obtener los paarmetros recibidos de ventanas
     console.log("Json recibido: ", this.jsonUser);
+
+
   }
+
+  ionViewWillEnter(){
+    console.log("Aplica coultamiento");
+    this.tabBarElement= document.getElementById("TabPrincipal");
+    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
+  }
+  ionViewWillLeave(){
+    console.log("SALE ");
+    document.getElementById("TabPrincipal").className="MostrarTab";
+  }
+
+
 
   ventanaLocal(){
     this.navCtrl.push(AdminLocalPage);
@@ -49,6 +64,10 @@ export class AdminHomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminHomePage');
+
+
   }
+
+
 
 }

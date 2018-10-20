@@ -15,11 +15,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AdminPlatillosPage {
 
+  tabBarElement:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPlatillosPage');
+  }
+
+  ionViewWillEnter(){
+    console.log("Aplica coultamiento");
+    this.tabBarElement= document.getElementById("TabPrincipal");
+    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
+  }
+  ionViewWillLeave(){
+    console.log("SALE ");
+    document.getElementById("TabPrincipal").className="MostrarTab";
   }
 
 }

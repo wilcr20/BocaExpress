@@ -19,7 +19,7 @@ import { UserCercanosPage } from '../user-cercanos/user-cercanos';
 })
 export class TabsPage {
 
-  
+
   tab1Root = UserPrincipalPage;
   tab2Root = UserCercanosPage;
   tab3Root = UserFavoritosPage;

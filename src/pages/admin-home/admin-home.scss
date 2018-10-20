@@ -20,3 +20,31 @@ page-admin-home {}
 .btn_compra {
     background-image: url('../../assets/imgs/btn_compras.jpg');
 }
+
+.OcultaTab1 a:first-child {
+    display: none;
+    /*usar con admin*/
+}
+
+.OcultaTab2 a:nth-child(2) {
+    display: none;
+    /*usar con admin*/
+}
+
+.OcultaTab3 a:nth-child(3) {
+    display: none;
+    /*usar con admin*/
+}
+
+.OcultaTab4 a:nth-child(4) {
+    display: none;
+    /*usar con admin*/
+}
+
+.MostrarTab a:first-child,
+a:nth-child(2),
+a:nth-child(3),
+a:nth-child(4) {
+    display: block;
+    /*usar con cliente*/
+}

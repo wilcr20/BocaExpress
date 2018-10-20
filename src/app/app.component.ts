@@ -20,7 +20,7 @@ export class MyApp {
 
   constructor(public menuCtrl: MenuController,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
 
-    
+
     //habilitar este menu para las demas paginas
     this.menuCtrl.swipeEnable(true, 'main-menu');
 
@@ -29,8 +29,9 @@ export class MyApp {
     ];
 
     this.initializeApp();
-    
+
   }
+
 
 
   initializeApp() {
@@ -41,7 +42,7 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
-  
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
@@ -50,7 +51,7 @@ export class MyApp {
       this.nav.setRoot(UserPrincipalPage);
 
     } else {
-      
+
       this.nav.push(page.component);
     }
   }

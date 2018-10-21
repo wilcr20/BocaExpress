@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 
 declare var google;
 
@@ -12,52 +10,32 @@ declare var google;
 })
 export class UserCercanosPage {
 
+  @ViewChild("map") mapElement;
   map: any;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
-    private geolocation: Geolocation) {
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    this.getPosition();
+    this.initMap();
   }
 
-  getPosition():any{
-    this.geolocation.getCurrentPosition()
-    .then(response => {
-      this.loadMap(response);
-    })
-    .catch(error =>{
-      console.log(error);
-    })
+  initMap(){
+
+    let coords = new google.maps.LatLng(10.364245,-84.4838111);
+    let mapOptions:  google.maps.MapOptions = {
+      center: coords,
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    }
+
+    this.map = new google.maps.Map(
+      this.mapElement.nativeElement,
+      mapOptions
+      );
   }
 
-  loadMap(position: Geoposition){
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
-    console.log(latitude, longitude);
-
-    // create a new map by passing HTMLElement
-    let mapEle: HTMLElement = document.getElementById('map');
-
-    // create LatLng object
-    let myLatLng = {lat: latitude, lng: longitude};
-
-    // create map
-    this.map = new google.maps.Map(mapEle, {
-      center: myLatLng,
-      zoom: 12
-    });
-
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      let marker = new google.maps.Marker({
-        position: myLatLng,
-        map: this.map,
-        title: 'Hello World!'
-      });
-      mapEle.classList.add('show-map');
-    });
-  }
 }

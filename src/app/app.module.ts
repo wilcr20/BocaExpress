@@ -5,7 +5,6 @@ import { MyApp } from './app.component';
 
 
 // Mapa
-import { Geolocation } from '@ionic-native/geolocation';
 
 
 // Importacion de pages a usar
@@ -27,10 +26,6 @@ import {  ListaPage } from '../pages/lista/lista';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -77,8 +72,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Geolocation
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

@@ -20,7 +20,7 @@
         <ion-select [(ngModel)]="userOption" (ionChange)="onItemSelection($event)">
             <ion-option [value]="item" *ngFor="let item of option">{{item.name}}</ion-option>
         </ion-select>
-    </ion-item>
+    </ion-item><br><br>
 
     <div *ngIf="estado  == 'Cliente'">
 
@@ -34,6 +34,9 @@
                         <ion-item>
                             <ion-input placeholder="Password" name="password" id="passwordField" type="password" required></ion-input>
                         </ion-item>
+                        <ion-item>
+                            <ion-input placeholder="telefono" name="telefono" id="telefonoField" type="number" required></ion-input>
+                        </ion-item>
                     </ion-list>
                 </ion-col>
             </ion-row>
@@ -44,23 +47,45 @@
                 </ion-col>
             </ion-row>
         </form>
-
     </div>
 
     <div *ngIf="estado  == 'Restaurante'">
-
+        <ion-item>
+            <ion-label>Tipo de Restaurante</ion-label>
+            <ion-select [(ngModel)]="categorieOption" (ionChange)="onItemSelection($event)">
+                <ion-option [value]="item" *ngFor="let item of alternative">{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
         <form #loginForm="ngForm" autocomplete="off">
             <ion-row>
                 <ion-col>
                     <ion-list inset>
                         <ion-item>
-                            <ion-input placeholder="Nombre de empresa" name="username" id="loginField" type="text" required #email></ion-input>
+                            <!-- Img Restaurante-->
+                            <ion-thumbnail item-start>
+                                <img src="../../assets/imgs/arrozconleche.jpg">
+                            </ion-thumbnail>
                         </ion-item>
                         <ion-item>
-                            <ion-input placeholder="Email" name="username" id="loginField" type="text" required #email></ion-input>
+                            <ion-input placeholder="Nombre del Restaurante" name="restaurantname" id="restaurantnameField" type="text" required></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required></ion-input>
+                            <ion-input placeholder="Horario" name="horario" id="horarioField" type="text" required></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input placeholder="telefono" name="telefono" id="telefonoRestauranteField" type="text" required></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input placeholder="Descripción" name="descripción" id="descripcionField" type="text" required></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input placeholder="Nombre Propietario" name="propietario" id="propietario" type="text" required></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <!-- Img Propietario-->
+                            <ion-thumbnail item-start>
+                                <img src="../../assets/imgs/arrozconleche.jpg">
+                            </ion-thumbnail>
                         </ion-item>
                     </ion-list>
                 </ion-col>

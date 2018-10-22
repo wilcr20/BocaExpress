@@ -18,6 +18,9 @@ export class RegistroPage {
 
   userOption : Array<{name: string}>;
   option     : Array<{name: string}>;
+
+  categorieOption : Array<{name: string}>;
+  alternative     : Array<{name: string}>;
   
   estado:any = "null";
 
@@ -25,6 +28,13 @@ export class RegistroPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
     this.option  = [{ name: "Cliente" },{name: "Restaurante"}]; 
+
+    this.alternative  = [{ name:"Comida Rapida" },
+                         {name: "Familiar"},
+                         {name: "Buffet"},
+                         {name: "Temáticos"},
+                         {name: "Para llevar"},
+                         {name: "Oriental"}]; 
   }
 
   ionViewDidLoad() {

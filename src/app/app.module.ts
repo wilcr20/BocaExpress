@@ -4,6 +4,10 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 
+// Camara
+import { Camera} from '@ionic-native/camera';
+
+
 // Mapa
 
 
@@ -82,6 +86,7 @@ import {AngularFireAuthModule} from 'angularfire2/auth'
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

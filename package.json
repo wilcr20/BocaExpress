@@ -20,6 +20,7 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/camera": "^4.16.0",
     "@ionic-native/core": "~4.12.0",
     "@ionic-native/geolocation": "^4.16.0",
     "@ionic-native/google-maps": "^4.14.0",
@@ -28,6 +29,7 @@
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.0.2",
     "cordova-android": "7.0.0",
+    "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-googlemaps": "2.4.6",
@@ -66,7 +68,8 @@
         "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android"

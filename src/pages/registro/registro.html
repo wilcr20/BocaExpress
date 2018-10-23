@@ -24,6 +24,12 @@
 
     <div *ngIf="estado  == 'Cliente'">
 
+
+        <button ion-button block (click)="takePhoto()">Take Photo</button>
+
+        <button ion-button block (click)="getImage()">Toma una foto</button>
+        <img [src]="image" *ngIf="image" />
+
         <form #loginForm="ngForm" autocomplete="off">
             <ion-row>
                 <ion-col>

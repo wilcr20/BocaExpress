@@ -38,8 +38,10 @@ export class UserCercanosPage {
 
     this.map = new google.maps.Map( this.mapElement.nativeElement,mapOptions);
 
+    /*
     var dogwalkMarker = new google.maps.Marker({position: coords, title: "titulos"});
       dogwalkMarker.setMap(this.map);
+    */
   
   }
 }

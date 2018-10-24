@@ -29,6 +29,7 @@
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.0.2",
     "cordova-android": "7.0.0",
+    "cordova-android-play-services-gradle-release": "^1.4.4",
     "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "4.0.1",
@@ -69,7 +70,10 @@
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-camera": {}
+      "cordova-plugin-camera": {},
+      "cordova-android-play-services-gradle-release": {
+        "PLAY_SERVICES_VERSION": "15.0.0"
+      }
     },
     "platforms": [
       "android"

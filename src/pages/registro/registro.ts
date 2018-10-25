@@ -56,25 +56,7 @@ export class RegistroPage {
     }
   }
 
-  takePhoto(){
-
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    
-    this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     //let base64Image = 'data:image/jpeg;base64,' + imageData;
-     //console.log(base64Image);
-    }, (err) => {
-     // Handle error
-    });
-
-  }
+  
 
   getImage(){
     const options: CameraOptions = {
@@ -85,7 +67,7 @@ export class RegistroPage {
     }
     this.camera.getPicture( options )
     .then(imageData => {
-      this.image = `data:image/jpeg;base64,${imageData}`;
+      this.image = 'data:image/jpeg;base64,' + imageData;//`data:image/jpeg;base64,${imageData}`;
     })
     .catch(error =>{
       console.error( error );

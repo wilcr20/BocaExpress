@@ -13,9 +13,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="body">
 
-    <ion-list menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    <ion-list color="list" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
 
         {{p.title}}
         <button ion-button clear item-end>

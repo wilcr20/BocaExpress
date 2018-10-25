@@ -15,39 +15,43 @@
 
 <ion-content padding class="body">
 
-    <ion-item>
+    <ion-item color="componet">
         <ion-label>Tipo de usuario</ion-label>
         <ion-select [(ngModel)]="userOption" (ionChange)="onItemSelection($event)">
-            <ion-option [value]="item" *ngFor="let item of option">{{item.name}}</ion-option>
+            <ion-option [value]="item" *ngFor="let item of option">{{item.name}} </ion-option>
         </ion-select>
     </ion-item><br><br>
 
     <div *ngIf="estado  == 'Cliente'">
 
 
-        <button ion-button block (click)="takePhoto()">Take Photo</button>
 
-        <button ion-button block (click)="getImage()">Toma una foto</button>
-        <img [src]="image" *ngIf="image" />
+        <ion-item color="componet">
+            <ion-icon name="image" item-left primary (click)="getImage()"></ion-icon>
+        </ion-item>
+
+        <ion-thumbnail *ngIf="image" item-start color="componet">
+            <img [src]="image">
+        </ion-thumbnail>
 
         <form #loginForm="ngForm" autocomplete="off">
             <ion-row>
                 <ion-col>
                     <ion-list inset>
-                        <ion-item>
+                        <ion-item color="componet">
                             <ion-input placeholder="Email" name="username" id="loginField" type="text" required #email></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item color="componet">
                             <ion-input placeholder="Password" name="password" id="passwordField" type="password" required></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item color="componet">
                             <ion-input placeholder="telefono" name="telefono" id="telefonoField" type="number" required></ion-input>
                         </ion-item>
                     </ion-list>
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col>
+                <ion-col color="componet">
                     <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Registrar
                 </button>
                 </ion-col>
@@ -56,7 +60,7 @@
     </div>
 
     <div *ngIf="estado  == 'Restaurante'">
-        <ion-item>
+        <ion-item color="componet">
             <ion-label>Tipo de Restaurante</ion-label>
             <ion-select [(ngModel)]="categorieOption" (ionChange)="onItemSelection($event)">
                 <ion-option [value]="item" *ngFor="let item of alternative">{{item.name}}</ion-option>
@@ -66,28 +70,28 @@
             <ion-row>
                 <ion-col>
                     <ion-list inset>
-                        <ion-item>
+                        <ion-item color="componet">
                             <!-- Img Restaurante-->
                             <ion-thumbnail item-start>
                                 <img src="../../assets/imgs/arrozconleche.jpg">
                             </ion-thumbnail>
                         </ion-item>
-                        <ion-item>
+                        <ion-item color="componet">
                             <ion-input placeholder="Nombre del Restaurante" name="restaurantname" id="restaurantnameField" type="text" required></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item color="componet">
                             <ion-input placeholder="Horario" name="horario" id="horarioField" type="text" required></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item color="componet">
                             <ion-input placeholder="telefono" name="telefono" id="telefonoRestauranteField" type="text" required></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item color="componet">
                             <ion-input placeholder="Descripción" name="descripción" id="descripcionField" type="text" required></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item color="componet">
                             <ion-input placeholder="Nombre Propietario" name="propietario" id="propietario" type="text" required></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item color="componet">
                             <!-- Img Propietario-->
                             <ion-thumbnail item-start>
                                 <img src="../../assets/imgs/arrozconleche.jpg">

@@ -5,23 +5,23 @@ import { Platillo } from '../../model/platillo/platillo.model';
 @Injectable()
 export class PlatilloService {
  
-    private noteListRef = this.db.list<Platillo>('Platillo');
+    private platilloListRef = this.db.list<Platillo>('Platillo');
  
     constructor(private db: AngularFireDatabase) { }
  
     getPlatilloList() {
-        return this.noteListRef;
+        return this.platilloListRef;
     }
  
     addPlatillo(platillo: Platillo) {
-        return this.noteListRef.push(platillo);
+        return this.platilloListRef.push(platillo);
     }
  
     updatePlatillo(platillo: Platillo) {
-        return this.noteListRef.update(platillo.precio, platillo);
+        return this.platilloListRef.update(platillo.precio, platillo);
     }
  
     removePlatillo(platillo: Platillo) {
-        return this.noteListRef.remove(platillo.idRestaurante);
+        return this.platilloListRef.remove(platillo.idRestaurante);
     }
 }

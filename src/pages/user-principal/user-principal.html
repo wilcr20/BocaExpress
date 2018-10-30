@@ -20,20 +20,27 @@
 
     <ion-searchbar></ion-searchbar>
 
-    <ion-card>
-        <img src="../../assets/imgs/arrozconleche.jpg" />
-        <ion-card-content>
-            <ion-card-title>
-                Arroz con leche
-            </ion-card-title>
-            <p>
-                Arroz con leche 7u7
-            </p><br>
-            <p> <strong>Precio:</strong> 1200 colones.</p>
-        </ion-card-content>
-    </ion-card>
-
     <button ion-button color="dark" (click)="adminVentana()">
         <ion-icon name="key"></ion-icon>Administrador
     </button>
+    <button ion-button block color="dark" (click)="addPlatillo()">Agregar platillos prueba</button>
+
+    <ion-card *ngFor="let platillo of platilloList | async" (click)="verPlatillo(platillo)">
+        <img src="{{platillo.imagen}}">
+        <ion-card-content>
+            <ion-card-title>
+                {{platillo.nombre}}
+            </ion-card-title>
+            <p>
+                {{platillo.descripcion}}
+            </p>
+            <p>
+                <strong>
+                    Precio:
+                </strong> {{platillo.precio}}
+            </p>
+        </ion-card-content>
+    </ion-card>
+
+
 </ion-content>

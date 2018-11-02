@@ -14,3 +14,18 @@
 // automatically applied to the <body> element in the app.
 
 /* Se encargan de ocultar y mostrar los tabs , de acuerdo a usuario de uso*/
+
+.alertCustomCss {
+    button {
+        color: green!important;
+    }
+    .alert-wrapper {
+        background: #f3f4d0;
+    }
+    .alert-message {
+        color: grayscale($color: #000000);
+    }
+    .alert-title {
+        color: grayscale($color: #000000);
+    }
+}

@@ -7,12 +7,42 @@
 <ion-header>
 
     <ion-navbar color="nav">
-        <ion-title>producto</ion-title>
+        <ion-title>{{platillo.nombre}}</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding class="body">
+<ion-content padding class="card-background-page">
 
+    <ion-card>
+
+        <img src="{{platillo.imagen}}">
+        <ion-fab right top>
+            <button ion-fab>
+            <ion-icon name="pin"></ion-icon>
+          </button>
+        </ion-fab>
+
+        <ion-item>
+            <ion-icon name="ios-basket-outline" item-start large></ion-icon>
+            <h2>Nombre</h2>
+            <p>{{platillo.nombre}}</p>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="ios-beer-outline" item-start large></ion-icon>
+            <h2>Descripción</h2>
+            <p>{{platillo.descripcion}}</p>
+        </ion-item>
+
+        <ion-item>
+            <button ion-button icon-start clear item-end>
+            <ion-icon name="ios-card"></ion-icon>
+            Buy
+          </button>
+            <p>₡{{platillo.precio}}</p>
+        </ion-item>
+
+    </ion-card><br><br>
 </ion-content>

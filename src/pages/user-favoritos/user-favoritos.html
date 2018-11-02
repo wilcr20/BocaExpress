@@ -15,64 +15,15 @@
 
 <ion-content padding class="body">
 
-    <ion-list>
-
+    <ion-list *ngFor="let platillo of platillos">
         <ion-item>
             <ion-thumbnail item-start>
-                <img src="../../assets/imgs/arrozconleche.jpg">
+                <img src="{{platillo.imagen}}">
             </ion-thumbnail>
-            <h2>My Neighbor Totoro</h2>
-            <p>Hayao Miyazaki • 1988</p>
-            <ion-fab right bottom item-end>
-                <button ion-fab mini color="light">View</button>
-                <ion-fab-list side="left">
-                    <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-                </ion-fab-list>
-            </ion-fab>
+            <h2>{{platillo.nombre}}</h2>
+            <p>₡{{platillo.precio}}</p>
+            <button ion-button clear item-end>Remove</button>
         </ion-item>
-
-        <ion-item>
-            <ion-thumbnail item-start>
-                <img src="../../assets/imgs/arrozconleche.jpg">
-            </ion-thumbnail>
-            <h2>My Neighbor Totoro</h2>
-            <p>Hayao Miyazaki • 1988</p>
-            <ion-fab right bottom item-end>
-                <button ion-fab mini color="light">View</button>
-                <ion-fab-list side="left">
-                    <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-                </ion-fab-list>
-            </ion-fab>
-        </ion-item>
-
-        <ion-item>
-            <ion-thumbnail item-start>
-                <img src="../../assets/imgs/arrozconleche.jpg">
-            </ion-thumbnail>
-            <h2>My Neighbor Totoro</h2>
-            <p>Hayao Miyazaki • 1988</p>
-
-            <ion-fab right bottom item-end>
-                <button ion-fab mini color="light">View</button>
-                <ion-fab-list side="left">
-                    <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-                    <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-                </ion-fab-list>
-            </ion-fab>
-
-        </ion-item>
-
-
-
-
     </ion-list>
 
 </ion-content>

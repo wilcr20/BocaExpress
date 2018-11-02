@@ -15,7 +15,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProductoPage {
 
+  platillo:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.platillo= this.navParams.get('platillo');
   }
 
   ionViewDidLoad() {

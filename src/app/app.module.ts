@@ -6,7 +6,6 @@ import { MyApp } from './app.component';
 
 // Camara
 import { Camera} from '@ionic-native/camera';
-import { Observable } from 'rxjs/Observable';
 
 
 // Importacion de pages a usar
@@ -34,7 +33,7 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth'
 
 import { PlatilloService } from '../services/platillo/platillo.service';
-
+import { FavoritoService } from '../services/favorito/favorito.service';
 
 @NgModule({
   declarations: [
@@ -86,7 +85,8 @@ import { PlatilloService } from '../services/platillo/platillo.service';
     SplashScreen,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PlatilloService
+    PlatilloService,
+    FavoritoService
   ]
 })
 export class AppModule {}

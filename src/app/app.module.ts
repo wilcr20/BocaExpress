@@ -84,7 +84,7 @@ import { PlatilloService } from '../services/platillo/platillo.service';
   providers: [
     StatusBar,
     SplashScreen,
-    Camera,
+    //Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PlatilloService
   ]

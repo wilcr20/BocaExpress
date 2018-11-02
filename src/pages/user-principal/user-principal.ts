@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 //pages
 import {AdminHomePage} from '../admin-home/admin-home'; // importa la pagina a llamar
@@ -44,7 +45,8 @@ export class UserPrincipalPage {
               public navParams: NavParams, 
               private platilloService: PlatilloService,
               public alertCtrl: AlertController,
-              public favoritoService: FavoritoService) {
+              public favoritoService: FavoritoService,
+              public toastCtrl: ToastController) {
 
 
     //Nota: apenas abre esta pagina carga el metodo obtener platillos
@@ -98,13 +100,11 @@ export class UserPrincipalPage {
 
     this.favoritoService.addFavorito(this.favorito).then(ref => {})
 
-    let alert = this.alertCtrl.create({
-      title: 'Favoritos',
-      message: 'Has agregado un plarillo a favoritos!',
-      buttons: ['OK'],
-      cssClass: 'alertCustomCss'
+     const toast = this.toastCtrl.create({
+      message: 'Agregado a favoritos!',
+      duration: 3000
     });
-    alert.present();
+    toast.present();
   }
 
 }

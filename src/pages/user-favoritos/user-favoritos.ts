@@ -31,6 +31,8 @@ export class UserFavoritosPage {
   //lista de platillos que si son favorotos del usuario
   platillos:  Platillo[] = [];
 
+  lista:  any[] = [];
+
   dish: Platillo = {
     descripcion: '',
     idRestaurante: '',
@@ -82,42 +84,31 @@ export class UserFavoritosPage {
   //hago el inner join de las listas y creo las relaciones
   myFavorites(){
 
-    try {
-      
-      let i = 0;
-      let j = 0;
-    
-      this.favoriteList.forEach(favorito => {
-  
-        if(favorito[i] != null){
+    this.favoriteList.forEach(favorito => {
+        favorito.forEach(indexFavorito => {
+ 
+          this.dishList.forEach(platillo => {
+            platillo.forEach(indexPlatillo => {
 
-          let id = favorito[i].idPlatillo;
-  
-          this.dishList.forEach(platillo =>{
-              let key = platillo[j].key;
-    
-              if(id == key){
-                //agregar platillo
-                this.dish.nombre = platillo[j].nombre;
-                this.dish.precio = platillo[j].precio;
-                this.dish.imagen = platillo[j].imagen;
-                
-                try {
-                  this.platillos.push(this.dish);
-                } catch (error) {
-                  console.log(error);
+              if(indexFavorito.idPlatillo == indexPlatillo.key){
+
+                let result = this.lista.find( platillo => platillo == indexPlatillo.key);
+
+                //significa no repetir datos
+                if(result == undefined){
+
+                  this.platillos.push(indexPlatillo);
+                  this.lista.push(indexPlatillo.key);
+
                 }
-                    
+                
               }
-              j++;
+
             });
-          i++;
-        }    
-      });
-      
-    } catch (error) {
-      console.log(error);
-    }
+          });
+
+        });
+    });
   
   }
 

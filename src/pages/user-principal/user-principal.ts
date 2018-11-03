@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
+
 
 //pages
 import {AdminHomePage} from '../admin-home/admin-home'; // importa la pagina a llamar
@@ -12,9 +11,8 @@ import { ProductoPage } from '../producto/producto';
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
 import { Platillo } from '../../model/platillo/platillo.model';
-import { Favorito } from '../../model/favorito/favorito.model';
 import { PlatilloService } from '../../services/platillo/platillo.service';
-import { FavoritoService } from '../../services/favorito/favorito.service';
+import { searchbarService} from '../../services/searchbar/searchbar.service';
 
 @IonicPage()
 @Component({
@@ -27,46 +25,40 @@ export class UserPrincipalPage {
 
   //nota: Para wilfred: cuando se haga el metodo de agregar platillo: agregar la imagen a storage y recuperar la url y agregarla 
   platillo: Platillo = {
-    descripcion: 'Pizza de jamón y queso.',
+    descripcion: 'Fideos maruchan.',
     idRestaurante: 'hfhsjsjhs',
-    nombre: 'Pizza',
-    precio: '7000',
+    nombre: 'Fideos',
+    precio: '4000',
     imagen: 'https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/pizza.jpg?alt=media&token=d915367c-986d-4144-96eb-d8a383628c8a',
 
-  };
-
-  favorito: Favorito = {
-    idPlatillo: '',
-    idCliente: ''
   };
 
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private platilloService: PlatilloService,
-              public alertCtrl: AlertController,
-              public favoritoService: FavoritoService,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController,
+              public searchbarService: searchbarService) {
+          
+              this.searchbarService.platilloRef.on('value', platilloList => {
 
+                let platillos = [];
 
-    //Nota: apenas abre esta pagina carga el metodo obtener platillos
-    this.platilloList = this.platilloService.getPlatilloList()
-    .snapshotChanges()
-    .map(
-      changes => {
-        return changes.map( c =>({
-          key: c.payload.key, ...c.payload.val()
-        }))
-      }
-    )
-    .map(changes => changes.reverse());
-    
-
+                platilloList.forEach( platillo => {
+            
+                  console.log(platillo);
+                  platillos.push(platillo.val());
+                  return false;
+                });
+              
+                this.searchbarService.platilloList = platillos;
+                this.searchbarService.loadedPlatilloList = platillos;
+              });
+  
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserPrincipalPage');
-  }
+
+  ionViewDidLoad() {}
 
 
   adminVentana() {
@@ -83,6 +75,34 @@ export class UserPrincipalPage {
     this.navCtrl.push(LoginPage);
   }
 
+  initializeItems(): void {
+    this.searchbarService.platilloList = this.searchbarService.loadedPlatilloList;
+  }
+
+  getItems(searchbar) {
+
+    // Reset items back to all of the items
+    this.initializeItems();
+  
+    // set value to the value of the searchbar
+    var value = searchbar.srcElement.value;
+  
+    // if the value is an empty string don't filter the items
+    if (!value) {
+      return;
+    }
+  
+    this.searchbarService.platilloList = this.searchbarService.platilloList.filter((v) => {
+      if(v.nombre && value) {
+        if (v.nombre.toLowerCase().indexOf(value.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
+  
+  }
+
   //Nota: agrega platillo quemado con this.platillo(prueba)
   addPlatillo() {
     this.platilloService.addPlatillo(this.platillo).then(ref => {})
@@ -93,18 +113,5 @@ export class UserPrincipalPage {
     this.navCtrl.push(ProductoPage, {platillo}); 
   }
 
-  addFavoritos(platillo: any){
-
-    this.favorito.idPlatillo = platillo.key;
-    this.favorito.idCliente  = 'null';
-
-    this.favoritoService.addFavorito(this.favorito).then(ref => {})
-
-     const toast = this.toastCtrl.create({
-      message: 'Agregado a favoritos!',
-      duration: 3000
-    });
-    toast.present();
-  }
 
 }

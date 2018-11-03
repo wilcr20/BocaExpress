@@ -18,21 +18,23 @@
 
 <ion-content padding class="card-background-page">
 
-    <ion-searchbar></ion-searchbar>
+
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
     <button ion-button color="dark" (click)="adminVentana()">
         <ion-icon name="key"></ion-icon>Administrador
     </button>
     <button ion-button block color="dark" (click)="addPlatillo()">Agregar platillos prueba</button>
 
-    <ion-card *ngFor="let platillo of platilloList | async" (click)="verPlatillo(platillo)">
+
+    <ion-card *ngFor="let platillo of this.searchbarService.platilloList" (click)="verPlatillo(platillo)">
         <img src="{{platillo.imagen}}" />
         <div class="card-title">{{platillo.nombre}}</div>
         <div class="card-subtitle">{{platillo.precio}}</div>
-        <div class="card-heard">
-            <ion-icon name='ios-heart' (click)="addFavoritos(platillo)"></ion-icon>
-        </div>
     </ion-card>
+
+
+
 
 
 

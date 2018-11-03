@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
-/**
- * Generated class for the ProductoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Favorito } from '../../model/favorito/favorito.model';
+import { FavoritoService } from '../../services/favorito/favorito.service';
 
 @IonicPage()
 @Component({
@@ -16,9 +13,53 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ProductoPage {
 
   platillo:any;
+  visible = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.platillo= this.navParams.get('platillo');
+  favorito: Favorito = {
+    idPlatillo: '',
+    idCliente: ''
+  };
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public favoritoService: FavoritoService,
+              public toastCtrl: ToastController) {
+
+              this.platillo= this.navParams.get('platillo');
+  }
+
+  addFavoritos(platillo: any){
+
+    //cambia el estado del icono
+    this.visible = !this.visible;
+
+
+    console.log(platillo);
+    /*
+    //llena el json de favorito
+    this.favorito.idPlatillo = platillo.key;
+    this.favorito.idCliente  = 'null';
+
+    //agrega un favorito a firebase
+    this.favoritoService.addFavorito(this.favorito).then(ref => {})
+    */
+    
+
+    //muestra una notificación
+    const toast = this.toastCtrl.create({
+      message: 'Agregado a favoritos!',
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  verRestaurante(){
+    //muestra una notificación
+    const toast = this.toastCtrl.create({
+      message: 'Se redireccionara a restaurante!',
+      duration: 3000
+    });
+    toast.present();
   }
 
   ionViewDidLoad() {

@@ -32,7 +32,7 @@ export class LoginPage {
 
   loginUser(email:string,password:string){
     this.loginService.loginUser(email,password);
-    this.navCtrl.setRoot(UserPrincipalPage);
+    this.navCtrl.setRoot(ListaPage);
     }
 
 }

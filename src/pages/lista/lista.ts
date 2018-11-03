@@ -23,6 +23,7 @@ import { TabsPageModule } from '../tabs/tabs.module';
 import { first } from 'rxjs/operators';
 import { Platillo } from '../../model/platillo/platillo.model';
 import { PlatilloService } from '../../services/platillo/platillo.service';
+import { CompraService } from '../../services/compra/compra.service';
 
 
 
@@ -37,15 +38,15 @@ export class ListaPage {
       email : undefined,
       password : undefined
     }
-    items: Observable<any[]>;
+    compras: Observable<any[]>;
     
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public loginService: LoginService, public authService: AngularFireAuth,
-     public db: AngularFireDatabase, private platilloService: PlatilloService ) {
+     public db: AngularFireDatabase, private comprasService: CompraService ) {
 
       this.redirect();
     
-      this.items = this.db.list('Platillo').valueChanges();
+      
      }
   
 
@@ -55,9 +56,12 @@ export class ListaPage {
     this.redirect();
     if(this.authService.auth.currentUser != null){
       this.user.email = this.authService.auth.currentUser.email;
+      this.compras = this.comprasService.getCompras(this.authService.auth.currentUser.uid);
+   
     }
     
-   
+    
+    
   }
 ionViewWillEnter(){
   
@@ -86,7 +90,7 @@ ionViewWillEnter(){
   logout(){
     this.loginService.logoutUser();
 
-    this.navCtrl.setRoot(UserPrincipalPage);
+    this.navCtrl.setRoot(LoginPage);
     
   }
 

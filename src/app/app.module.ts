@@ -36,6 +36,7 @@ import { PlatilloService } from '../services/platillo/platillo.service';
 import { FavoritoService } from '../services/favorito/favorito.service';
 
 import { LoginService } from '../services/login/login.service';
+import { CompraService } from '../services/compra/compra.service';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { LoginService } from '../services/login/login.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PlatilloService,
     FavoritoService,
-    LoginService
+    LoginService,
+    CompraService
   ]
 })
 export class AppModule {}

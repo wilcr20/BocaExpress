@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { LoginService } from '../../services/login/login.service';
+import { UserPrincipalPage } from '../user-principal/user-principal';
+import { User } from '../../model/user/user.model';
 
 
 /**
@@ -28,10 +31,17 @@ export class RegistroPage {
   estado:any = "null";
   image: string = null;
 
+  user : User ={
+    email : undefined,
+    password : undefined
+  }
+
+
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public camera: Camera) {
+              public camera: Camera,
+              public authService :LoginService) {
 
     this.option  = [{ name: "Cliente" },{name: "Restaurante"}]; 
 
@@ -72,6 +82,14 @@ export class RegistroPage {
     .catch(error =>{
       console.error( error );
     });
+  }
+
+
+
+  signUpUser(email:string,password:string){
+    this.authService.signUpUser(email,password);
+    console.log("Registrado");
+    this.navCtrl.setRoot(UserPrincipalPage);
   }
 }
 

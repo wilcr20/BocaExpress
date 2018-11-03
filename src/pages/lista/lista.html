@@ -22,14 +22,14 @@
 <ion-content padding class="body">
 <h2>{{user.email}}</h2>
 <ion-list>
-    <ion-item *ngFor="let item of items | async">
+    <ion-item *ngFor="let compra of compras | async">
       
-      <h2>{{ item.description }}</h2>
+      <h2>{{ compra.estado }}</h2>
       <p> 
-       {{item.nombre}}
+       {{compra.idCliente}}
       </p>
       <p>
-        {{item.precio}}
+        {{compra.total}}
       </p>
     </ion-item>
   </ion-list>

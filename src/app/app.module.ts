@@ -36,6 +36,8 @@ import { PlatilloService } from '../services/platillo/platillo.service';
 import { FavoritoService } from '../services/favorito/favorito.service';
 import { searchbarService } from '../services/searchbar/searchbar.service';
 
+import { LoginService } from '../services/login/login.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -88,7 +90,8 @@ import { searchbarService } from '../services/searchbar/searchbar.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PlatilloService,
     FavoritoService,
-    searchbarService
+    searchbarService,
+    LoginService
   ]
 })
 export class AppModule {}

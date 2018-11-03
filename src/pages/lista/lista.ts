@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tabs} from 'ionic-angular';
 
 /**
  * Generated class for the ListaPage page.
@@ -10,6 +10,20 @@ import { IonicPage, NavController, NavParams} from 'ionic-angular';
 import { UserHistorialComprasPage } from '../user-historial-compras/user-historial-compras';
 import { LoginPage } from '../login/login';
 import { RegistroPage } from '../registro/registro';
+import { LoginService } from '../../services/login/login.service';
+import { EmailValidator } from '@angular/forms';
+import { FirebaseAuth } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { User } from '../../model/user/user.model';
+import { Observable } from 'rxjs';
+import { TabsPage } from '../tabs/tabs';
+import { UserPrincipalPage } from '../user-principal/user-principal';
+import { TabsPageModule } from '../tabs/tabs.module';
+import { first } from 'rxjs/operators';
+import { Platillo } from '../../model/platillo/platillo.model';
+import { PlatilloService } from '../../services/platillo/platillo.service';
+
 
 
 @IonicPage()
@@ -19,20 +33,36 @@ import { RegistroPage } from '../registro/registro';
 })
 export class ListaPage {
 
-  pages: Array<{title: string, component: any}>;
+    user : User ={
+      email : undefined,
+      password : undefined
+    }
+    items: Observable<any[]>;
+    
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public loginService: LoginService, public authService: AngularFireAuth,
+     public db: AngularFireDatabase, private platilloService: PlatilloService ) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-    this.pages = [
-      { title: 'Historial', component: UserHistorialComprasPage },
-      { title: 'Login', component: LoginPage },
-      { title: 'Registro', component: RegistroPage },
-    ];
-  }
+      this.redirect();
+    
+      this.items = this.db.list('Platillo').valueChanges();
+     }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaPage');
+    
+    this.redirect();
+    if(this.authService.auth.currentUser != null){
+      this.user.email = this.authService.auth.currentUser.email;
+    }
+    
+   
   }
+ionViewWillEnter(){
+  
+
+}
 
   openPage(page) {
     // Reset the content nav to have just this page
@@ -41,5 +71,25 @@ export class ListaPage {
     this.navCtrl.push(page.component);
   
   }
+  isLoggedIn() {
+    return this.authService.authState.pipe(first()).toPromise();
+ }
+  async redirect() {
+    const user = await this.isLoggedIn()
+    if (!user) {
+     this.navCtrl.setRoot(LoginPage);
+    } else {
+      // do something else
+   }
+  }
+
+  logout(){
+    this.loginService.logoutUser();
+
+    this.navCtrl.setRoot(UserPrincipalPage);
+    
+  }
+
+
 
 }

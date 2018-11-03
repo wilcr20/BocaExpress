@@ -19,7 +19,7 @@
 
         <img src="{{platillo.imagen}}">
         <ion-fab right top>
-            <button ion-fab>
+            <button ion-fab (click)="verRestaurante()">
             <ion-icon name="pin"></ion-icon>
           </button>
         </ion-fab>
@@ -37,10 +37,14 @@
         </ion-item>
 
         <ion-item>
+            <button ion-button icon-start clear item-end (click)="addFavoritos(platillo)">
+                <ion-icon [name]="visible ? 'ios-star' : 'ios-star-outline'"></ion-icon>
+                    Add favorite
+            </button>
             <button ion-button icon-start clear item-end>
-            <ion-icon name="ios-card"></ion-icon>
-            Buy
-          </button>
+              <ion-icon name="ios-card"></ion-icon>
+              Buy
+            </button>
             <p>₡{{platillo.precio}}</p>
         </ion-item>
 

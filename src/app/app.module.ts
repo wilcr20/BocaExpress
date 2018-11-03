@@ -95,6 +95,7 @@ import { CompraService } from '../services/compra/compra.service';
     CompraService,
     searchbarService,
     LoginService
+  
   ]
 })
 export class AppModule {}

@@ -35,6 +35,8 @@ import {AngularFireAuthModule} from 'angularfire2/auth'
 import { PlatilloService } from '../services/platillo/platillo.service';
 import { FavoritoService } from '../services/favorito/favorito.service';
 
+import { LoginService } from '../services/login/login.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -83,10 +85,11 @@ import { FavoritoService } from '../services/favorito/favorito.service';
   providers: [
     StatusBar,
     SplashScreen,
-    //Camera,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PlatilloService,
-    FavoritoService
+    FavoritoService,
+    LoginService
   ]
 })
 export class AppModule {}

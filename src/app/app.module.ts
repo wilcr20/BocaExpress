@@ -91,13 +91,10 @@ import { CompraService } from '../services/compra/compra.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PlatilloService,
     FavoritoService,
-<<<<<<< HEAD
     LoginService,
-    CompraService
-=======
+    CompraService,
     searchbarService,
     LoginService
->>>>>>> 771a35204a14d4b609c3dbc0fd84dd58f6fa8c19
   ]
 })
 export class AppModule {}

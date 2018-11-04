@@ -39,10 +39,10 @@
                 <ion-col>
                     <ion-list inset>
                         <ion-item color="componet">
-                            <ion-input placeholder="Email" name="username" id="emailField" type="text" required #email></ion-input>
+                            <ion-input placeholder="Email" name="username" id="emailField" type="text" required [(ngModel)]="user.email"  #email></ion-input>
                         </ion-item>
                         <ion-item color="componet">
-                            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required></ion-input>
+                            <ion-input placeholder="Password" name="password" id="passwordField" type="password" [(ngModel)]="user.password" required></ion-input>
                         </ion-item>
                         <ion-item color="componet">
                             <ion-input placeholder="telefono" name="telefono" id="telefonoField" type="number" required></ion-input>
@@ -52,7 +52,7 @@
             </ion-row>
             <ion-row>
                 <ion-col color="componet">
-                    <button ion-button class="submit-btn" full type="submit" (click)="signUpUser(emailField,passwordField)" [disabled]="!loginForm.form.valid">Registrar
+                    <button ion-button class="submit-btn" full type="submit" (click)="signUpUser(user.email,user.password)" [disabled]="!loginForm.form.valid">Registrar
                 </button>
                 </ion-col>
             </ion-row>

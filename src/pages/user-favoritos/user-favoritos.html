@@ -18,11 +18,16 @@
     <ion-list *ngFor="let platillo of platillos">
         <ion-item>
             <ion-thumbnail item-start>
-                <img src="{{platillo.imagen}}">
+                <img src="{{platillo.platillo.imagen}}">
             </ion-thumbnail>
-            <h2>{{platillo.nombre}}</h2>
-            <p>₡{{platillo.precio}}</p>
-            <button ion-button clear item-end>Remove</button>
+            <h2>{{platillo.platillo.nombre}}</h2>
+            <p>₡{{platillo.platillo.precio}}</p>
+            <button ion-button icon-start clear item-end (click)="removeFavorite(platillo)">
+                    <ion-icon name="ios-trash-outline"></ion-icon>
+            </button>
+            <button ion-button icon-start clear item-end>
+                <ion-icon name="md-cart"></ion-icon>
+            </button>
         </ion-item>
     </ion-list>
 

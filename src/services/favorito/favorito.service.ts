@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Favorito } from '../../model/favorito/favorito.model';
+
  
 @Injectable()
 export class FavoritoService {
@@ -22,7 +23,7 @@ export class FavoritoService {
     }
  
  
-    removeFavorito(Favorito: Favorito) {
-        return this.favoritoListRef.remove(Favorito.idPlatillo);
+    removeFavorito(favoriteKey: any) {
+        return this.favoritoListRef.remove(favoriteKey);
     }
 }

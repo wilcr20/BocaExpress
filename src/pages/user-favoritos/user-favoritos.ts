@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //Firebase
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
-import { Favorito } from '../../model/favorito/favorito.model';
 import { Platillo } from '../../model/platillo/platillo.model';
 import { PlatilloService } from '../../services/platillo/platillo.service';
 import { FavoritoService } from '../../services/favorito/favorito.service';
@@ -24,12 +23,12 @@ import { FavoritoService } from '../../services/favorito/favorito.service';
 export class UserFavoritosPage {
 
   //todos los favoritos
-  favoriteList: Observable<Favorito[]>
+  favoriteList: Observable<any[]>
   //todos los platillos
   dishList: Observable<any[]>
 
   //lista de platillos que si son favorotos del usuario
-  platillos:  Platillo[] = [];
+  platillos:  any[] = [];
 
   lista:  any[] = [];
 
@@ -87,6 +86,7 @@ export class UserFavoritosPage {
     this.favoriteList.forEach(favorito => {
         favorito.forEach(indexFavorito => {
  
+
           this.dishList.forEach(platillo => {
             platillo.forEach(indexPlatillo => {
 
@@ -97,7 +97,7 @@ export class UserFavoritosPage {
                 //significa no repetir datos
                 if(result == undefined){
 
-                  this.platillos.push(indexPlatillo);
+                  this.platillos.push({platillo:indexPlatillo, favoriteKey: indexFavorito.key });
                   this.lista.push(indexPlatillo.key);
 
                 }
@@ -112,8 +112,16 @@ export class UserFavoritosPage {
   
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserFavoritosPage');
+  removeFavorite(platillo: any){
+    this.favoriteService.removeFavorito(platillo.favoriteKey).then(ref => {
+      this.platillos.splice(platillo.platillo, 1);
+      this.lista.splice(platillo.favoriteKey, 1);
+    });
+
+    this.getDish_and_favorites();
+    this.myFavorites();
   }
+
+  ionViewDidLoad() {}
 
 }

@@ -25,13 +25,14 @@ export class UserPrincipalPage {
 
   //nota: Para wilfred: cuando se haga el metodo de agregar platillo: agregar la imagen a storage y recuperar la url y agregarla 
   platillo: Platillo = {
-    descripcion: 'Fideos maruchan.',
+    descripcion: 'Casado tradicional tico.',
     idRestaurante: 'hfhsjsjhs',
-    nombre: 'Fideos',
-    precio: '4000',
-    imagen: 'https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/pizza.jpg?alt=media&token=d915367c-986d-4144-96eb-d8a383628c8a',
+    nombre: 'Casado',
+    precio: '3000',
+    imagen: 'https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6',
 
   };
+
 
 
   constructor(public navCtrl: NavController, 
@@ -45,9 +46,9 @@ export class UserPrincipalPage {
                 let platillos = [];
 
                 platilloList.forEach( platillo => {
-            
-                  console.log(platillo);
-                  platillos.push(platillo.val());
+          
+                  platillos.push({platillo: platillo.val(), key: platillo.key});
+
                   return false;
                 });
               
@@ -93,8 +94,9 @@ export class UserPrincipalPage {
     }
   
     this.searchbarService.platilloList = this.searchbarService.platilloList.filter((v) => {
-      if(v.nombre && value) {
-        if (v.nombre.toLowerCase().indexOf(value.toLowerCase()) > -1) {
+
+      if(v.platillo.nombre && value) {
+        if (v.platillo.nombre.toLowerCase().indexOf(value.toLowerCase()) > -1) {
           return true;
         }
         return false;

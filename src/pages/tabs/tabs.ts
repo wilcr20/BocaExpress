@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, List } from 'ionic-angular';
+import { IonicPage, NavController, NavParams} from 'ionic-angular';
 
 import { UserPrincipalPage } from '../user-principal/user-principal';
 import { ListaPage } from '../lista/lista';
 import { UserFavoritosPage } from '../user-favoritos/user-favoritos';
 import { UserCercanosPage } from '../user-cercanos/user-cercanos';
-import { FirebaseAuth } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { first, reduce } from 'rxjs/operators';
-import { LoginPage } from '../login/login';
 /**
  * Generated class for the TabsPage page.
  *

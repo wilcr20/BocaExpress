@@ -26,12 +26,14 @@
     </button>
     <button ion-button block color="dark" (click)="addPlatillo()">Agregar platillos prueba</button>
 
-
     <ion-card *ngFor="let platillo of this.searchbarService.platilloList" (click)="verPlatillo(platillo)">
-        <img src="{{platillo.imagen}}" />
-        <div class="card-title">{{platillo.nombre}}</div>
-        <div class="card-subtitle">{{platillo.precio}}</div>
+
+        <img src="{{platillo.platillo.imagen}}" />
+        <div class="card-title">{{platillo.platillo.nombre}}</div>
+        <div class="card-subtitle">{{platillo.platillo.precio}}</div>
+
     </ion-card>
+
 
 
 

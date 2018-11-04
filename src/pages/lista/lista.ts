@@ -7,22 +7,13 @@ import { IonicPage, NavController, NavParams, Tabs} from 'ionic-angular';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-import { UserHistorialComprasPage } from '../user-historial-compras/user-historial-compras';
 import { LoginPage } from '../login/login';
-import { RegistroPage } from '../registro/registro';
 import { LoginService } from '../../services/login/login.service';
-import { EmailValidator } from '@angular/forms';
-import { FirebaseAuth } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase} from 'angularfire2/database';
 import { User } from '../../model/user/user.model';
 import { Observable } from 'rxjs';
-import { TabsPage } from '../tabs/tabs';
-import { UserPrincipalPage } from '../user-principal/user-principal';
-import { TabsPageModule } from '../tabs/tabs.module';
 import { first } from 'rxjs/operators';
-import { Platillo } from '../../model/platillo/platillo.model';
-import { PlatilloService } from '../../services/platillo/platillo.service';
 import { CompraService } from '../../services/compra/compra.service';
 
 

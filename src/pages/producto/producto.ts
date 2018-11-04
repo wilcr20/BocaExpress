@@ -33,16 +33,13 @@ export class ProductoPage {
     //cambia el estado del icono
     this.visible = !this.visible;
 
-
-    console.log(platillo);
-    /*
     //llena el json de favorito
     this.favorito.idPlatillo = platillo.key;
     this.favorito.idCliente  = 'null';
 
     //agrega un favorito a firebase
     this.favoritoService.addFavorito(this.favorito).then(ref => {})
-    */
+    
     
 
     //muestra una notificación
@@ -57,13 +54,11 @@ export class ProductoPage {
     //muestra una notificación
     const toast = this.toastCtrl.create({
       message: 'Se redireccionara a restaurante!',
-      duration: 3000
+      duration: 1000
     });
     toast.present();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductoPage');
-  }
+  ionViewDidLoad() {}
 
 }

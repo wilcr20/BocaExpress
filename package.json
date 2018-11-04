@@ -1,5 +1,5 @@
 {
-  "name": "BocaExpress",
+  "name": "bocaexpress",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -81,5 +81,14 @@
       "android",
       "browser"
     ]
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelomedina/BocaExpress.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angelomedina/BocaExpress/issues"
   }
 }

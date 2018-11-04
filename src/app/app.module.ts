@@ -39,6 +39,8 @@ import { searchbarService } from '../services/searchbar/searchbar.service';
 
 import { LoginService } from '../services/login/login.service';
 import { CompraService } from '../services/compra/compra.service';
+import {adminService} from '../services/adminService/admin.service';
+
 
 @NgModule({
   declarations: [
@@ -97,8 +99,9 @@ import { CompraService } from '../services/compra/compra.service';
     LoginService,
     CompraService,
     searchbarService,
-    LoginService
-  
+    LoginService,
+    adminService
+
   ]
 })
 export class AppModule {}

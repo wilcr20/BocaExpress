@@ -21,9 +21,7 @@
 
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
-    <button ion-button color="dark" (click)="adminVentana()">
-        <ion-icon name="key"></ion-icon>Administrador
-    </button>
+
     <button ion-button block color="dark" (click)="addPlatillo()">Agregar platillos prueba</button>
 
     <ion-card *ngFor="let platillo of this.searchbarService.platilloList" (click)="verPlatillo(platillo)">

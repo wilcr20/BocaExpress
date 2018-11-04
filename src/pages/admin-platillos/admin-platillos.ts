@@ -16,6 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class AdminPlatillosPage {
 
   tabBarElement:any;
+  mostrar:any=true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -25,13 +26,24 @@ export class AdminPlatillosPage {
   }
 
   ionViewWillEnter(){
-    console.log("Aplica coultamiento");
+
     this.tabBarElement= document.getElementById("TabPrincipal");
-    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
+    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4 OcultaTab5";
   }
   ionViewWillLeave(){
-    console.log("SALE ");
     document.getElementById("TabPrincipal").className="MostrarTab";
+  }
+
+  mostrarP(){
+    this.mostrar= true;
+  }
+
+  addP(){
+    this.mostrar= false;
+  }
+
+  agregaPlatillo(){
+      console.log("Agregas nuevo platillo");
   }
 
 }

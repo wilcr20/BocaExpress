@@ -25,12 +25,10 @@ export class AdminComprasPage {
 
 
   ionViewWillEnter(){
-    console.log("Aplica coultamiento");
     this.tabBarElement= document.getElementById("TabPrincipal");
-    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
+    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4 OcultaTab5";
   }
   ionViewWillLeave(){
-    console.log("SALE ");
     document.getElementById("TabPrincipal").className="MostrarTab";
   }
 

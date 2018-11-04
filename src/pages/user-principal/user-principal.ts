@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
-
+import { AngularFireAuth } from 'angularfire2/auth';
+import {adminService} from '../../services/adminService/admin.service';
 
 //pages
 import {AdminHomePage} from '../admin-home/admin-home'; // importa la pagina a llamar
@@ -22,8 +23,10 @@ import { searchbarService} from '../../services/searchbar/searchbar.service';
 export class UserPrincipalPage {
 
   platilloList: Observable<Platillo[]>
+  RestauranteList: Observable<any[]> // guarda todos los resdtaurantes en DB
+  rest:  any[] = [];
 
-  //nota: Para wilfred: cuando se haga el metodo de agregar platillo: agregar la imagen a storage y recuperar la url y agregarla 
+  //nota: Para wilfred: cuando se haga el metodo de agregar platillo: agregar la imagen a storage y recuperar la url y agregarla
   platillo: Platillo = {
     descripcion: 'Casado tradicional tico.',
     idRestaurante: 'hfhsjsjhs',
@@ -35,41 +38,86 @@ export class UserPrincipalPage {
 
 
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               private platilloService: PlatilloService,
               public toastCtrl: ToastController,
-              public searchbarService: searchbarService) {
-          
+              public searchbarService: searchbarService, public authService: AngularFireAuth, public admServ:adminService) {
+
               this.searchbarService.platilloRef.on('value', platilloList => {
 
                 let platillos = [];
 
                 platilloList.forEach( platillo => {
-          
+
                   platillos.push({platillo: platillo.val(), key: platillo.key});
 
                   return false;
                 });
-              
+
                 this.searchbarService.platilloList = platillos;
                 this.searchbarService.loadedPlatilloList = platillos;
               });
-  
+
   }
 
 
-  ionViewDidLoad() {}
+  ionViewWillEnter(){
+    document.getElementById("TabPrincipal").className="OcultaTab4 OcultaTab5";
 
+    if (this.authService.auth.currentUser != null){
+      console.log("Logueado:  "+this.authService.auth.currentUser.uid )
+      this.obtieneRestaurantes();
+      this.allRestaurants();
 
-  adminVentana() {
+    }
 
-    var jsonPrueba = {  // Prueba de como funcionan los envios de Json entre Pages
-      nombre:'Wilfred',
-      cedula:207720776
-    };
-    this.navCtrl.push(AdminHomePage, {jsonPrueba});  // el navCtrl funciona como redireccion de paginas
   }
+
+
+
+  //// Firebase
+  obtieneRestaurantes(){
+    this.RestauranteList = this.admServ.getRestaurantesList()
+    .snapshotChanges()
+    .map(
+      changes => {
+        return changes.map( c =>({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      }
+    )
+    .map(changes => changes.reverse());
+  }
+
+
+  allRestaurants(){
+    this.RestauranteList.forEach(restaurante => {
+    this.rest.push(restaurante);
+ });
+    this.existeRestauranteAdmin(this.authService.auth.currentUser.uid);
+}
+
+   existeRestauranteAdmin(idUser){
+      if(this.rest.length>0){
+          var restJson = this.rest[0];
+         // document.getElementById("TabPrincipal").className="MostrarTab";
+          for(var i=0; i<restJson.length;i++){
+            if(restJson[i].idPropietario == idUser){
+              document.getElementById("TabPrincipal").className="OcultaTab4";
+              return true;
+            }
+          }
+          document.getElementById("TabPrincipal").className="OcultaTab5";
+          return false;
+
+      }
+
+   }
+
+
+
+
 
 
   loginVentana(){
@@ -84,15 +132,15 @@ export class UserPrincipalPage {
 
     // Reset items back to all of the items
     this.initializeItems();
-  
+
     // set value to the value of the searchbar
     var value = searchbar.srcElement.value;
-  
+
     // if the value is an empty string don't filter the items
     if (!value) {
       return;
     }
-  
+
     this.searchbarService.platilloList = this.searchbarService.platilloList.filter((v) => {
 
       if(v.platillo.nombre && value) {
@@ -102,7 +150,7 @@ export class UserPrincipalPage {
         return false;
       }
     });
-  
+
   }
 
   //Nota: agrega platillo quemado con this.platillo(prueba)
@@ -112,7 +160,7 @@ export class UserPrincipalPage {
 
   //Nota: la idea es obtener la informacion del platillo para procesar la compra
   verPlatillo(platillo: Platillo){
-    this.navCtrl.push(ProductoPage, {platillo}); 
+    this.navCtrl.push(ProductoPage, {platillo});
   }
 
 

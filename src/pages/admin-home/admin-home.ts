@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 import { AdminLocalPage } from '../admin-local/admin-local';
 import { AdminComprasPage } from '../admin-compras/admin-compras';
@@ -32,10 +34,8 @@ export class AdminHomePage {
   RestauranteList: Observable<any[]> // guarda todos los resdtaurantes en DB
   rest:  any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public admServ:adminService) {
-
-    this.jsonUser= this.navParams.get('jsonPrueba'); // se usa el navParams.get para obtener los paarmetros recibidos de ventanas
-    console.log("Json recibido: ", this.jsonUser);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public admServ:adminService,public authService: AngularFireAuth) {
+    console.log("CONST");
 
   }
 
@@ -43,8 +43,10 @@ export class AdminHomePage {
 
   ionViewWillEnter(){
     this.tabBarElement= document.getElementById("TabPrincipal");
-    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
+    document.getElementById("TabPrincipal").className="MostrarTab";
+    document.getElementById("TabPrincipal").className="OcultaTab4";
   }
+
   ionViewWillLeave(){
     document.getElementById("TabPrincipal").className="MostrarTab";
   }
@@ -71,7 +73,6 @@ export class AdminHomePage {
 
 
   //// Firebase
-
   obtieneRestaurantes(){
     this.RestauranteList = this.admServ.getRestaurantesList()
     .snapshotChanges()
@@ -85,15 +86,27 @@ export class AdminHomePage {
     .map(changes => changes.reverse());
   }
 
+
   allRestaurants(){
-
     this.RestauranteList.forEach(restaurante => {
-    console.log(".. ",restaurante);
-    var restP:any=  restaurante[0];
-    this.navCtrl.push(AdminLocalPage,{"rest":restP});
     this.rest.push(restaurante);
+    this.existeRestauranteAdmin(this.authService.auth.currentUser.uid);
  });
+}
 
+existeRestauranteAdmin(idUser){
+  if(this.rest.length>0){
+      var restJson = this.rest[0];
+     // document.getElementById("TabPrincipal").className="MostrarTab";
+      for(var i=0; i<restJson.length;i++){
+        if(restJson[i].idPropietario == idUser){
+          this.navCtrl.push(AdminLocalPage,{"rest":restJson[i]});
+          //document.getElementById("TabPrincipal").className="OcultaTab4";
+          return true;
+        }
+      }
+
+  }
 
 }
 

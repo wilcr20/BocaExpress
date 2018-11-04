@@ -8,12 +8,7 @@ import { Platillo } from '../../model/platillo/platillo.model';
 import { PlatilloService } from '../../services/platillo/platillo.service';
 import { FavoritoService } from '../../services/favorito/favorito.service';
 
-/**
- * Generated class for the UserFavoritosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ProductoPage } from '../producto/producto';
 
 @IonicPage()
 @Component({
@@ -86,7 +81,6 @@ export class UserFavoritosPage {
     this.favoriteList.forEach(favorito => {
         favorito.forEach(indexFavorito => {
  
-
           this.dishList.forEach(platillo => {
             platillo.forEach(indexPlatillo => {
 
@@ -120,6 +114,10 @@ export class UserFavoritosPage {
 
     this.getDish_and_favorites();
     this.myFavorites();
+  }
+
+  verPlatillo(platillo: any){
+    this.navCtrl.push(ProductoPage, {platillo}); 
   }
 
   ionViewDidLoad() {}

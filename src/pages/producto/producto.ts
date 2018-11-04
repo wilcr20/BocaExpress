@@ -4,6 +4,7 @@ import { ToastController } from 'ionic-angular';
 
 import { Favorito } from '../../model/favorito/favorito.model';
 import { FavoritoService } from '../../services/favorito/favorito.service';
+import { SeeRestaurantPage } from '../see-restaurant/see-restaurant';
 
 @IonicPage()
 @Component({
@@ -51,12 +52,9 @@ export class ProductoPage {
   }
 
   verRestaurante(){
-    //muestra una notificación
-    const toast = this.toastCtrl.create({
-      message: 'Se redireccionara a restaurante!',
-      duration: 1000
-    });
-    toast.present();
+
+    this.navCtrl.push(SeeRestaurantPage);
+    
   }
 
   ionViewDidLoad() {}

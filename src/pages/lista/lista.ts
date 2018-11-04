@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Tabs} from 'ionic-angular';
+import { IonicPage, NavController, NavParams} from 'ionic-angular';
 
-/**
- * Generated class for the ListaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 import { LoginPage } from '../login/login';
 import { LoginService } from '../../services/login/login.service';
 import { AngularFireAuth } from 'angularfire2/auth';

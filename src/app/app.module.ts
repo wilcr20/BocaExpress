@@ -24,6 +24,7 @@ import {LoginPage} from '../pages/login/login';
 import { RegistroPage } from '../pages/registro/registro';
 import {  TabsPage } from '../pages/tabs/tabs';
 import {  ListaPage } from '../pages/lista/lista';
+import { SeeRestaurantPage } from '../pages/see-restaurant/see-restaurant';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -56,7 +57,8 @@ import { CompraService } from '../services/compra/compra.service';
     RegistroPage,
     LoginPage,
     TabsPage,
-    ListaPage
+    ListaPage,
+    SeeRestaurantPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,8 @@ import { CompraService } from '../services/compra/compra.service';
     RegistroPage,
     LoginPage,
     TabsPage,
-    ListaPage
+    ListaPage,
+    SeeRestaurantPage
   ],
   providers: [
     StatusBar,

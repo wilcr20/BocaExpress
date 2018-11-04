@@ -17,7 +17,7 @@
 
     <ion-list *ngFor="let platillo of platillos">
         <ion-item>
-            <ion-thumbnail item-start>
+            <ion-thumbnail item-start (click)="verPlatillo(platillo)">
                 <img src="{{platillo.platillo.imagen}}">
             </ion-thumbnail>
             <h2>{{platillo.platillo.nombre}}</h2>

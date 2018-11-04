@@ -36,7 +36,7 @@ export class UserFavoritosPage {
 
   };
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public favoriteService: FavoritoService,
               public platilloService: PlatilloService) {
@@ -44,7 +44,7 @@ export class UserFavoritosPage {
       this.getDish_and_favorites();
       this.myFavorites();
 
-    
+
   }
 
   getDish_and_favorites(){
@@ -80,7 +80,7 @@ export class UserFavoritosPage {
 
     this.favoriteList.forEach(favorito => {
         favorito.forEach(indexFavorito => {
- 
+
           this.dishList.forEach(platillo => {
             platillo.forEach(indexPlatillo => {
 
@@ -95,7 +95,7 @@ export class UserFavoritosPage {
                   this.lista.push(indexPlatillo.key);
 
                 }
-                
+
               }
 
             });
@@ -103,7 +103,7 @@ export class UserFavoritosPage {
 
         });
     });
-  
+
   }
 
   removeFavorite(platillo: any){
@@ -117,7 +117,7 @@ export class UserFavoritosPage {
   }
 
   verPlatillo(platillo: any){
-    this.navCtrl.push(ProductoPage, {platillo}); 
+    this.navCtrl.push(ProductoPage, {platillo});
   }
 
   ionViewDidLoad() {}

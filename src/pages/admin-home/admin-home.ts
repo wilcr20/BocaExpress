@@ -6,6 +6,11 @@ import { AdminComprasPage } from '../admin-compras/admin-compras';
 import { AdminPlatillosPage } from '../admin-platillos/admin-platillos';
 import { AdminBandejaPage } from '../admin-bandeja/admin-bandeja';
 
+import {adminService} from '../../services/adminService/admin.service';
+import 'rxjs/add/operator/map'
+import { Observable } from 'rxjs/Observable';
+
+
 
 /**
  * Generated class for the AdminHomePage page.
@@ -24,28 +29,32 @@ export class AdminHomePage {
   jsonUser:any; // Variable para recibir el json enviado desde userGate
   tabBarElement:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  RestauranteList: Observable<any[]> // guarda todos los resdtaurantes en DB
+  rest:  any[] = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public admServ:adminService) {
 
     this.jsonUser= this.navParams.get('jsonPrueba'); // se usa el navParams.get para obtener los paarmetros recibidos de ventanas
     console.log("Json recibido: ", this.jsonUser);
 
-
   }
 
+
+
   ionViewWillEnter(){
-    console.log("Aplica coultamiento");
     this.tabBarElement= document.getElementById("TabPrincipal");
     document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
   }
   ionViewWillLeave(){
-    console.log("SALE ");
     document.getElementById("TabPrincipal").className="MostrarTab";
   }
 
 
 
+
   ventanaLocal(){
-    this.navCtrl.push(AdminLocalPage);
+    this.obtieneRestaurantes();
+    this.allRestaurants();
   }
 
   ventanaPlatillos(){
@@ -61,12 +70,32 @@ export class AdminHomePage {
   }
 
 
+  //// Firebase
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminHomePage');
-
-
+  obtieneRestaurantes(){
+    this.RestauranteList = this.admServ.getRestaurantesList()
+    .snapshotChanges()
+    .map(
+      changes => {
+        return changes.map( c =>({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      }
+    )
+    .map(changes => changes.reverse());
   }
+
+  allRestaurants(){
+
+    this.RestauranteList.forEach(restaurante => {
+    console.log(".. ",restaurante);
+    var restP:any=  restaurante[0];
+    this.navCtrl.push(AdminLocalPage,{"rest":restP});
+    this.rest.push(restaurante);
+ });
+
+
+}
 
 
 

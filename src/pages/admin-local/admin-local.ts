@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
+import {adminService} from '../../services/adminService/admin.service';
+import 'rxjs/add/operator/map'
+import { Observable } from 'rxjs/Observable';
 
-/**
- * Generated class for the AdminLocalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,21 +13,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AdminLocalPage {
   tabBarElement:any;
+  restaurantes:any; // Variable para recibir el json enviado
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public admServ:adminService) {
+    this.restaurantes= this.navParams.get('rest');
+    console.log("recibe : ", this.restaurantes);
+
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminLocalPage');
-  }
+
 
   ionViewWillEnter(){
-    console.log("Aplica coultamiento");
+
     this.tabBarElement= document.getElementById("TabPrincipal");
     document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
   }
   ionViewWillLeave(){
-    console.log("SALE ");
+
     document.getElementById("TabPrincipal").className="MostrarTab";
   }
 

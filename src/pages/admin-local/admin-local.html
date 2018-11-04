@@ -17,11 +17,18 @@
 
 
 <ion-content padding>
+    <img src={{restaurantes.imagenRestaurante}}>
 
-    <img src="" <p style="font-size:20px;"><strong>Categoria: </strong> <span style="font-size:17px;">{{restaurantes.categoria}}</span></p>
+    <p style="font-size:18px;"><strong>Categoria: </strong> <input type="text" id="resCat" value={{restaurantes.categoria}}> </p>
     <hr>
-    <p style="font-size:20px;"><strong>Descripción: </strong> <span style="font-size:17px;">{{restaurantes.descripcion}}</span> </p>
+    <p style="font-size:18px;"><strong>Descripción: </strong> <input type="text" id="resDes" value={{restaurantes.descripcion}}> </p>
     <hr>
-    <p style="font-size:20px;"><strong>Horario: </strong><span style="font-size:17px;">{{restaurantes.horario}}</span> </p>
+    <p style="font-size:18px;"><strong>Horario: </strong> <input type="text" id="resHora" value={{restaurantes.horario}}> </p>
+    <hr>
+    <p style="font-size:18px;"><strong>Telefono: </strong> <input type="text" id="resTel" value={{restaurantes.telefono}}> </p>
+    <hr>
+    <p style="font-size:18px;"><strong>Ubicación: </strong> <input type="text" id="resDes" value={{restaurantes.ubicacion}}> </p>
 
+    <br>
+    <button ion-button>Guardar Cambios</button>
 </ion-content>

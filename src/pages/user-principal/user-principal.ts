@@ -4,7 +4,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {adminService} from '../../services/adminService/admin.service';
 
 //pages
-import {AdminHomePage} from '../admin-home/admin-home'; // importa la pagina a llamar
 import { LoginPage } from '../login/login';
 import { ProductoPage } from '../producto/producto';
 

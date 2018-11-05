@@ -6,13 +6,59 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>registro-restaurant</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>registro-restaurant</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    <ion-item color="componet">
+        <ion-label>Tipo de Restaurante</ion-label>
+        <ion-select [(ngModel)]="categorieOption" (ionChange)="onItemSelection($event)">
+            <ion-option [value]="item" *ngFor="let item of alternative">{{item.name}}</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-row>
+        <ion-col>
+            <ion-list inset>
+                <ion-item color="componet">
+                    <ion-input placeholder="Nombre del Restaurante" [(ngModel)]="restaurantname" name="restaurantname" id="restaurantnameField" type="text" required></ion-input>
+                </ion-item>
+                <ion-item color="componet">
+                    <ion-input placeholder="Horario" name="horario" [(ngModel)]="horario" id="horarioField" type="text" required></ion-input>
+                </ion-item>
+                <ion-item color="componet">
+                    <ion-input placeholder="telefono" name="telefono" [(ngModel)]="telefono" id="telefonoRestauranteField" type="text" required></ion-input>
+                </ion-item>
+                <ion-item color="componet">
+                    <ion-input placeholder="Descripción" name="descripción" [(ngModel)]="descripcion" id="descripcionField" type="text" required></ion-input>
+                </ion-item>
+                <ion-item color="componet">
+                    <ion-input placeholder="Ubicación" name="ubicacion" [(ngModel)]="ubicacion" id="ubicacion" type="text" required></ion-input>
+                </ion-item>
+                <ion-item color="componet">
+                    <ion-input placeholder="Nombre Propietario" name="propietario" [(ngModel)]="propietario" id="propietario" type="text" required></ion-input>
+                </ion-item>
+                <ion-item color="componet">
+                    <ion-input placeholder="Imagen Restaurante" name="imagen" [(ngModel)]="imagen" id="imagen" type="text" required></ion-input>
+                </ion-item>
+                <ion-item color="componet">
+                    <ion-input placeholder="Imagen Propietario" name="imagenP" [(ngModel)]="imagenP" id="imagenP" type="text" required></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+            <button ion-button class="submit-btn" full (click)="registraRestaurante()">
+              Registrar
+            </button>
+        </ion-col>
+    </ion-row>
 
 </ion-content>

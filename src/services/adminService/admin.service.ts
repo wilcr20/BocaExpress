@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "angularfire2/database";
 import {restaurante} from '../../model/restaurante/restaurante.model'
-import firebase from 'firebase';
 
 
 @Injectable()
@@ -12,6 +11,10 @@ export class adminService{
 
 
     constructor(private db : AngularFireDatabase){}
+
+    addRestaurant(rest: restaurante) {
+      this.restauranteRef.push(rest);
+  }
 
     getRestaurantesList() {
       return this.restauranteRef;

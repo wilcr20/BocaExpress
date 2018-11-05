@@ -21,9 +21,6 @@
 
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
-
-    <button ion-button block color="dark" (click)="addPlatillo()">Agregar platillos prueba</button>
-
     <ion-card *ngFor="let platillo of this.searchbarService.platilloList" (click)="verPlatillo(platillo)">
 
         <img src="{{platillo.platillo.imagen}}" />

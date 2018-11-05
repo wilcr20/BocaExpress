@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
 import {adminService} from '../../services/adminService/admin.service';
 import 'rxjs/add/operator/map'
-import { Observable } from 'rxjs/Observable';
-import {restaurante} from '../../model/restaurante/restaurante.model';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()

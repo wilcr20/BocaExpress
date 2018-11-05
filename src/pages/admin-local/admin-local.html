@@ -19,16 +19,15 @@
 <ion-content padding>
     <img src={{restaurantes.imagenRestaurante}}>
 
-    <p style="font-size:18px;"><strong>Categoria: </strong> <input type="text" id="resCat" value={{restaurantes.categoria}}> </p>
+    <p style="font-size:18px;"><strong>Categoria: </strong> <input type="text" id="resCat" [(ngModel)]="categoria" name="categoria"> </p>
     <hr>
-    <p style="font-size:18px;"><strong>Descripción: </strong> <input type="text" id="resDes" value={{restaurantes.descripcion}}> </p>
+    <p style="font-size:18px;"><strong>Descripción: </strong> <input type="text" id="resDes" [(ngModel)]="descripcion" name="descripcion"> </p>
     <hr>
-    <p style="font-size:18px;"><strong>Horario: </strong> <input type="text" id="resHora" value={{restaurantes.horario}}> </p>
+    <p style="font-size:18px;"><strong>Horario: </strong> <input type="text" id="resHora" [(ngModel)]="horario" name="horario"> </p>
     <hr>
-    <p style="font-size:18px;"><strong>Telefono: </strong> <input type="text" id="resTel" value={{restaurantes.telefono}}> </p>
+    <p style="font-size:18px;"><strong>Telefono: </strong> <input type="text" id="resTel" [(ngModel)]="telefono" name="telefono"> </p>
     <hr>
-    <p style="font-size:18px;"><strong>Ubicación: </strong> <input type="text" id="resDes" value={{restaurantes.ubicacion}}> </p>
-
+    <p style="font-size:18px;"><strong>Ubicación: </strong> <input type="text" id="resDes" [(ngModel)]="ubicacion" name="ubicacion"> </p>
     <br>
-    <button ion-button>Guardar Cambios</button>
+    <button ion-button (click)="modificaLocal()">Guardar Cambios</button>
 </ion-content>

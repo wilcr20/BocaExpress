@@ -80,6 +80,7 @@ export class AdminHomePage {
 
   //// Firebase
   obtieneRestaurantes(){
+    this.rest=[];
     this.RestauranteList = this.admServ.getRestaurantesList()
     .snapshotChanges()
     .map(
@@ -94,10 +95,12 @@ export class AdminHomePage {
 
 
   allRestaurants(page){
+
     this.RestauranteList.forEach(restaurante => {
     this.rest.push(restaurante);
     this.existeRestauranteAdmin(this.authService.auth.currentUser.uid,page);
  });
+    //this.existeRestauranteAdmin(this.authService.auth.currentUser.uid,page);
 }
 
 existeRestauranteAdmin(idUser,page){
@@ -108,11 +111,13 @@ existeRestauranteAdmin(idUser,page){
         if(restJson[i].idPropietario == idUser){
           if(page ==1){
             this.navCtrl.push(AdminLocalPage,{"rest":restJson[i]});
-            return true;
+            //return true;
+            break;
           }
           if(page ==2){
             this.navCtrl.push(AdminPlatillosPage,{"rest":restJson[i]});
-            return true;
+            break;
+            //return true;
           }
 
           //document.getElementById("TabPrincipal").className="OcultaTab4";

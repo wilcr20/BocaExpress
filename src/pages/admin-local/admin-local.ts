@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AdminLocalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {adminService} from '../../services/adminService/admin.service';
+import 'rxjs/add/operator/map'
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -15,22 +11,56 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AdminLocalPage {
   tabBarElement:any;
+  restaurantes:any; // Variable para recibir el json enviado
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  // variables NGMODEl usadas en forms
+    categoria="";
+    descripcion="";
+    horario="";
+    telefono="";
+    ubicacion="";
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public admServ:adminService,public authService: AngularFireAuth) {
+    this.restaurantes= this.navParams.get('rest');
+    console.log("recibe : ", this.restaurantes);
+    this.categoria= this.restaurantes.categoria;
+    this.descripcion= this.restaurantes.descripcion;
+    this.horario= this.restaurantes.horario;
+    this.telefono= this.restaurantes.telefono;
+    this.ubicacion= this.restaurantes.ubicacion;
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminLocalPage');
-  }
+
 
   ionViewWillEnter(){
-    console.log("Aplica coultamiento");
+
     this.tabBarElement= document.getElementById("TabPrincipal");
-    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
+    //document.getElementById("TabPrincipal").className="MostrarTab";
+    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4 OcultaTab5";
   }
   ionViewWillLeave(){
-    console.log("SALE ");
+
     document.getElementById("TabPrincipal").className="MostrarTab";
+  }
+
+
+  modificaLocal(){
+     var rest={
+      categoria:this.categoria,
+      descripcion:this.descripcion,
+      horario:this.horario,
+      idPropietario:this.authService.auth.currentUser.uid,
+      imagenPropietario:this.restaurantes.imagenPropietario,
+      imagenRestaurante:this.restaurantes.imagenRestaurante,
+      nombrePropietario:this.restaurantes.nombrePropietario,
+      nombreRestaurante:this.restaurantes.nombreRestaurante,
+      telefono:this.telefono,
+      ubicacion:this.ubicacion,
+      key:this.restaurantes.key
+     };
+     this.admServ.editRestaurante(rest);
   }
 
 }

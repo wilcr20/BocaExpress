@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>adminPlatillos</ion-title>
+        <ion-title>Mis Platillos</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -15,58 +15,55 @@
 
 <ion-content padding>
 
-    <ion-card>
-        <img src="../../assets/imgs/arrozconleche.jpg" />
-        <ion-card-content>
-            <ion-card-title>
-                Arroz con leche 7u7
-            </ion-card-title>
-            <p>
-                Rico UwU y se hace con arroz y un poco de leche :v/
-            </p><br>
-            <p> <strong>Precio:</strong> 1200 colones.</p>
-        </ion-card-content>
-    </ion-card>
+    <button ion-button (click)="mostrarP()" *ngIf="!mostrar"> Mostrar Platillos</button> <button ion-button (click)="addP()" *ngIf="mostrar" color="secondary"> Añadir nuevo</button>
 
-    <ion-card>
-        <img src="../../assets/imgs/arrozconleche.jpg" />
-        <ion-card-content>
-            <ion-card-title>
-                Arroz con leche 7u7
-            </ion-card-title>
-            <p>
-                Rico UwU y se hace con arroz y un poco de leche :v/
-            </p><br>
-            <p> <strong>Precio:</strong> 1200 colones.</p>
-        </ion-card-content>
-    </ion-card>
+    <div *ngIf="mostrar">
+        <ion-card *ngFor="let dish of platillosLocal">
+            <img src={{dish.imagen}} />
+            <ion-card-content>
+                <ion-card-title>
+                    {{dish.nombre}}
+                </ion-card-title>
+                <p>
+                    {{dish.descripcion}}
+                </p><br>
+                <p> <strong>Precio:</strong> {{dish.precio}} colones.</p>
+            </ion-card-content>
 
-    <ion-card>
-        <img src="../../assets/imgs/arrozconleche.jpg" />
-        <ion-card-content>
-            <ion-card-title>
-                Arroz con leche 7u7
-            </ion-card-title>
-            <p>
-                Rico UwU y se hace con arroz y un poco de leche :v/
-            </p><br>
-            <p> <strong>Precio:</strong> 1200 colones.</p>
-        </ion-card-content>
-    </ion-card>
+            <button ion-button icon-only (click)="editaPlatillo(dish)"> <!--Boton editar platillo-->
+                <ion-icon name="create"></ion-icon>
+            </button>
+            <button ion-button icon-only (click)="borraPlatillo(dish)"> <!--Boton eliminar platillo-->
+              <ion-icon name="trash"></ion-icon>
+           </button>
 
-    <ion-card>
-        <img src="../../assets/imgs/arrozconleche.jpg" />
-        <ion-card-content>
-            <ion-card-title>
-                Arroz con leche 7u7
-            </ion-card-title>
-            <p>
-                Rico UwU y se hace con arroz y un poco de leche :v/
-            </p><br>
-            <p> <strong>Precio:</strong> 1200 colones.</p>
-        </ion-card-content>
-    </ion-card>
+        </ion-card>
+    </div>
 
+    <div *ngIf="!mostrar" style="text-align:center">
+        <br><br><br>
+        <hr>
+        <ion-item>
+            <ion-label>Nombre: </ion-label>
+            <ion-input type="text" id="nameP" [(ngModel)]="nombre" name="nombre" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Descripción: </ion-label>
+            <ion-input type="text" id="descP" [(ngModel)]="descripcion" name="descripcion"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Precio: </ion-label>
+            <ion-input type="text" id="precioP" [(ngModel)]="precio" name="precio"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Imagen: </ion-label>
+            <ion-input type="text" id="imagenP" [(ngModel)]="imagen" name="imagen"></ion-input>
+        </ion-item>
+        <hr>
+
+        <br>
+        <button ion-button small full (click)="agregaPlatillo()" color="secondary"> Confirmar y agregar!</button>
+    </div>
 
 
 </ion-content>

@@ -24,6 +24,8 @@ import {LoginPage} from '../pages/login/login';
 import { RegistroPage } from '../pages/registro/registro';
 import {  TabsPage } from '../pages/tabs/tabs';
 import {  ListaPage } from '../pages/lista/lista';
+import { SeeRestaurantPage } from '../pages/see-restaurant/see-restaurant';
+import {RegistroRestaurantPage} from '../pages/registro-restaurant/registro-restaurant';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -38,6 +40,8 @@ import { searchbarService } from '../services/searchbar/searchbar.service';
 
 import { LoginService } from '../services/login/login.service';
 import { CompraService } from '../services/compra/compra.service';
+import {adminService} from '../services/adminService/admin.service';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +60,9 @@ import { CompraService } from '../services/compra/compra.service';
     RegistroPage,
     LoginPage,
     TabsPage,
-    ListaPage
+    ListaPage,
+    SeeRestaurantPage,
+    RegistroRestaurantPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +88,9 @@ import { CompraService } from '../services/compra/compra.service';
     RegistroPage,
     LoginPage,
     TabsPage,
-    ListaPage
+    ListaPage,
+    SeeRestaurantPage,
+    RegistroRestaurantPage
   ],
   providers: [
     StatusBar,
@@ -94,8 +102,9 @@ import { CompraService } from '../services/compra/compra.service';
     LoginService,
     CompraService,
     searchbarService,
-    LoginService
-  
+    LoginService,
+    adminService
+
   ]
 })
 export class AppModule {}

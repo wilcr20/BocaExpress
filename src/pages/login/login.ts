@@ -6,7 +6,6 @@ import { LoginService } from '../../services/login/login.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../../model/user/user.model';
 import { ListaPage } from '../lista/lista';
-import { UserPrincipalPage } from '../user-principal/user-principal';
 
 @IonicPage()
 @Component({

@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar color="nav">
-        <ion-title>{{platillo.nombre}}</ion-title>
+        <ion-title>{{platillo.platillo.nombre}}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -17,7 +17,7 @@
 
     <ion-card>
 
-        <img src="{{platillo.imagen}}">
+        <img src="{{platillo.platillo.imagen}}">
         <ion-fab right top>
             <button ion-fab (click)="verRestaurante()">
             <ion-icon name="pin"></ion-icon>
@@ -27,13 +27,13 @@
         <ion-item>
             <ion-icon name="ios-basket-outline" item-start large></ion-icon>
             <h2>Nombre</h2>
-            <p>{{platillo.nombre}}</p>
+            <p>{{platillo.platillo.nombre}}</p>
         </ion-item>
 
         <ion-item>
             <ion-icon name="ios-beer-outline" item-start large></ion-icon>
             <h2>Descripción</h2>
-            <p>{{platillo.descripcion}}</p>
+            <p>{{platillo.platillo.descripcion}}</p>
         </ion-item>
 
         <ion-item>
@@ -45,7 +45,7 @@
               <ion-icon name="ios-card"></ion-icon>
               Buy
             </button>
-            <p>₡{{platillo.precio}}</p>
+            <p>₡{{platillo.platillo.precio}}</p>
         </ion-item>
 
     </ion-card><br><br>

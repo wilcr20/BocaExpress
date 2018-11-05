@@ -15,14 +15,35 @@
 
 <ion-content padding class="body">
 
+    <!--
+    <ion-slides>
+        <ion-slide *ngFor='let platillo of platillos'>
+            <ion-card>
+                <ion-card-header>
+                    <img src='{{platillo.platillo.imagen}}'>
+                </ion-card-header>
+                <ion-card-content>
+                    <h2>{{platillo.platillo.nombre}}</h2>
+                    {{platillo.platillo.precio}}
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
+    -->
+
     <ion-list *ngFor="let platillo of platillos">
         <ion-item>
-            <ion-thumbnail item-start>
-                <img src="{{platillo.imagen}}">
+            <ion-thumbnail item-start (click)="verPlatillo(platillo)">
+                <img src="{{platillo.platillo.imagen}}">
             </ion-thumbnail>
-            <h2>{{platillo.nombre}}</h2>
-            <p>₡{{platillo.precio}}</p>
-            <button ion-button clear item-end>Remove</button>
+            <h2>{{platillo.platillo.nombre}}</h2>
+            <p>₡{{platillo.platillo.precio}}</p>
+            <button ion-button icon-start clear item-end (click)="removeFavorite(platillo)">
+                    <ion-icon name="ios-trash-outline"></ion-icon>
+            </button>
+            <button ion-button icon-start clear item-end>
+                <ion-icon name="md-cart"></ion-icon>
+            </button>
         </ion-item>
     </ion-list>
 

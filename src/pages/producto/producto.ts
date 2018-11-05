@@ -4,6 +4,7 @@ import { ToastController } from 'ionic-angular';
 
 import { Favorito } from '../../model/favorito/favorito.model';
 import { FavoritoService } from '../../services/favorito/favorito.service';
+import { SeeRestaurantPage } from '../see-restaurant/see-restaurant';
 
 @IonicPage()
 @Component({
@@ -33,16 +34,13 @@ export class ProductoPage {
     //cambia el estado del icono
     this.visible = !this.visible;
 
-
-    console.log(platillo);
-    /*
     //llena el json de favorito
     this.favorito.idPlatillo = platillo.key;
     this.favorito.idCliente  = 'null';
 
     //agrega un favorito a firebase
     this.favoritoService.addFavorito(this.favorito).then(ref => {})
-    */
+    
     
 
     //muestra una notificación
@@ -54,16 +52,11 @@ export class ProductoPage {
   }
 
   verRestaurante(){
-    //muestra una notificación
-    const toast = this.toastCtrl.create({
-      message: 'Se redireccionara a restaurante!',
-      duration: 3000
-    });
-    toast.present();
+
+    this.navCtrl.push(SeeRestaurantPage);
+    
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductoPage');
-  }
+  ionViewDidLoad() {}
 
 }

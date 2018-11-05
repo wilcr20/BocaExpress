@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 import { AdminLocalPage } from '../admin-local/admin-local';
 import { AdminComprasPage } from '../admin-compras/admin-compras';
 import { AdminPlatillosPage } from '../admin-platillos/admin-platillos';
 import { AdminBandejaPage } from '../admin-bandeja/admin-bandeja';
+
+import {adminService} from '../../services/adminService/admin.service';
+import 'rxjs/add/operator/map'
+import { Observable } from 'rxjs/Observable';
+
 
 
 /**
@@ -21,52 +28,106 @@ import { AdminBandejaPage } from '../admin-bandeja/admin-bandeja';
 })
 export class AdminHomePage {
 
-  jsonUser:any; // Variable para recibir el json enviado desde userGate
+
   tabBarElement:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  RestauranteList: Observable<any[]> // guarda todos los resdtaurantes en DB
+  rest:  any[] = [];
 
-    this.jsonUser= this.navParams.get('jsonPrueba'); // se usa el navParams.get para obtener los paarmetros recibidos de ventanas
-    console.log("Json recibido: ", this.jsonUser);
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public admServ:adminService,public authService: AngularFireAuth) {
+    console.log("CONST");
 
   }
+
+
 
   ionViewWillEnter(){
-    console.log("Aplica coultamiento");
     this.tabBarElement= document.getElementById("TabPrincipal");
-    document.getElementById("TabPrincipal").className="OcultaTab1 OcultaTab2 OcultaTab3 OcultaTab4";
+    document.getElementById("TabPrincipal").className="MostrarTab";
+    document.getElementById("TabPrincipal").className="OcultaTab4";
   }
+
   ionViewWillLeave(){
-    console.log("SALE ");
     document.getElementById("TabPrincipal").className="MostrarTab";
   }
 
 
 
+
   ventanaLocal(){
-    this.navCtrl.push(AdminLocalPage);
+    this.obtieneRestaurantes();
+    this.allRestaurants(1);
   }
 
   ventanaPlatillos(){
-    this.navCtrl.push(AdminPlatillosPage);
+    this.obtieneRestaurantes();
+    this.allRestaurants(2);
+
   }
 
   ventanaBandeja(){
+    //this.obtieneRestaurantes();
+    //this.allRestaurants(3);
     this.navCtrl.push(AdminBandejaPage);
   }
 
   ventanaCompras(){
+    //this.obtieneRestaurantes();
+    //this.allRestaurants(4);
     this.navCtrl.push(AdminComprasPage);
   }
 
 
+  //// Firebase
+  obtieneRestaurantes(){
+    this.rest=[];
+    this.RestauranteList = this.admServ.getRestaurantesList()
+    .snapshotChanges()
+    .map(
+      changes => {
+        return changes.map( c =>({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      }
+    )
+    .map(changes => changes.reverse());
+  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminHomePage');
 
+  allRestaurants(page){
+
+    this.RestauranteList.forEach(restaurante => {
+    this.rest.push(restaurante);
+    this.existeRestauranteAdmin(this.authService.auth.currentUser.uid,page);
+ });
+    //this.existeRestauranteAdmin(this.authService.auth.currentUser.uid,page);
+}
+
+existeRestauranteAdmin(idUser,page){
+  if(this.rest.length>0){
+      var restJson = this.rest[0];
+
+      for(var i=0; i<restJson.length;i++){
+        if(restJson[i].idPropietario == idUser){
+          if(page ==1){
+            this.navCtrl.push(AdminLocalPage,{"rest":restJson[i]});
+            //return true;
+            break;
+          }
+          if(page ==2){
+            this.navCtrl.push(AdminPlatillosPage,{"rest":restJson[i]});
+            break;
+            //return true;
+          }
+
+          //document.getElementById("TabPrincipal").className="OcultaTab4";
+
+        }
+      }
 
   }
+
+}
 
 
 

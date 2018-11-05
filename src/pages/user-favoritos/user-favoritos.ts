@@ -4,17 +4,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //Firebase
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
-import { Favorito } from '../../model/favorito/favorito.model';
 import { Platillo } from '../../model/platillo/platillo.model';
 import { PlatilloService } from '../../services/platillo/platillo.service';
 import { FavoritoService } from '../../services/favorito/favorito.service';
 
-/**
- * Generated class for the UserFavoritosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ProductoPage } from '../producto/producto';
 
 @IonicPage()
 @Component({
@@ -24,12 +18,12 @@ import { FavoritoService } from '../../services/favorito/favorito.service';
 export class UserFavoritosPage {
 
   //todos los favoritos
-  favoriteList: Observable<Favorito[]>
+  favoriteList: Observable<any[]>
   //todos los platillos
   dishList: Observable<any[]>
 
   //lista de platillos que si son favorotos del usuario
-  platillos:  Platillo[] = [];
+  platillos:  any[] = [];
 
   lista:  any[] = [];
 
@@ -42,7 +36,7 @@ export class UserFavoritosPage {
 
   };
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public favoriteService: FavoritoService,
               public platilloService: PlatilloService) {
@@ -50,7 +44,7 @@ export class UserFavoritosPage {
       this.getDish_and_favorites();
       this.myFavorites();
 
-    
+
   }
 
   getDish_and_favorites(){
@@ -86,7 +80,7 @@ export class UserFavoritosPage {
 
     this.favoriteList.forEach(favorito => {
         favorito.forEach(indexFavorito => {
- 
+
           this.dishList.forEach(platillo => {
             platillo.forEach(indexPlatillo => {
 
@@ -97,11 +91,11 @@ export class UserFavoritosPage {
                 //significa no repetir datos
                 if(result == undefined){
 
-                  this.platillos.push(indexPlatillo);
+                  this.platillos.push({platillo:indexPlatillo, favoriteKey: indexFavorito.key });
                   this.lista.push(indexPlatillo.key);
 
                 }
-                
+
               }
 
             });
@@ -109,11 +103,23 @@ export class UserFavoritosPage {
 
         });
     });
-  
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserFavoritosPage');
+  removeFavorite(platillo: any){
+    this.favoriteService.removeFavorito(platillo.favoriteKey).then(ref => {
+      this.platillos.splice(platillo.platillo, 1);
+      this.lista.splice(platillo.favoriteKey, 1);
+    });
+
+    this.getDish_and_favorites();
+    this.myFavorites();
   }
+
+  verPlatillo(platillo: any){
+    this.navCtrl.push(ProductoPage, {platillo});
+  }
+
+  ionViewDidLoad() {}
 
 }

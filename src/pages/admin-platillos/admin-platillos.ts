@@ -4,6 +4,7 @@ import { Platillo } from '../../model/platillo/platillo.model';
 import { PlatilloService } from '../../services/platillo/platillo.service';
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the AdminPlatillosPage page.
@@ -20,7 +21,7 @@ import { Observable } from 'rxjs/Observable';
 export class AdminPlatillosPage {
 
   tabBarElement:any;
-  restaurante:any; // Variable para recibir el json enviado
+  restaurante:any=[]; // Variable para recibir el json enviado
   mostrar:any=true;
   dishList: Observable<any[]>
 
@@ -28,16 +29,18 @@ export class AdminPlatillosPage {
   platillos:any=[];
   platillosLocal:  any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService,private alertCtrl: AlertController) {
     this.restaurante= this.navParams.get('rest');
     console.log("recibe : ", this.restaurante);
     this.getPlatillos();
     this.allPlatillos();
 
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPlatillosPage');
+
   }
 
   ionViewWillEnter(){
@@ -64,31 +67,29 @@ export class AdminPlatillosPage {
   }
 
   allPlatillos(){
+
     this.dishList.forEach(platillo => {
-      console.log("Platillo", platillo);
-      this.platillos= platillo;
+      this.getPlatilloLocal(platillo);
+
    });
-   console.log("lista platillos: ", this.platillos);
-   this.getPlatilloLocal();
+
 
   }
 
-  getPlatilloLocal(){
-    console.log("entra a getPlatilloLocal()");
-    console.log("tam :", this.platillos.length);
-
-     for(var i=0; i< this.platillos.length;i++){
-       console.log("-",this.platillos[i]);
-      if(this.platillos[i].idRestaurante == this.restaurante.key){
-        this.platillosLocal.push(this.platillos[i]);
-        console.log("HALLA IGULA");
-      }
-    }
+  getPlatilloLocal(platillosL){
+      for(var i=0; i< platillosL.length;i++){
+       if(platillosL[i].idRestaurante == this.restaurante.key){
+         this.platillosLocal.push(platillosL[i]);
+       }
+     }
 
   }
+
+
+// funciones de ventana
 
   mostrarP(){
-    //console.log(this.platillosLocal.length);
+    console.log(this.platillosLocal.length);
     this.mostrar= true;
   }
 
@@ -100,5 +101,60 @@ export class AdminPlatillosPage {
   agregaPlatillo(){
       console.log("Agregas nuevo platillo");
   }
+
+  borraPlatillo(dish){
+    console.log("Borra");
+    this.platilloService.deletePlatillo(dish);
+    this.platillosLocal=[];
+    this.getPlatillos();
+    this.allPlatillos();
+  }
+
+  editaPlatillo(dish){
+
+      let alert = this.alertCtrl.create({
+        title: 'Modificar datos.',
+        inputs: [
+          {
+            name: 'nombre',
+            placeholder: 'Nombre de platillo',
+            value:dish.nombre
+          },
+          {
+            name: 'descripcion',
+            placeholder: 'Descripcion',
+            value:dish.descripcion
+          },
+          {
+            name: 'precio',
+            placeholder: 'Precio',
+            value:dish.precio
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Modificar!',
+            handler: data => {
+              console.log("Data: ",data);
+            }
+          }
+        ]
+      });
+      alert.present();
+  }
+
+
+
+
+
+
+
 
 }

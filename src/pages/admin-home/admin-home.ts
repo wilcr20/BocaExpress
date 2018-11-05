@@ -62,7 +62,7 @@ export class AdminHomePage {
   ventanaPlatillos(){
     this.obtieneRestaurantes();
     this.allRestaurants(2);
-    this.navCtrl.push(AdminPlatillosPage);
+
   }
 
   ventanaBandeja(){
@@ -103,18 +103,20 @@ export class AdminHomePage {
 existeRestauranteAdmin(idUser,page){
   if(this.rest.length>0){
       var restJson = this.rest[0];
-     // document.getElementById("TabPrincipal").className="MostrarTab";
+
       for(var i=0; i<restJson.length;i++){
         if(restJson[i].idPropietario == idUser){
           if(page ==1){
             this.navCtrl.push(AdminLocalPage,{"rest":restJson[i]});
+            return true;
           }
           if(page ==2){
             this.navCtrl.push(AdminPlatillosPage,{"rest":restJson[i]});
+            return true;
           }
 
           //document.getElementById("TabPrincipal").className="OcultaTab4";
-          return true;
+
         }
       }
 

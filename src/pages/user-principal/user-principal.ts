@@ -62,6 +62,8 @@ export class UserPrincipalPage {
   }
 
 
+
+
   ionViewWillEnter(){
     document.getElementById("TabPrincipal").className="OcultaTab4 OcultaTab5";
 
@@ -78,6 +80,7 @@ export class UserPrincipalPage {
 
   //// Firebase
   obtieneRestaurantes(){
+    console.log("Entra a obtieneRestaurantes");
     this.RestauranteList = this.admServ.getRestaurantesList()
     .snapshotChanges()
     .map(
@@ -92,6 +95,7 @@ export class UserPrincipalPage {
 
 
   allRestaurants(){
+    console.log("Entra a allRestaurants");
     this.RestauranteList.forEach(restaurante => {
     this.rest.push(restaurante);
  });

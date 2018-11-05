@@ -30,6 +30,14 @@ export class AdminPlatillosPage {
   platillosLocal:  any[] = [];
 
 
+  // Variables NGMODEl para validar formulario de agregar platillo
+    descripcion="";
+    idRestaurante= "";
+    nombre= "";
+    precio= "";
+    imagen="";
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService,private alertCtrl: AlertController) {
     this.restaurante= this.navParams.get('rest');
@@ -108,18 +116,16 @@ export class AdminPlatillosPage {
 
   agregaPlatillo(){
       console.log("Agregas nuevo platillo");
-
       var dishJ:Platillo ={
-        descripcion: 'Casado tradicional tico.',
+        descripcion: this.descripcion,
         idRestaurante: this.restaurante.key,
-        nombre: 'Casado',
-        precio: '3000',
-        imagen: ""
+        nombre: this.nombre,
+        precio: this.precio,
+        imagen: this.imagen
       }
 
-      console.log("new : ", dishJ);
-      //this.platilloService.addPlatilloo(dishJson);
-
+      this.platilloService.addPlatillo(dishJ);
+      this.actualizaPantalla();
 
   }
 

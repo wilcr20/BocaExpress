@@ -29,10 +29,6 @@ export class PlatilloService {
 
     // Made by Wilfred :v
 
-    addPlatilloo(platillo){
-      this.db.database.ref('Platillo/'+platillo.key).set(platillo);
-    }
-
     deletePlatillo(platillo){  /// borra platillo de manera general
       this.db.database.ref('Platillo/'+platillo.key).remove();
 

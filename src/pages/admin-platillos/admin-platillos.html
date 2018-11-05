@@ -45,19 +45,19 @@
         <hr>
         <ion-item>
             <ion-label>Nombre: </ion-label>
-            <ion-input type="text" id="nameP" required></ion-input>
+            <ion-input type="text" id="nameP" [(ngModel)]="nombre" name="nombre" required></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Descripción: </ion-label>
-            <ion-input type="text" id="descP"></ion-input>
+            <ion-input type="text" id="descP" [(ngModel)]="descripcion" name="descripcion"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Precio: </ion-label>
-            <ion-input type="text" id="precioP"></ion-input>
+            <ion-input type="text" id="precioP" [(ngModel)]="precio" name="precio"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Imagen: </ion-label>
-            <ion-input type="text" id="imagenP"></ion-input>
+            <ion-input type="text" id="imagenP" [(ngModel)]="imagen" name="imagen"></ion-input>
         </ion-item>
         <hr>
 

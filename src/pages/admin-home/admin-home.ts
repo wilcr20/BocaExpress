@@ -28,7 +28,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AdminHomePage {
 
-  jsonUser:any; // Variable para recibir el json enviado desde userGate
+
   tabBarElement:any;
 
   RestauranteList: Observable<any[]> // guarda todos los resdtaurantes en DB
@@ -56,18 +56,24 @@ export class AdminHomePage {
 
   ventanaLocal(){
     this.obtieneRestaurantes();
-    this.allRestaurants();
+    this.allRestaurants(1);
   }
 
   ventanaPlatillos(){
-    this.navCtrl.push(AdminPlatillosPage);
+    this.obtieneRestaurantes();
+    this.allRestaurants(2);
+
   }
 
   ventanaBandeja(){
+    //this.obtieneRestaurantes();
+    //this.allRestaurants(3);
     this.navCtrl.push(AdminBandejaPage);
   }
 
   ventanaCompras(){
+    //this.obtieneRestaurantes();
+    //this.allRestaurants(4);
     this.navCtrl.push(AdminComprasPage);
   }
 
@@ -87,22 +93,30 @@ export class AdminHomePage {
   }
 
 
-  allRestaurants(){
+  allRestaurants(page){
     this.RestauranteList.forEach(restaurante => {
     this.rest.push(restaurante);
-    this.existeRestauranteAdmin(this.authService.auth.currentUser.uid);
+    this.existeRestauranteAdmin(this.authService.auth.currentUser.uid,page);
  });
 }
 
-existeRestauranteAdmin(idUser){
+existeRestauranteAdmin(idUser,page){
   if(this.rest.length>0){
       var restJson = this.rest[0];
-     // document.getElementById("TabPrincipal").className="MostrarTab";
+
       for(var i=0; i<restJson.length;i++){
         if(restJson[i].idPropietario == idUser){
-          this.navCtrl.push(AdminLocalPage,{"rest":restJson[i]});
+          if(page ==1){
+            this.navCtrl.push(AdminLocalPage,{"rest":restJson[i]});
+            return true;
+          }
+          if(page ==2){
+            this.navCtrl.push(AdminPlatillosPage,{"rest":restJson[i]});
+            return true;
+          }
+
           //document.getElementById("TabPrincipal").className="OcultaTab4";
-          return true;
+
         }
       }
 

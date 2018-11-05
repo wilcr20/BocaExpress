@@ -21,13 +21,15 @@ import { AlertController } from 'ionic-angular';
 export class AdminPlatillosPage {
 
   tabBarElement:any;
-  restaurante:any=[]; // Variable para recibir el json enviado
+  restaurante:any={}; // Variable para recibir el json enviado
   mostrar:any=true;
   dishList: Observable<any[]>
 
   //lista de platillos general
   platillos:any=[];
   platillosLocal:  any[] = [];
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService,private alertCtrl: AlertController) {
     this.restaurante= this.navParams.get('rest');
@@ -88,6 +90,12 @@ export class AdminPlatillosPage {
 
 // funciones de ventana
 
+
+  actualizaPantalla(){
+    this.platillosLocal=[];
+
+  }
+
   mostrarP(){
     console.log(this.platillosLocal.length);
     this.mostrar= true;
@@ -100,14 +108,26 @@ export class AdminPlatillosPage {
 
   agregaPlatillo(){
       console.log("Agregas nuevo platillo");
+
+      var dishJ:Platillo ={
+        descripcion: 'Casado tradicional tico.',
+        idRestaurante: this.restaurante.key,
+        nombre: 'Casado',
+        precio: '3000',
+        imagen: ""
+      }
+
+      console.log("new : ", dishJ);
+      //this.platilloService.addPlatilloo(dishJson);
+
+
   }
 
   borraPlatillo(dish){
     console.log("Borra");
     this.platilloService.deletePlatillo(dish);
-    this.platillosLocal=[];
-    this.getPlatillos();
-    this.allPlatillos();
+    this.actualizaPantalla();
+
   }
 
   editaPlatillo(dish){
@@ -142,7 +162,12 @@ export class AdminPlatillosPage {
           {
             text: 'Modificar!',
             handler: data => {
-              console.log("Data: ",data);
+              dish.nombre = data.nombre;
+              dish.descripcion= data.descripcion;
+              dish.precio= data.precio;
+              console.log("Data: ",dish);
+              this.platilloService.editPlatillo(dish);
+              this.actualizaPantalla();
             }
           }
         ]

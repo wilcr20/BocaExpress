@@ -25,9 +25,20 @@ export class PlatilloService {
         return this.platilloListRef.remove(platillo.idRestaurante);
     }
 
+
+
+    // Made by Wilfred :v
+
+    addPlatilloo(platillo){
+      this.db.database.ref('Platillo/'+platillo.key).set(platillo);
+    }
+
     deletePlatillo(platillo){  /// borra platillo de manera general
-      console.log(this.db.database.ref('Platillo/'+platillo.key));
       this.db.database.ref('Platillo/'+platillo.key).remove();
 
+    }
+
+    editPlatillo(platillo){
+      this.db.database.ref('Platillo/'+platillo.key).set(platillo);
     }
 }

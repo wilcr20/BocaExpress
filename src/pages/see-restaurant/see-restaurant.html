@@ -13,42 +13,54 @@
 </ion-header>
 
 
-<ion-content padding class="buttons-components-page" *ngFor="let element of restauranteById">
-    <ion-card>
+<ion-content padding>
+
+    <ion-card *ngFor="let element of restauranteById">
+
+        <!--
+            <img src="{{element.imagenRestaurante}}" />
+        -->
+        <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
 
         <ion-card-content>
-            <img src="{{element.imagenRestaurante}}" />
+            <ion-card-title>
+                <strong>{{element.nombreRestaurante}}</strong>
+            </ion-card-title>
+            <p>{{element.descripcion}}</p>
         </ion-card-content>
 
-        <ion-item>
-            <button ion-button clear item-start>Like</button>
-            <button ion-button clear item-end>Comment</button>
-        </ion-item>
+        <ion-list>
+            <ion-item item-end outline>
+                <ion-icon name='ios-pizza-outline' item-start style="color: red"></ion-icon>
+                <h2><strong>Categoria</strong></h2>
+                <p>{{element.categoria}}</p>
+            </ion-item>
+
+            <ion-item item-end outline>
+                <ion-icon name='ios-information-circle-outline' item-start style="color: red"></ion-icon>
+                <h2><strong>Descripción</strong></h2>
+                <p>{{element.descripcion}}</p>
+            </ion-item>
+
+            <ion-item item-end outline>
+                <ion-icon name='ios-time-outline' item-start style="color: red"></ion-icon>
+                <h2><strong>Horario</strong></h2>
+                <p>{{element.horario}}</p>
+            </ion-item>
+
+            <ion-item item-end outline>
+                <ion-icon name='ios-call-outline' item-start style="color: red"></ion-icon>
+                <h2><strong>Telefono</strong></h2>
+                <p>{{element.telefono}}</p>
+            </ion-item>
+
+            <ion-item item-end outline>
+                <ion-icon name='ios-locate-outline' item-start style="color: red"></ion-icon>
+                <h2><strong>Ubicación</strong></h2>
+                <p>{{element.ubicacion}}</p>
+            </ion-item>
+        </ion-list>
+
     </ion-card>
 
-    <ion-list>
-        <ion-item item-end outline>
-            {{element.categoria}}
-        </ion-item>
-
-        <ion-item item-end outline>
-            {{element.descripcion}}
-        </ion-item>
-
-        <ion-item item-end outline>
-            {{element.horario}}
-        </ion-item>
-
-        <ion-item item-end outline>
-            {{element.nombrePropietario}}
-        </ion-item>
-
-        <ion-item item-end outline>
-            {{element.telefono}}
-        </ion-item>
-
-        <ion-item item-end outline>
-            {{element.ubicacion}}
-        </ion-item>
-    </ion-list>
 </ion-content>

@@ -13,16 +13,20 @@ import { ListaPage } from '../lista/lista';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+
   usuario : User = {
     email : undefined,
-    password : undefined
+    password : undefined,
+    nombre: undefined,
+    telefono: undefined
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginService : LoginService, public fireauth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public loginService : LoginService, 
+              public fireauth: AngularFireAuth) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+  ionViewDidLoad() {}
 
   registroVentana(){
     this.navCtrl.push(RegistroPage);

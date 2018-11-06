@@ -21,7 +21,9 @@ export class ListaPage {
 
     user : User ={
       email : undefined,
-      password : undefined
+      password : undefined,
+      nombre: undefined,
+      telefono: undefined
     }
     compras: Observable<any[]>;
 

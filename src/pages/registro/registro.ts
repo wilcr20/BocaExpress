@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { LoginService } from '../../services/login/login.service';
@@ -10,12 +10,7 @@ import { PerfilService } from '../../services/perfil/perfil.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 
-/**
- * Generated class for the RegistroPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -36,17 +31,26 @@ export class RegistroPage {
 
   user : User ={
     email : undefined,
-    password : undefined
+    password : undefined,
+    nombre:  undefined,
+    telefono: undefined
   }
 
+  profile : Profile = {
+    nombre : "",
+    telefono : "",
+    user_id : ""
 
+  }
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public camera: Camera,
               public authService :LoginService,
               public profileService : PerfilService,
-              public auth : AngularFireAuth) {
+              public auth : AngularFireAuth,
+              public loginService : LoginService,
+              public loadingCtrl: LoadingController) {
 
     this.option  = [{ name: "Cliente" },{name: "Restaurante"}]; 
 
@@ -56,11 +60,10 @@ export class RegistroPage {
                          {name: "Temáticos"},
                          {name: "Para llevar"},
                          {name: "Oriental"}]; 
+    
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegistroPage');
-  }
+  ionViewDidLoad() {}
 
   onItemSelection(selection) {
 
@@ -74,6 +77,7 @@ export class RegistroPage {
   
 
   getImage(){
+
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -82,41 +86,49 @@ export class RegistroPage {
     }
     this.camera.getPicture( options )
     .then(imageData => {
+      
       this.image = 'data:image/jpeg;base64,' + imageData;//`data:image/jpeg;base64,${imageData}`;
     })
     .catch(error =>{
       console.error( error );
     });
+
   }
 
   createProfile(profile: Profile){
-        this.profileService.newProfile(profile);
+
+    this.profileService.newProfile(profile).then(ref => {})
+    
   }
 
-  signUpUser(email:string,password:string){
-    this.authService.signUpUser(email,password);
 
-    console.log("Registrado");
+  signUpUser(email:string,password:string,nombre:string,telefono:string){
 
-    var profile : Profile = {
-      nombre : "Juan",
-      telefono : "12124124",
-      user_id : this.auth.auth.currentUser.uid
+    this.loadingCtrl.create({
+      content: 'Please wait...',
+      duration: 1000,
+      dismissOnPageChange: true
+    }).present();
 
-    }
-   
-    this.auth.auth.onAuthStateChanged(function(user){
-      if(user){
 
-        this.createProfile(profile);
-      }
+    this.authService.signUpUser(email,password).then(ref => {
+      
+      this.registerProfile(ref.user.uid,nombre,telefono);
+
     })
-    
+  }
+   
+  registerProfile(id: string,nombre: string,telefono: string){
 
-    console.log(this.auth.auth.currentUser.email);
-  
+    this.profile.nombre    = nombre;
+    this.profile.telefono  = telefono;
+    this.profile.user_id   = id;
+
+    this.createProfile(this.profile);
 
     this.navCtrl.setRoot(UserPrincipalPage);
+  
+
   }
 }
 

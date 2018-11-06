@@ -13,45 +13,44 @@
 </ion-header>
 
 
-<ion-content padding class="body">
+<ion-content padding>
 
-   
+    <ion-thumbnail *ngIf="image" item-start color="componet">
+        <img [src]="image">
+    </ion-thumbnail>
 
-  
-
-
-
-       
-
-        <ion-thumbnail *ngIf="image" item-start color="componet">
-            <img [src]="image">
-        </ion-thumbnail>
-
-        <form #loginForm="ngForm" autocomplete="off">
-            <ion-row>
-                <ion-col>
-                    <ion-list inset>
-                        <ion-item color="componet">
-                            <ion-input placeholder="Email" name="username" id="emailField" type="text" required [(ngModel)]="user.email"  #email></ion-input>
-                        </ion-item>
-                        <ion-item color="componet">
-                            <ion-input placeholder="Password" name="password" id="passwordField" type="password" [(ngModel)]="user.password" required></ion-input>
-                        </ion-item>
-                        <ion-item color="componet">
-                            <ion-input placeholder="telefono" name="telefono" id="telefonoField" type="number" required></ion-input>
-                        </ion-item>
-                    </ion-list>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col color="componet">
-                    <button ion-button class="submit-btn" full type="submit" (click)="signUpUser(user.email,user.password)" [disabled]="!loginForm.form.valid">Registrar
+    <form #loginForm="ngForm" autocomplete="on">
+        <ion-row>
+            <ion-col>
+                <ion-list inset>
+                    <ion-item>
+                        <ion-label floating>Nombre Completo</ion-label>
+                        <ion-input name="nombre" id="nombreField" type="text" [(ngModel)]="user.nombre" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Email</ion-label>
+                        <ion-input name="username" id="emailField" type="text" [(ngModel)]="user.email" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Password</ion-label>
+                        <ion-input name="password" id="passwordField" type="password" [(ngModel)]="user.password" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Télefono</ion-label>
+                        <ion-input name="telefono" id="telefonoField" type="text" pattern="" [(ngModel)]="user.telefono" required></ion-input>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col color="componet">
+                <button ion-button class="submit-btn" full type="submit" (click)="signUpUser(user.email,user.password,user.nombre,user.telefono)" [disabled]="!loginForm.form.valid">Registrar
                 </button>
-                </ion-col>
-            </ion-row>
-        </form>
-   
+            </ion-col>
+        </ion-row>
+    </form>
 
-    
+
+
 
 </ion-content>

@@ -13,16 +13,18 @@
 </ion-header>
 
 
-<ion-content padding class="body">
-    <form #loginForm="ngForm" autocomplete="off">
+<ion-content padding>
+    <form #loginForm="ngForm" autocomplete="on">
         <ion-row>
             <ion-col>
                 <ion-list inset>
                     <ion-item>
-                        <ion-input placeholder="Email" name="username" id="loginField" type="text" required #email [(ngModel)]= "usuario.email"></ion-input>
+                        <ion-label floating>Email</ion-label>
+                        <ion-input name="username" id="loginField" type="text" required #email [(ngModel)]="usuario.email"></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]= "usuario.password"></ion-input>
+                        <ion-label floating>Password</ion-label>
+                        <ion-input name="password" id="passwordField" type="password" required [(ngModel)]="usuario.password"></ion-input>
                     </ion-item>
                 </ion-list>
             </ion-col>

@@ -115,13 +115,15 @@ export class AdminPlatillosPage {
   }
 
   agregaPlatillo(){
-      console.log("Agregas nuevo platillo");
+
+      //NOTA: CAMBIE LA IMAGEN PARA HACER PREUBAS
       var dishJ:Platillo ={
         descripcion: this.descripcion,
         idRestaurante: this.restaurante.key,
         nombre: this.nombre,
         precio: this.precio,
-        imagen: this.imagen
+        imagen: 'https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/pizza.jpg?alt=media&token=d915367c-986d-4144-96eb-d8a383628c8a'
+        //imagen: this.imagen
       }
 
       this.platilloService.addPlatillo(dishJ);

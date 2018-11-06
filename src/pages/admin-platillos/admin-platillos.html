@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>Mis Platillos</ion-title>
+    <ion-navbar color="nav">
+        <ion-title>Platillos</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -15,7 +15,8 @@
 
 <ion-content padding>
 
-    <button ion-button (click)="mostrarP()" *ngIf="!mostrar"> Mostrar Platillos</button> <button ion-button (click)="addP()" *ngIf="mostrar" color="secondary"> Añadir nuevo</button>
+    <button ion-button (click)="mostrarP()" *ngIf="!mostrar" full block> Mostrar Platillos</button>
+    <button ion-button (click)="addP()" *ngIf="mostrar" full block color="secondary"> Añadir nuevo</button>
 
     <div *ngIf="mostrar">
         <ion-card *ngFor="let dish of platillosLocal">

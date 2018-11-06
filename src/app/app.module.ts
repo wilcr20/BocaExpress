@@ -43,6 +43,8 @@ import { LoginService } from '../services/login/login.service';
 import { CompraService } from '../services/compra/compra.service';
 import {adminService} from '../services/adminService/admin.service';
 import { PerfilService } from '../services/perfil/perfil.service';
+import { RestauranteService } from '../services/restaurante/restaurante.service';
+
 
 
 
@@ -107,7 +109,8 @@ import { PerfilService } from '../services/perfil/perfil.service';
     searchbarService,
     LoginService,
     adminService,
-    PerfilService
+    PerfilService,
+    RestauranteService
 
   ]
 })

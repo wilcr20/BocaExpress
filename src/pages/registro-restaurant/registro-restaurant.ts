@@ -42,9 +42,7 @@ export class RegistroRestaurantPage {
                          {name: "Oriental"}];
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegistroRestaurantPage');
-  }
+  ionViewDidLoad() {}
 
   onItemSelection(selection) {
 

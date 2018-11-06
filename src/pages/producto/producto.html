@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar color="nav">
-        <ion-title>{{platillo.platillo.nombre}}</ion-title>
+        <ion-title>Producto</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -19,7 +19,7 @@
 
         <img src="{{platillo.platillo.imagen}}">
         <ion-fab right top>
-            <button ion-fab (click)="verRestaurante()">
+            <button ion-fab (click)="verRestaurante(platillo.platillo.idRestaurante)">
             <ion-icon name="pin"></ion-icon>
           </button>
         </ion-fab>

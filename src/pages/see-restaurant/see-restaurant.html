@@ -6,17 +6,18 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>see-restaurant</ion-title>
+    <ion-navbar color="nav">
+        <ion-title>Restaurante</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding class="buttons-components-page">
+<ion-content padding class="buttons-components-page" *ngFor="let element of restauranteById">
     <ion-card>
+
         <ion-card-content>
-            <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
+            <img src="{{element.imagenRestaurante}}" />
         </ion-card-content>
 
         <ion-item>
@@ -26,25 +27,28 @@
     </ion-card>
 
     <ion-list>
-        <ion-item>
-            Inner Button
-            <button ion-button item-end outline>Outline</button>
+        <ion-item item-end outline>
+            {{element.categoria}}
         </ion-item>
 
-        <ion-item>
-            Left Icon Button
-            <button ion-button item-end outline icon-start>
-          <ion-icon name='star'></ion-icon>
-          Left Icon
-        </button>
+        <ion-item item-end outline>
+            {{element.descripcion}}
         </ion-item>
 
-        <ion-item>
-            Right Icon Button
-            <button ion-button item-end outline icon-end>
-          Right Icon
-          <ion-icon name='star'></ion-icon>
-        </button>
+        <ion-item item-end outline>
+            {{element.horario}}
+        </ion-item>
+
+        <ion-item item-end outline>
+            {{element.nombrePropietario}}
+        </ion-item>
+
+        <ion-item item-end outline>
+            {{element.telefono}}
+        </ion-item>
+
+        <ion-item item-end outline>
+            {{element.ubicacion}}
         </ion-item>
     </ion-list>
 </ion-content>

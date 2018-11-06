@@ -11,6 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { ProductoPage } from '../producto/producto';
 
+
 @IonicPage()
 @Component({
   selector: 'page-user-favoritos',
@@ -134,6 +135,7 @@ export class UserFavoritosPage {
   verPlatillo(platillo: any){
     this.navCtrl.push(ProductoPage, {platillo});
   }
+
 
   ionViewDidLoad() {}
 

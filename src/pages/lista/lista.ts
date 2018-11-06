@@ -51,6 +51,7 @@ export class ListaPage {
 
       this.user.email = this.authService.auth.currentUser.email;
       this.compras = this.comprasService.getCompras(this.authService.auth.currentUser.uid);
+      this.tabs.showTab=true;
 
     }
 
@@ -70,6 +71,7 @@ export class ListaPage {
 
   isLoggedIn() {
 
+    this.tabs.showTab=true;
     return this.authService.authState.pipe(first()).toPromise();
 
   }
@@ -81,6 +83,7 @@ export class ListaPage {
     if (!user) {
 
       this.navCtrl.setRoot(LoginPage);
+      this.tabs.showTab=true;
 
     } else {
 

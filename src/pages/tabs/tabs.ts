@@ -33,15 +33,15 @@ export class TabsPage {
               public authentication : AngularFireAuth,
               public viewCtrl: ViewController,
               public authService: AngularFireAuth) {
-
-              if (this.authService.auth.currentUser != null){
-                this.showTab = true;
-              }else{
-                this.showTab = false;
-              }
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    if (this.authService.auth.currentUser != null){
+      this.showTab = true;
+    }else{
+      this.showTab = false;
+    }
+  }
 
 }
 

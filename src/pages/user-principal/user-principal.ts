@@ -4,9 +4,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {adminService} from '../../services/adminService/admin.service';
 
 
+
 //pages
 import { LoginPage } from '../login/login';
 import { ProductoPage } from '../producto/producto';
+import { TabsPage} from '../tabs/tabs'
 
 //Firebase
 import 'rxjs/add/operator/map'
@@ -33,13 +35,23 @@ export class UserPrincipalPage {
               public authService: AngularFireAuth, 
               public admServ:adminService,
               public loadingCtrl: LoadingController,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public tabs: TabsPage) {
 
-                this.loadingCtrl.create({
+                if (this.authService.auth.currentUser != null){
+                  this.tabs.showTab = true;
+                  
+                }else{
+                  this.tabs.showTab = false;
+                }
+
+              
+              this.loadingCtrl.create({
                   content: 'Please wait...',
                   duration: 3000,
                   dismissOnPageChange: true
-                }).present();
+              }).present();
+            
 
               this.searchbarService.platilloRef.on('value', platilloList => {
 
@@ -59,14 +71,21 @@ export class UserPrincipalPage {
   }
 
 
-
+  ionViewDidLoad() {
+    if (this.authService.auth.currentUser != null){
+      this.tabs.showTab = true;
+      
+    }else{
+      this.tabs.showTab = false;
+    }
+  }
 
   ionViewWillEnter(){
 
     if (this.authService.auth.currentUser != null){
       
       this.obtieneRestaurantes();
-      this.allRestaurants();
+      this.allRestaurants(); 
     }
 
   }
@@ -96,22 +115,28 @@ export class UserPrincipalPage {
 
   existeRestauranteAdmin(idUser){
 
+  
+    if(this.rest != null){
+
       if(this.rest.length>0){
 
-          var restJson = this.rest[0];
+        var restJson = this.rest[0];
 
-          for(var i=0; i<restJson.length;i++){
+        for(var i=0; i<restJson.length;i++){
 
-            if(restJson[i].idPropietario == idUser){
-              
-              document.getElementById("TabPrincipal").className="OcultaTab4";
-              return true;
-            }
-
+          if(restJson[i].idPropietario == idUser){
+            
+            //document.getElementById("TabPrincipal").className="OcultaTab4";
+            return true;
           }
-          document.getElementById("TabPrincipal").className="OcultaTab5";
-          return false;
+
+        }
+        //document.getElementById("TabPrincipal").className="OcultaTab5";
+        return false;
       }
+    }
+
+    
    }
 
 

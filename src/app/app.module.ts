@@ -27,6 +27,7 @@ import {  TabsPage } from '../pages/tabs/tabs';
 import {  ListaPage } from '../pages/lista/lista';
 import { SeeRestaurantPage } from '../pages/see-restaurant/see-restaurant';
 import {RegistroRestaurantPage} from '../pages/registro-restaurant/registro-restaurant';
+import {ShoppingPage} from '../pages/shopping/shopping';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -67,7 +68,8 @@ import { RestauranteService } from '../services/restaurante/restaurante.service'
     TabsPage,
     ListaPage,
     SeeRestaurantPage,
-    RegistroRestaurantPage
+    RegistroRestaurantPage,
+    ShoppingPage,
   ],
   imports: [
     BrowserModule,
@@ -95,7 +97,8 @@ import { RestauranteService } from '../services/restaurante/restaurante.service'
     TabsPage,
     ListaPage,
     SeeRestaurantPage,
-    RegistroRestaurantPage
+    RegistroRestaurantPage,
+    ShoppingPage,
   ],
   providers: [
     StatusBar,

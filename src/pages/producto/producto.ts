@@ -5,6 +5,7 @@ import { Favorito } from '../../model/favorito/favorito.model';
 import { FavoritoService } from '../../services/favorito/favorito.service';
 import { SeeRestaurantPage } from '../see-restaurant/see-restaurant';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ShoppingPage } from '../shopping/shopping';
 
 @IonicPage()
 @Component({
@@ -66,6 +67,22 @@ export class ProductoPage {
 
     this.navCtrl.push(SeeRestaurantPage, {idRestaurante});
     
+  }
+
+  verShopping(){
+    if(this.auth.auth.currentUser != null){
+
+      this.navCtrl.push(ShoppingPage);
+
+    }else{
+
+      const toast = this.toastCtrl.create({
+        message: 'Tienes que estar logueado para agregar a shopping!',
+        duration: 2000,
+        position: 'top'
+      });
+      toast.present();
+    }
   }
 
   ionViewDidLoad() {}

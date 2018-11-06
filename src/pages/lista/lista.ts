@@ -37,9 +37,7 @@ export class ListaPage {
               public loadingCtrl: LoadingController,
               public toastCtrl: ToastController) {
 
-      this.redirect();
-
-
+              this.redirect();
      }
 
 
@@ -83,7 +81,6 @@ export class ListaPage {
     if (!user) {
 
       this.navCtrl.setRoot(LoginPage);
-      this.tabs.showTab=true;
 
     } else {
 
@@ -107,9 +104,6 @@ export class ListaPage {
     });
 
     this.navCtrl.setRoot(LoginPage);
-
-
-
   }
 
 

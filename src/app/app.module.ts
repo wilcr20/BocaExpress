@@ -41,6 +41,8 @@ import { searchbarService } from '../services/searchbar/searchbar.service';
 import { LoginService } from '../services/login/login.service';
 import { CompraService } from '../services/compra/compra.service';
 import {adminService} from '../services/adminService/admin.service';
+import { PerfilService } from '../services/perfil/perfil.service';
+
 
 
 @NgModule({
@@ -103,7 +105,8 @@ import {adminService} from '../services/adminService/admin.service';
     CompraService,
     searchbarService,
     LoginService,
-    adminService
+    adminService,
+    PerfilService
 
   ]
 })

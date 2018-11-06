@@ -20,6 +20,7 @@ export class LoginService {
   }
   signUpUser(email:string,password:string){
     return this.authentication.auth.createUserWithEmailAndPassword(email,password);
+    
   }
     
    

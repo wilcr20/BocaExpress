@@ -5,6 +5,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { LoginService } from '../../services/login/login.service';
 import { UserPrincipalPage } from '../user-principal/user-principal';
 import { User } from '../../model/user/user.model';
+import { Profile } from '../../model/profile/profile.model';
+import { PerfilService } from '../../services/perfil/perfil.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 /**
@@ -41,7 +44,9 @@ export class RegistroPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public camera: Camera,
-              public authService :LoginService) {
+              public authService :LoginService,
+              public profileService : PerfilService,
+              public auth : AngularFireAuth) {
 
     this.option  = [{ name: "Cliente" },{name: "Restaurante"}]; 
 
@@ -84,11 +89,33 @@ export class RegistroPage {
     });
   }
 
-
+  createProfile(profile: Profile){
+        this.profileService.newProfile(profile);
+  }
 
   signUpUser(email:string,password:string){
     this.authService.signUpUser(email,password);
+
     console.log("Registrado");
+
+    var profile : Profile = {
+      nombre : "Juan",
+      telefono : "12124124",
+      user_id : this.auth.auth.currentUser.uid
+
+    }
+   
+    this.auth.auth.onAuthStateChanged(function(user){
+      if(user){
+
+        this.createProfile(profile);
+      }
+    })
+    
+
+    console.log(this.auth.auth.currentUser.email);
+  
+
     this.navCtrl.setRoot(UserPrincipalPage);
   }
 }

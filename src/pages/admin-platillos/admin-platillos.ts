@@ -114,6 +114,17 @@ export class AdminPlatillosPage {
     this.mostrar= false;
   }
 
+
+
+
+  seleccionaImagen(){
+    console.log("yep")
+  }
+
+
+
+
+
   agregaPlatillo(){
 
       //NOTA: CAMBIE LA IMAGEN PARA HACER PREUBAS
@@ -182,6 +193,10 @@ export class AdminPlatillosPage {
       });
       alert.present();
   }
+
+
+
+
 
 
 

@@ -40,13 +40,17 @@ import { PlatilloService } from '../services/platillo/platillo.service';
 import { FavoritoService } from '../services/favorito/favorito.service';
 import { searchbarService } from '../services/searchbar/searchbar.service';
 
+//Multimedia
+import {FileChooser} from '@ionic-native/file-chooser';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+
+
 import { LoginService } from '../services/login/login.service';
 import { CompraService } from '../services/compra/compra.service';
 import {adminService} from '../services/adminService/admin.service';
 import { PerfilService } from '../services/perfil/perfil.service';
 import { RestauranteService } from '../services/restaurante/restaurante.service';
-
-
 
 
 @NgModule({
@@ -103,7 +107,7 @@ import { RestauranteService } from '../services/restaurante/restaurante.service'
   providers: [
     StatusBar,
     SplashScreen,
-    Camera,
+    Camera,File,FileChooser,FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PlatilloService,
     FavoritoService,

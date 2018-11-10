@@ -27,11 +27,11 @@ export class ListaPage {
     }
     compras: Observable<any[]>;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public loginService: LoginService, 
+              public loginService: LoginService,
               public authService: AngularFireAuth,
-              public db: AngularFireDatabase, 
+              public db: AngularFireDatabase,
               private comprasService: CompraService,
               public tabs: TabsPage ,
               public loadingCtrl: LoadingController,
@@ -76,16 +76,16 @@ export class ListaPage {
 
   async redirect() {
 
-    const user = await this.isLoggedIn();
+   // const user = await this.isLoggedIn();
 
-    if (!user) {
+    // if (!user) {
 
-      this.navCtrl.setRoot(LoginPage);
+    //   this.navCtrl.setRoot(LoginPage);
 
-    } else {
+    // } else {
 
-      // do something else
-    }
+    //   // do something else
+    // }
   }
 
   logout(){
@@ -100,7 +100,7 @@ export class ListaPage {
         position: 'top'
       });
       toast.present();
-      
+
     });
 
     this.navCtrl.setRoot(LoginPage);

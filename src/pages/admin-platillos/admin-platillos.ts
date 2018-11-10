@@ -6,6 +6,12 @@ import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
 import { AlertController } from 'ionic-angular';
 
+import firebase from 'firebase';
+import {FileChooser} from '@ionic-native/file-chooser';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+
+
 /**
  * Generated class for the AdminPlatillosPage page.
  *
@@ -39,7 +45,8 @@ export class AdminPlatillosPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService,private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService,
+    private alertCtrl: AlertController, private fileC:FileChooser, private file:File, private filePath:FilePath) {
     this.restaurante= this.navParams.get('rest');
     console.log("recibe : ", this.restaurante);
     this.getPlatillos();
@@ -48,10 +55,9 @@ export class AdminPlatillosPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminPlatillosPage');
 
-  }
+
+
 
   ionViewWillEnter(){
 
@@ -61,6 +67,7 @@ export class AdminPlatillosPage {
   ionViewWillLeave(){
     document.getElementById("TabPrincipal").className="MostrarTab";
   }
+
 
 
   getPlatillos(){
@@ -113,17 +120,6 @@ export class AdminPlatillosPage {
   addP(){
     this.mostrar= false;
   }
-
-
-
-
-  seleccionaImagen(){
-    console.log("yep")
-  }
-
-
-
-
 
   agregaPlatillo(){
 
@@ -194,6 +190,76 @@ export class AdminPlatillosPage {
       alert.present();
   }
 
+
+
+  seleccionaImagen(){
+    console.log("selecciona..");
+
+    this.fileC.open().then((uri) => {
+      alert(uri);
+
+      this.filePath.resolveNativePath(uri).then(filePath => {
+        alert(filePath);
+        let dirPathSegments = filePath.split('/');
+        let fileName = dirPathSegments[dirPathSegments.length-1];
+        dirPathSegments.pop();
+        let dirPath = dirPathSegments.join('/');
+        this.file.readAsArrayBuffer(dirPath, fileName).then(async (buffer) => {
+          await this.upload(buffer, fileName);
+        }).catch((err) => {
+          alert(err.toString());
+        });
+      });
+    });
+
+
+    // this.fileC.open()
+    // .then((uri) => {
+    //   //uri = direccion imagen desde el movil
+    //   alert("URL: " +uri);
+
+    //   this.filePath.resolveNativePath(uri)
+    //   .then( (newUrl)=>{
+    //     alert("newUrl: "+ JSON.stringify(newUrl));
+
+    //     let dirPath= newUrl.nativeURL;
+
+    //     let segmentos= dirPath.split('/');
+    //     segmentos.pop();  // dejar solo direccion de carpeta, sin el archivo en ruta
+    //     dirPath= segmentos.join('/');
+
+    //     alert("new dir "+dirPath );
+
+
+    //     this.file.readAsArrayBuffer(dirPath,newUrl.name)
+    //     .then( async(buffer)=>{
+    //       alert("Waittinng");
+    //       await this.upload(buffer,newUrl.name);
+    //     } )
+    //     .catch( (error) =>{
+    //       alert("ERROR read arrya: "+ JSON.stringify(error))
+    //     })
+    //   })
+
+
+    // } )
+  }
+
+
+  async upload(buffer,name){
+    alert("Subiendo imagen ...")
+    let blob = new Blob([buffer],{ type: "image/jpeg"});
+    // especificar mas formatos de fotos xd
+    let storage = firebase.storage();
+    storage.ref('imagenes/'+name).put(blob)
+    .then((d)=>{
+      alert("subida lista!!  "+  JSON.stringify(d) );
+
+    })
+    .catch( (error) =>{
+      alert("ERROR: "+ JSON.stringify(error))
+    })
+  }
 
 
 

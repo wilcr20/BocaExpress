@@ -1,16 +1,17 @@
 page-see-restaurant {
-    .buttons-components-page {
-        ion-card {
-            margin-bottom: 2em;
-        }
-        ion-card-content {
-            background-color: gainsboro;
-        }
-        ion-card img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            margin: 0% auto;
-        }
+    .card {
+        background-color: rgb(159, 247, 159);
+        border-radius: 4px;
+    }
+    .item {
+        background-color: white;
+    }
+    ion-title {
+        top: 0;
+        left: 0;
+        padding: 0 50px 1px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
     }
 }

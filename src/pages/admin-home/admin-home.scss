@@ -1,56 +1,54 @@
-page-admin-home {}
-
-.body {
-    // background-image: url('../../assets/imgs/rest_opt.jpg');
-    background-color: #fcfcf2;
-}
-
-.btn_plat {
-    //background-image: url('../../assets/imgs/btn_platillos.jpg');
-}
-
-.btn_rest {
-    //background-image: url('../../assets/imgs/btn_rest.jpg');
-}
-
-.btn_bandeja {
-    //background-image: url('../../assets/imgs/btn_bandeja.jpg');
-}
-
-.btn_compra {
-    //background-image: url('../../assets/imgs/btn_compras.jpg');
-}
-
-.OcultaTab1 a:first-child {
-    display: none;
-    /*usar con admin*/
-}
-
-.OcultaTab2 a:nth-child(2) {
-    display: none;
-    /*usar con admin*/
-}
-
-.OcultaTab3 a:nth-child(3) {
-    display: none;
-    /*usar con admin*/
-}
-
-.OcultaTab4 a:nth-child(4) {
-    display: none;
-    /*usar con admin*/
-}
-
-.OcultaTab5 a:nth-child(5) {
-    display: none;
-    /*usar con admin*/
-}
-
-.MostrarTab a:first-child,
-a:nth-child(2),
-a:nth-child(3),
-a:nth-child(4),
-a:nth-child(5) {
-    display: block;
-    /*usar con cliente*/
+page-admin-home {
+    .body {
+        // background-image: url('../../assets/imgs/rest_opt.jpg');
+        background-color: #fcfcf2;
+    }
+    .btn_plat {
+        //background-image: url('../../assets/imgs/btn_platillos.jpg');
+    }
+    .btn_rest {
+        //background-image: url('../../assets/imgs/btn_rest.jpg');
+    }
+    .btn_bandeja {
+        //background-image: url('../../assets/imgs/btn_bandeja.jpg');
+    }
+    .btn_compra {
+        //background-image: url('../../assets/imgs/btn_compras.jpg');
+    }
+    .OcultaTab1 a:first-child {
+        display: none;
+        /*usar con admin*/
+    }
+    .OcultaTab2 a:nth-child(2) {
+        display: none;
+        /*usar con admin*/
+    }
+    .OcultaTab3 a:nth-child(3) {
+        display: none;
+        /*usar con admin*/
+    }
+    .OcultaTab4 a:nth-child(4) {
+        display: none;
+        /*usar con admin*/
+    }
+    .OcultaTab5 a:nth-child(5) {
+        display: none;
+        /*usar con admin*/
+    }
+    .MostrarTab a:first-child,
+    a:nth-child(2),
+    a:nth-child(3),
+    a:nth-child(4),
+    a:nth-child(5) {
+        display: block;
+        /*usar con cliente*/
+    }
+    ion-title {
+        top: 0;
+        left: 0;
+        padding: 0 90px 1px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
 }

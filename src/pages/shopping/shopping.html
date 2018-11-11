@@ -1,0 +1,61 @@
+<!--
+  Generated template for the ShoppingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="nav">
+        <ion-title>shopping</ion-title>
+    </ion-navbar>
+
+    <ion-toolbar no-border-top color="nav">
+        <ion-segment [(ngModel)]="pet">
+            <ion-segment-button value="puppies">
+                Puppies
+            </ion-segment-button>
+            <ion-segment-button value="kittens">
+                Kittens
+            </ion-segment-button>
+            <ion-segment-button value="ducklings">
+                Ducklings
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div [ngSwitch]="pet">
+        <ion-list *ngSwitchCase="'puppies'">
+            <ion-item>
+                <ion-thumbnail item-start>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
+                </ion-thumbnail>
+                <h2>Ruby</h2>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'kittens'">
+            <ion-item>
+                <ion-thumbnail item-start>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
+                </ion-thumbnail>
+                <h2>Luna</h2>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'ducklings'">
+            <ion-item>
+                <ion-thumbnail item-start>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
+                </ion-thumbnail>
+                <h2>Luna2</h2>
+            </ion-item>
+        </ion-list>
+    </div>
+
+</ion-content>

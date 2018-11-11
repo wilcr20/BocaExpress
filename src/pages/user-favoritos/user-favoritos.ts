@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 
 //Firebase
 import 'rxjs/add/operator/map'
@@ -7,8 +7,10 @@ import { Observable } from 'rxjs/Observable';
 import { Platillo } from '../../model/platillo/platillo.model';
 import { PlatilloService } from '../../services/platillo/platillo.service';
 import { FavoritoService } from '../../services/favorito/favorito.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 import { ProductoPage } from '../producto/producto';
+
 
 @IonicPage()
 @Component({
@@ -39,7 +41,9 @@ export class UserFavoritosPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public favoriteService: FavoritoService,
-              public platilloService: PlatilloService) {
+              public platilloService: PlatilloService,
+              public auth : AngularFireAuth,
+              public toastCtrl: ToastController) {
 
       this.getDish_and_favorites();
       this.myFavorites();
@@ -78,31 +82,43 @@ export class UserFavoritosPage {
   //hago el inner join de las listas y creo las relaciones
   myFavorites(){
 
-    this.favoriteList.forEach(favorito => {
-        favorito.forEach(indexFavorito => {
+    if(this.auth.auth.currentUser != null){
 
-          this.dishList.forEach(platillo => {
-            platillo.forEach(indexPlatillo => {
-
-              if(indexFavorito.idPlatillo == indexPlatillo.key){
-
-                let result = this.lista.find( platillo => platillo == indexPlatillo.key);
-
-                //significa no repetir datos
-                if(result == undefined){
-
-                  this.platillos.push({platillo:indexPlatillo, favoriteKey: indexFavorito.key });
-                  this.lista.push(indexPlatillo.key);
-
+      this.favoriteList.forEach(favorito => {
+          favorito.forEach(indexFavorito => {
+  
+            this.dishList.forEach(platillo => {
+              platillo.forEach(indexPlatillo => {
+  
+                if(indexFavorito.idPlatillo == indexPlatillo.key){
+  
+                  let result = this.lista.find( platillo => platillo == indexPlatillo.key);
+  
+                  //significa no repetir datos
+                  if(result == undefined){
+  
+                    this.platillos.push({platillo:indexPlatillo, favoriteKey: indexFavorito.key });
+                    this.lista.push(indexPlatillo.key);
+  
+                  }
+  
                 }
-
-              }
-
+  
+              });
             });
+  
           });
+      });
 
-        });
-    });
+    }else{
+
+      const toast = this.toastCtrl.create({
+        message: 'Tienes que estar logueado para ver tus favoritos!',
+        duration: 2000,
+        position: 'top'
+      });
+      toast.present();
+    }
 
   }
 
@@ -119,6 +135,7 @@ export class UserFavoritosPage {
   verPlatillo(platillo: any){
     this.navCtrl.push(ProductoPage, {platillo});
   }
+
 
   ionViewDidLoad() {}
 

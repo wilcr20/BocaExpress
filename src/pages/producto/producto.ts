@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
 
 import { Favorito } from '../../model/favorito/favorito.model';
 import { FavoritoService } from '../../services/favorito/favorito.service';
 import { SeeRestaurantPage } from '../see-restaurant/see-restaurant';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { ShoppingPage } from '../shopping/shopping';
 
 @IonicPage()
 @Component({
@@ -24,37 +25,64 @@ export class ProductoPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public favoritoService: FavoritoService,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController,
+              public auth : AngularFireAuth,
+              public loadingCtrl: LoadingController) {
 
               this.platillo= this.navParams.get('platillo');
   }
 
   addFavoritos(platillo: any){
 
-    //cambia el estado del icono
-    this.visible = !this.visible;
+    if(this.auth.auth.currentUser != null){
+      //cambia el estado del icono
+      this.visible = !this.visible;
+  
+      //llena el json de favorito
+      this.favorito.idPlatillo = platillo.key;
+      this.favorito.idCliente  = 'null';
+  
+      //agrega un favorito a firebase
+      this.favoritoService.addFavorito(this.favorito).then(ref => {})
+      
+      //muestra una notificación
+      this.loadingCtrl.create({
+        content: 'Agregando favorito...',
+        duration: 1000,
+        dismissOnPageChange: true
+      }).present();
 
-    //llena el json de favorito
-    this.favorito.idPlatillo = platillo.key;
-    this.favorito.idCliente  = 'null';
-
-    //agrega un favorito a firebase
-    this.favoritoService.addFavorito(this.favorito).then(ref => {})
-    
-    
-
-    //muestra una notificación
-    const toast = this.toastCtrl.create({
-      message: 'Agregado a favoritos!',
-      duration: 3000
-    });
-    toast.present();
+    }else{
+        
+      const toast = this.toastCtrl.create({
+        message: 'Tienes que estar logueado para agregar a favoritos!',
+        duration: 2000,
+        position: 'top'
+      });
+      toast.present();
+    }
   }
 
-  verRestaurante(){
+  verRestaurante(idRestaurante){
 
-    this.navCtrl.push(SeeRestaurantPage);
+    this.navCtrl.push(SeeRestaurantPage, {idRestaurante});
     
+  }
+
+  verShopping(){
+    if(this.auth.auth.currentUser != null){
+
+      this.navCtrl.push(ShoppingPage);
+
+    }else{
+
+      const toast = this.toastCtrl.create({
+        message: 'Tienes que estar logueado para agregar a shopping!',
+        duration: 2000,
+        position: 'top'
+      });
+      toast.present();
+    }
   }
 
   ionViewDidLoad() {}

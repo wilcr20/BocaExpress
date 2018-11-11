@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>Mis Platillos</ion-title>
+    <ion-navbar color="nav">
+        <ion-title>Platillos</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -15,7 +15,8 @@
 
 <ion-content padding>
 
-    <button ion-button (click)="mostrarP()" *ngIf="!mostrar"> Mostrar Platillos</button> <button ion-button (click)="addP()" *ngIf="mostrar" color="secondary"> Añadir nuevo</button>
+    <button ion-button (click)="mostrarP()" *ngIf="!mostrar" full block> Mostrar Platillos</button>
+    <button ion-button (click)="addP()" *ngIf="mostrar" full block color="secondary"> Añadir nuevo</button>
 
     <div *ngIf="mostrar">
         <ion-card *ngFor="let dish of platillosLocal">
@@ -56,8 +57,11 @@
             <ion-input type="text" id="precioP" [(ngModel)]="precio" name="precio"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>Imagen: </ion-label>
-            <ion-input type="text" id="imagenP" [(ngModel)]="imagen" name="imagen"></ion-input>
+            <!--<ion-label>Imagen: </ion-label>-->
+            <button ion-button color="black" type="button" full round (click)="seleccionaImagen()"> Selecionar imagen
+            <ion-icon name="md-image"></ion-icon>
+        </button>
+            <!-- <ion-input type="text" id="imagenP" [(ngModel)]="imagen" name="imagen"></ion-input>-->
         </ion-item>
         <hr>
 

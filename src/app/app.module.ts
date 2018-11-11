@@ -27,6 +27,7 @@ import {  TabsPage } from '../pages/tabs/tabs';
 import {  ListaPage } from '../pages/lista/lista';
 import { SeeRestaurantPage } from '../pages/see-restaurant/see-restaurant';
 import {RegistroRestaurantPage} from '../pages/registro-restaurant/registro-restaurant';
+import {ShoppingPage} from '../pages/shopping/shopping';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -39,11 +40,17 @@ import { PlatilloService } from '../services/platillo/platillo.service';
 import { FavoritoService } from '../services/favorito/favorito.service';
 import { searchbarService } from '../services/searchbar/searchbar.service';
 
+//Multimedia
+import {FileChooser} from '@ionic-native/file-chooser';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+
+
 import { LoginService } from '../services/login/login.service';
 import { CompraService } from '../services/compra/compra.service';
 import {adminService} from '../services/adminService/admin.service';
 import { PerfilService } from '../services/perfil/perfil.service';
-
+import { RestauranteService } from '../services/restaurante/restaurante.service';
 
 
 @NgModule({
@@ -65,7 +72,8 @@ import { PerfilService } from '../services/perfil/perfil.service';
     TabsPage,
     ListaPage,
     SeeRestaurantPage,
-    RegistroRestaurantPage
+    RegistroRestaurantPage,
+    ShoppingPage,
   ],
   imports: [
     BrowserModule,
@@ -93,12 +101,13 @@ import { PerfilService } from '../services/perfil/perfil.service';
     TabsPage,
     ListaPage,
     SeeRestaurantPage,
-    RegistroRestaurantPage
+    RegistroRestaurantPage,
+    ShoppingPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    Camera,
+    Camera,File,FileChooser,FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PlatilloService,
     FavoritoService,
@@ -107,7 +116,8 @@ import { PerfilService } from '../services/perfil/perfil.service';
     searchbarService,
     LoginService,
     adminService,
-    PerfilService
+    PerfilService,
+    RestauranteService
 
   ]
 })

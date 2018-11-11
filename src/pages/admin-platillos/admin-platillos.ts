@@ -6,6 +6,12 @@ import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
 import { AlertController } from 'ionic-angular';
 
+import firebase from 'firebase';
+import {FileChooser} from '@ionic-native/file-chooser';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+
+
 /**
  * Generated class for the AdminPlatillosPage page.
  *
@@ -37,9 +43,15 @@ export class AdminPlatillosPage {
     precio= "";
     imagen="";
 
+    // Direcciones de Firebase Storage
+
+    nombreIMG="";
+    urlimg=""; // url imagen en firebase
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService,private alertCtrl: AlertController) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService,
+    private alertCtrl: AlertController, private fileC:FileChooser, private file:File, private filePath:FilePath) {
     this.restaurante= this.navParams.get('rest');
     console.log("recibe : ", this.restaurante);
     this.getPlatillos();
@@ -48,10 +60,9 @@ export class AdminPlatillosPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminPlatillosPage');
 
-  }
+
+
 
   ionViewWillEnter(){
 
@@ -61,6 +72,7 @@ export class AdminPlatillosPage {
   ionViewWillLeave(){
     document.getElementById("TabPrincipal").className="MostrarTab";
   }
+
 
 
   getPlatillos(){
@@ -115,17 +127,20 @@ export class AdminPlatillosPage {
   }
 
   agregaPlatillo(){
-      console.log("Agregas nuevo platillo");
+
+      //NOTA: CAMBIE LA IMAGEN PARA HACER PREUBAS
       var dishJ:Platillo ={
         descripcion: this.descripcion,
         idRestaurante: this.restaurante.key,
         nombre: this.nombre,
         precio: this.precio,
-        imagen: this.imagen
+        //imagen: 'https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/pizza.jpg?alt=media&token=d915367c-986d-4144-96eb-d8a383628c8a'
+        imagen: this.urlimg
       }
 
       this.platilloService.addPlatillo(dishJ);
       this.actualizaPantalla();
+      alert("Platillo agregado correctamente...");
 
   }
 
@@ -180,6 +195,61 @@ export class AdminPlatillosPage {
       });
       alert.present();
   }
+
+
+
+  seleccionaImagen(){
+
+    this.fileC.open().then((uri) => {
+
+      this.filePath.resolveNativePath(uri).then(filePath => {
+        let dirPathSegments = filePath.split('/');
+        let fileName = dirPathSegments[dirPathSegments.length-1];
+        this.nombreIMG= dirPathSegments.pop();
+
+        let dirPath = dirPathSegments.join('/');
+        this.file.readAsArrayBuffer(dirPath, fileName).then(async (buffer) => {
+          await this.upload(buffer, fileName);
+        }).catch((err) => {
+          alert(err.toString());
+        });
+      });
+    });
+
+
+  }
+
+
+  async upload(buffer,name){
+
+    alert("Subiendo imagen ...")
+    let blob = new Blob([buffer],{ type: "image/jpeg"});
+    // especificar mas formatos de fotos xd
+    let storage = firebase.storage();
+    storage.ref('imagenes/'+name).put(blob)
+    .then((d)=>{
+      alert("subida lista!!  ");
+      this.getURLimagen(this.nombreIMG);
+
+    })
+    .catch( (error) =>{
+      alert("ERROR: "+ JSON.stringify(error))
+      this.getURLimagen(this.nombreIMG);
+    })
+  }
+
+  getURLimagen(nombre){
+    let storageFire = firebase.storage();
+    let pathReference = storageFire.ref().child('imagenes/'+nombre).getDownloadURL()
+    .then( (url)=>{
+
+        this.urlimg= url;
+    })
+
+  }
+
+
+
 
 
 

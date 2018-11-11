@@ -140,6 +140,7 @@ export class AdminPlatillosPage {
 
       this.platilloService.addPlatillo(dishJ);
       this.actualizaPantalla();
+      alert("Platillo agregado correctamente...");
 
   }
 
@@ -200,10 +201,8 @@ export class AdminPlatillosPage {
   seleccionaImagen(){
 
     this.fileC.open().then((uri) => {
-      alert(uri);
 
       this.filePath.resolveNativePath(uri).then(filePath => {
-        alert(filePath);
         let dirPathSegments = filePath.split('/');
         let fileName = dirPathSegments[dirPathSegments.length-1];
         this.nombreIMG= dirPathSegments.pop();

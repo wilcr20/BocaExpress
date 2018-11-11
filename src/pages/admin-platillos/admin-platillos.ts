@@ -43,6 +43,11 @@ export class AdminPlatillosPage {
     precio= "";
     imagen="";
 
+    // Direcciones de Firebase Storage
+
+    nombreIMG="";
+    urlimg=""; // url imagen en firebase
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public platilloService: PlatilloService,
@@ -129,8 +134,8 @@ export class AdminPlatillosPage {
         idRestaurante: this.restaurante.key,
         nombre: this.nombre,
         precio: this.precio,
-        imagen: 'https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/pizza.jpg?alt=media&token=d915367c-986d-4144-96eb-d8a383628c8a'
-        //imagen: this.imagen
+        //imagen: 'https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/pizza.jpg?alt=media&token=d915367c-986d-4144-96eb-d8a383628c8a'
+        imagen: this.urlimg
       }
 
       this.platilloService.addPlatillo(dishJ);
@@ -193,7 +198,6 @@ export class AdminPlatillosPage {
 
 
   seleccionaImagen(){
-    console.log("selecciona..");
 
     this.fileC.open().then((uri) => {
       alert(uri);
@@ -202,7 +206,8 @@ export class AdminPlatillosPage {
         alert(filePath);
         let dirPathSegments = filePath.split('/');
         let fileName = dirPathSegments[dirPathSegments.length-1];
-        dirPathSegments.pop();
+        this.nombreIMG= dirPathSegments.pop();
+
         let dirPath = dirPathSegments.join('/');
         this.file.readAsArrayBuffer(dirPath, fileName).then(async (buffer) => {
           await this.upload(buffer, fileName);
@@ -213,52 +218,35 @@ export class AdminPlatillosPage {
     });
 
 
-    // this.fileC.open()
-    // .then((uri) => {
-    //   //uri = direccion imagen desde el movil
-    //   alert("URL: " +uri);
-
-    //   this.filePath.resolveNativePath(uri)
-    //   .then( (newUrl)=>{
-    //     alert("newUrl: "+ JSON.stringify(newUrl));
-
-    //     let dirPath= newUrl.nativeURL;
-
-    //     let segmentos= dirPath.split('/');
-    //     segmentos.pop();  // dejar solo direccion de carpeta, sin el archivo en ruta
-    //     dirPath= segmentos.join('/');
-
-    //     alert("new dir "+dirPath );
-
-
-    //     this.file.readAsArrayBuffer(dirPath,newUrl.name)
-    //     .then( async(buffer)=>{
-    //       alert("Waittinng");
-    //       await this.upload(buffer,newUrl.name);
-    //     } )
-    //     .catch( (error) =>{
-    //       alert("ERROR read arrya: "+ JSON.stringify(error))
-    //     })
-    //   })
-
-
-    // } )
   }
 
 
   async upload(buffer,name){
+
     alert("Subiendo imagen ...")
     let blob = new Blob([buffer],{ type: "image/jpeg"});
     // especificar mas formatos de fotos xd
     let storage = firebase.storage();
     storage.ref('imagenes/'+name).put(blob)
     .then((d)=>{
-      alert("subida lista!!  "+  JSON.stringify(d) );
+      alert("subida lista!!  ");
+      this.getURLimagen(this.nombreIMG);
 
     })
     .catch( (error) =>{
       alert("ERROR: "+ JSON.stringify(error))
+      this.getURLimagen(this.nombreIMG);
     })
+  }
+
+  getURLimagen(nombre){
+    let storageFire = firebase.storage();
+    let pathReference = storageFire.ref().child('imagenes/'+nombre).getDownloadURL()
+    .then( (url)=>{
+
+        this.urlimg= url;
+    })
+
   }
 
 

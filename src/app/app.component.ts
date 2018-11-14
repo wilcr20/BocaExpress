@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserPrincipalPage } from '../pages/user-principal/user-principal';
 import { UserHistorialComprasPage } from '../pages/user-historial-compras/user-historial-compras';
 import {  TabsPage} from '../pages/tabs/tabs';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -18,7 +20,11 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public menuCtrl: MenuController,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public menuCtrl: MenuController,
+              public platform: Platform, 
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen,
+              public authService: AngularFireAuth) {
 
 
     //habilitar este menu para las demas paginas
@@ -55,5 +61,7 @@ export class MyApp {
       this.nav.push(page.component);
     }
   }
+
+
 
 }

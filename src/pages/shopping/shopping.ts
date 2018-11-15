@@ -9,6 +9,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Item } from '../../model/item/item.model'
 import { ItemService} from '../../services/item/item.service'
+import { CompraService } from '../../services/compra/compra.service';
+import { Compra } from '../../model/compra/compra.model';
 
 
 @IonicPage()
@@ -36,6 +38,8 @@ export class ShoppingPage {
     cantidad:   0
    }
 
+
+
    cantidad = null;
 
 
@@ -46,6 +50,19 @@ export class ShoppingPage {
 
    listaItems:      any[] = [];
 
+
+   // esto es para agregar una compra
+   arrayItem: any[] = [];
+   total = 0;
+
+   compra : Compra = {
+    estado     : false,
+    idCliente  : '',
+    arrayItems : [],
+    total : 0
+   }
+
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public shoppingService: ShoppingService,
@@ -53,11 +70,66 @@ export class ShoppingPage {
               public toastCtrl: ToastController,
               public auth : AngularFireAuth,
               public itemService: ItemService,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController,
+              public compraService: CompraService) {
 
               this.getPlatillos();
               this.myShopping();
               this.myItem();
+  }
+
+
+  addCompra(){
+
+    this.compra.arrayItems = this.arrayItem;
+    this.compra.idCliente  = this.auth.auth.currentUser.uid;
+    this.compra.total      = this.total;
+    this.compra.estado     = false;
+
+    this.compraService.addCompra(this.compra).then( ref =>{
+
+      const toast = this.toastCtrl.create({
+        message: 'Has agregado una compra!',
+        duration: 2000,
+        position: 'top'
+      });
+      toast.present();
+
+    });
+
+    //agrega compras a base de datos
+
+
+    //elimina todos los items
+  }
+
+  datachanged(e:any, item: any){
+
+    let key: string = item.itemKey;
+
+    let result = this.arrayItem.find( itemKey => itemKey == key);
+
+    if(e.checked == true){
+
+      if(result == undefined){
+
+        this.arrayItem.push( key );
+ 
+        this.total = this.total + (+item.cantidad * +item.platillo.precio);
+       
+      }
+
+    }else{
+
+      if(result != undefined){
+
+        this.arrayItem.splice(item.itemKey, 1);
+
+        this.total = this.total - (+item.cantidad * +item.platillo.precio);
+    
+      }
+    
+    }
   }
 
   deleteItem(platillo: any){

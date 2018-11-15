@@ -78,7 +78,7 @@
                     <ion-label>{{item.platillo.nombre}}</ion-label>
                     <ion-label>₡{{item.platillo.precio}} x {{item.cantidad}}</ion-label>
 
-                    <ion-checkbox color="secondary"></ion-checkbox>
+                    <ion-checkbox color="secondary" checked="false" (ionChange)="datachanged($event,item)"></ion-checkbox>
 
                     <button ion-button icon-start clear item-end (click)="deleteItem(item)">
                             <ion-icon name="md-trash" large></ion-icon>
@@ -88,9 +88,9 @@
 
             </div><br><br>
 
-            <h2>Total: </h2><br><br>
+            <h2>Total: ₡{{total}}</h2><br><br>
 
-            <button ion-button color="secondary" full>Comprar</button>
+            <button ion-button color="secondary" full (click)="addCompra()">Comprar</button>
 
         </ion-list>
     </div>

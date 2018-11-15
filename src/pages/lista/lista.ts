@@ -4,12 +4,14 @@ import { IonicPage, NavController, NavParams, LoadingController,ToastController}
 import { LoginPage } from '../login/login';
 import { LoginService } from '../../services/login/login.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase} from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import { User } from '../../model/user/user.model';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { CompraService } from '../../services/compra/compra.service';
 import { TabsPage} from '../tabs/tabs'
+import { PerfilService } from '../../services/perfil/perfil.service';
+import { ShoppingHistoryPage } from '../shopping-history/shopping-history';
 
 
 @IonicPage()
@@ -35,21 +37,26 @@ export class ListaPage {
               private comprasService: CompraService,
               public tabs: TabsPage ,
               public loadingCtrl: LoadingController,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController,
+              public perfilService: PerfilService) {
 
-              this.redirect();
+              //this.redirect();
+              if(this.authService.auth.currentUser != null){
+              this.loadProfile(this.authService.auth.currentUser.uid);
+            }
      }
 
 
   ionViewDidLoad() {
 
-    this.redirect();
+    //this.redirect();
 
     if(this.authService.auth.currentUser != null){
 
       this.user.email = this.authService.auth.currentUser.email;
       this.compras = this.comprasService.getCompras(this.authService.auth.currentUser.uid);
       this.tabs.showTab=true;
+     
 
     }
 
@@ -106,6 +113,19 @@ export class ListaPage {
     this.navCtrl.setRoot(LoginPage);
   }
 
+  loadProfile(uid: string){
+  this.perfilService.getProfile(uid).subscribe(
 
+    (data) => {this.user.telefono = data[0]["telefono"],
+              this.user.nombre = data[0]["nombre"]
+
+    }
+  )
+    
+  }
+
+  openHistory(){
+    this.navCtrl.setRoot(ShoppingHistoryPage);
+  }
 
 }

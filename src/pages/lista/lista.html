@@ -20,18 +20,17 @@
 
 
 <ion-content padding class="body">
-    <h5>{{user.email}}</h5>
-    <ion-list>
-        <ion-item *ngFor="let compra of compras | async">
-
-            <h2>{{ compra.estado }}</h2>
-            <p>
-                {{compra.idCliente}}
-            </p>
-            <p>
-                {{compra.total}}
-            </p>
-        </ion-item>
-    </ion-list>
+    <ion-item>
+    <ion-avatar item-start>
+        <img width="150" height="150" src="../../assets/imgs/default_profile.jpg" alt="">
+       
+    </ion-avatar>
+    <h1>{{user.nombre}}</h1>
+    <h2>{{user.email}}</h2>
+    
+    <h3>{{user.telefono}}</h3>
+    </ion-item>
+    
+    <button ion-button clear full (click)="openHistory()">Ver Historial de Compras</button>
 
 </ion-content>

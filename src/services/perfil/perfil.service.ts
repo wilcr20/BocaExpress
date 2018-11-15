@@ -16,4 +16,8 @@ export class PerfilService{
     newProfile(profile : Profile){
        return this.profileList.push(profile);
     }
+
+    getProfile(uid: string){
+        return this.db.list('/Profile/',ref =>  ref.orderByChild("user_id").equalTo(uid)).valueChanges();
+    }
 }

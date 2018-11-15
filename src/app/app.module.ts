@@ -51,6 +51,7 @@ import { CompraService } from '../services/compra/compra.service';
 import {adminService} from '../services/adminService/admin.service';
 import { PerfilService } from '../services/perfil/perfil.service';
 import { RestauranteService } from '../services/restaurante/restaurante.service';
+import { ShoppingHistoryPage } from '../pages/shopping-history/shopping-history';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { RestauranteService } from '../services/restaurante/restaurante.service'
     SeeRestaurantPage,
     RegistroRestaurantPage,
     ShoppingPage,
+    ShoppingHistoryPage
   ],
   imports: [
     BrowserModule,
@@ -103,6 +105,7 @@ import { RestauranteService } from '../services/restaurante/restaurante.service'
     SeeRestaurantPage,
     RegistroRestaurantPage,
     ShoppingPage,
+    ShoppingHistoryPage
   ],
   providers: [
     StatusBar,
@@ -117,7 +120,8 @@ import { RestauranteService } from '../services/restaurante/restaurante.service'
     LoginService,
     adminService,
     PerfilService,
-    RestauranteService
+    RestauranteService,
+
 
   ]
 })

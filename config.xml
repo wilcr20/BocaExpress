@@ -94,12 +94,9 @@
     <plugin name="cordova-android-play-services-gradle-release" spec="^1.4.4">
         <variable name="PLAY_SERVICES_VERSION" value="15.0.0" />
     </plugin>
-<<<<<<< HEAD
-=======
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-filepath" spec="^1.4.2" />
->>>>>>> 5a9d5a0d5ae7b458c74f351d80322f30185f7ef0
     <engine name="android" spec="7.1.1" />
     <engine name="browser" spec="5.0.4" />
 </widget>

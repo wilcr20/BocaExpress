@@ -63,19 +63,35 @@
                     </ion-select>
                 </ion-item><br>
 
-                <button ion-button color="secondary" full>Buy List</button>
+                <button ion-button color="secondary" full (click)="addItem(platillo)">Buy List</button>
 
             </ion-card><br><br>
 
         </ion-list>
 
         <ion-list *ngSwitchCase="'Compra'">
-            <ion-item>
-                <ion-thumbnail item-start>
-                    <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
-                </ion-thumbnail>
-                <h2>Luna</h2>
-            </ion-item>
+
+            <div *ngFor="let item of platillosItems">
+
+                <ion-item>}
+
+                    <ion-label>{{item.platillo.nombre}}</ion-label>
+                    <ion-label>₡{{item.platillo.precio}} x {{item.cantidad}}</ion-label>
+
+                    <ion-checkbox color="secondary"></ion-checkbox>
+
+                    <button ion-button icon-start clear item-end (click)="deleteItem(item)">
+                            <ion-icon name="md-trash" large></ion-icon>
+                    </button>
+
+                </ion-item>
+
+            </div><br><br>
+
+            <h2>Total: </h2><br><br>
+
+            <button ion-button color="secondary" full>Comprar</button>
+
         </ion-list>
     </div>
 

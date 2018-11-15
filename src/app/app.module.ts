@@ -51,6 +51,7 @@ import {adminService} from '../services/adminService/admin.service';
 import { PerfilService } from '../services/perfil/perfil.service';
 import { RestauranteService } from '../services/restaurante/restaurante.service';
 import { ShoppingService } from '../services/shopping/shopping.service';
+import { ItemService } from '../services/item/item.service';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { ShoppingService } from '../services/shopping/shopping.service';
     adminService,
     PerfilService,
     RestauranteService,
-    ShoppingService
+    ShoppingService,
+    ItemService
   ]
 })
 export class AppModule {}

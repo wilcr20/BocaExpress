@@ -10,8 +10,8 @@
             <ion-segment-button value="Carrito">
                 Carrito
             </ion-segment-button>
-            <ion-segment-button value="Factura">
-                Factura
+            <ion-segment-button value="Compra">
+                Compra
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -19,28 +19,57 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="card-background-page">
 
     <div [ngSwitch]="tipo">
 
         <ion-list *ngSwitchCase="'Carrito'">
 
-            <div *ngFor="let platillo of platillos">
+            <ion-card class="card" *ngFor="let platillo of platillos">
+
+                <img src="{{platillo.platillo.imagen}}" />
 
                 <ion-item>
-                    <ion-thumbnail item-start>
-                        <img src="{{platillo.platillo.imagen}}" />
-                    </ion-thumbnail>
-                    <h2>{{platillo.platillo.nombre}}</h2>
-                    <p>₡{{platillo.platillo.precio}}</p>
+                    <ion-icon name="ios-basket-outline" item-start large></ion-icon>
+                    <h2>Nombre</h2>
+                    <p>{{platillo.platillo.nombre}}</p>
                 </ion-item>
 
+                <ion-item>
+                    <ion-icon name="ios-beer-outline" item-start large></ion-icon>
+                    <h2>Descripción</h2>
+                    <p>{{platillo.platillo.descripcion}}</p>
+                </ion-item>
 
-            </div>
+                <ion-item>
+                    <ion-icon name="ios-cash-outline" item-start large></ion-icon>
+                    <h2>Precio</h2>
+                    <p>₡{{platillo.platillo.precio}}</p>
+
+                    <button ion-button icon-start clear item-end (click)="removeElement(platillo)">
+                        <ion-icon name="md-trash" large></ion-icon>
+                    </button>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Cantidad</ion-label>
+                    <ion-select multiple="false" (ionChange)="onItemSelection($event)">
+                        <ion-option>1</ion-option>
+                        <ion-option>2</ion-option>
+                        <ion-option>3</ion-option>
+                        <ion-option>4</ion-option>
+                        <ion-option>5</ion-option>
+                        <ion-option>6</ion-option>
+                    </ion-select>
+                </ion-item><br>
+
+                <button ion-button color="secondary" full>Buy List</button>
+
+            </ion-card><br><br>
 
         </ion-list>
 
-        <ion-list *ngSwitchCase="'Factura'">
+        <ion-list *ngSwitchCase="'Compra'">
             <ion-item>
                 <ion-thumbnail item-start>
                     <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />

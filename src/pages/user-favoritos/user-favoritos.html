@@ -15,8 +15,8 @@
 
 <ion-content padding class="body">
 
-    <ion-list *ngFor="let platillo of platillos">
-        <ion-item>
+    <ion-list>
+        <ion-item *ngFor="let platillo of platillos">
             <ion-thumbnail item-start (click)="verPlatillo(platillo)">
                 <img class="img " src="{{platillo.platillo.imagen}}">
             </ion-thumbnail>

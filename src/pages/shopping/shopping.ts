@@ -27,6 +27,7 @@ export class ShoppingPage {
    lista:      any[] = [];
 
 
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public shoppingService: ShoppingService,
@@ -39,6 +40,29 @@ export class ShoppingPage {
   }
 
 
+
+  removeElement(platillo: any){
+
+    try {
+
+      this.shoppingService.removePlatillo(platillo.shoppingKey).then(ref => {
+        this.platillos.splice(platillo.platillo, 1);
+        this.lista.splice(platillo.platillo.key, 1);
+        this.getPlatillos();
+        this.myShopping();
+        
+      });
+
+    } catch (error) {
+
+      console.log(error);
+    }
+  }
+  
+  onItemSelection(selection) {
+
+    console.log(selection);
+  }
 
   getPlatillos(){
 
@@ -83,8 +107,6 @@ export class ShoppingPage {
 
                         let result = this.lista.find( platillo => platillo == elementPlatillo.key);
     
-                        console.log(result);
-
                         //significa no repetir datos
                         if(result == undefined){
         

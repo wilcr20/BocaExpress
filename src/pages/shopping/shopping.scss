@@ -1,10 +1,34 @@
-page-shopping {
-    ion-title {
-        top: 0;
-        left: 0;
-        padding: 0 90px 1px;
-        width: 100%;
-        height: 100%;
-        text-align: center;
+    page-shopping {
+        .body {
+            background-color: #f3f4d0;
+        }
+        .card-background-page {
+            ion-card {
+                position: relative;
+                text-align: center;
+            }
+            .card-title {
+                position: absolute;
+                top: 36%;
+                font-size: 2.0em;
+                width: 100%;
+                font-weight: bold;
+                color: #fff;
+            }
+            .card-subtitle {
+                font-size: 1.0em;
+                position: absolute;
+                top: 52%;
+                width: 100%;
+                color: #fff;
+            }
+        }
+        ion-title {
+            top: 0;
+            left: 0;
+            padding: 0 90px 1px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
     }
-}

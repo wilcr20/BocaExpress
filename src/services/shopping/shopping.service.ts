@@ -25,4 +25,8 @@ export class ShoppingService {
         return this.ShoppingListRef.remove(platillo.idRestaurante);
     }
 
+    deletePlatillo(key: any){  /// borra platillo de manera general
+        this.db.database.ref('Shopping/'+key).remove();
+    }
+
 }

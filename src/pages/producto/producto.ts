@@ -42,20 +42,28 @@ export class ProductoPage {
       //cambia el estado del icono
       this.visible = !this.visible;
   
-      //llena el json de favorito
-      this.favorito.idPlatillo = platillo.key;
-      this.favorito.idCliente  = this.auth.auth.currentUser.uid;
-  
-      //agrega un favorito a firebase
-      this.favoritoService.addFavorito(this.favorito).then(ref => {})
-      
-      //muestra una notificación
-      this.loadingCtrl.create({
-        content: 'Agregando favorito...',
-        duration: 1000,
-        dismissOnPageChange: true
-      }).present();
+      try {
+        //llena el json de favorito
+        this.favorito.idPlatillo = platillo.key;
+        this.favorito.idCliente  = this.auth.auth.currentUser.uid;
+    
+        //agrega un favorito a firebase
+        this.favoritoService.addFavorito(this.favorito).then(ref => {
 
+          //muestra una notificación
+          this.loadingCtrl.create({
+            content: 'Agregando favorito...',
+            duration: 1000,
+            dismissOnPageChange: true
+          }).present();
+  
+        });
+      
+      } catch (error) {
+        
+        console.log(error);
+      }
+    
     }else{
         
       const toast = this.toastCtrl.create({
@@ -93,23 +101,26 @@ export class ProductoPage {
   addShopping(platillo: any){
 
     if(this.auth.auth.currentUser != null){
-      //cambia el estado del icono
-      this.visible = !this.visible;
     
-      this.favorito.idPlatillo = platillo.key;
-      this.favorito.idCliente  = this.auth.auth.currentUser.uid;
-      
-      this.shoppingService.addPlatillo(this.favorito).then(ref => {
+      try {
         
-        this.loadingCtrl.create({
-          content: 'Agregando carrito de compras...',
-          duration: 1000,
-          dismissOnPageChange: true
-        }).present();
+        this.favorito.idPlatillo = platillo.key;
+        this.favorito.idCliente  = this.auth.auth.currentUser.uid;
       
+        this.shoppingService.addPlatillo(this.favorito).then(ref => {
+        
+          this.loadingCtrl.create({
+            content: 'Agregando carrito de compras...',
+            duration: 1000,
+            dismissOnPageChange: true
+          }).present();
+    
+        });
 
-      });
-
+      } catch (error) {
+        console.log(error);
+      }
+      
 
     }else{
         

@@ -127,13 +127,14 @@ export class UserFavoritosPage {
   }
 
   removeFavorite(platillo: any){
+    
     this.favoriteService.removeFavorito(platillo.favoriteKey).then(ref => {
+
       this.platillos.splice(platillo.platillo, 1);
       this.lista.splice(platillo.favoriteKey, 1);
+      this.getPlatillos();
+      this.myFavorites();
     });
-
-    this.getPlatillos();
-    this.myFavorites();
   }
 
   verPlatillo(platillo: any){

@@ -40,7 +40,7 @@ export class ProductoPage {
   
       //llena el json de favorito
       this.favorito.idPlatillo = platillo.key;
-      this.favorito.idCliente  = 'null';
+      this.favorito.idCliente  = this.auth.auth.currentUser.uid;
   
       //agrega un favorito a firebase
       this.favoritoService.addFavorito(this.favorito).then(ref => {})

@@ -87,26 +87,30 @@ export class UserFavoritosPage {
       this.favoriteList.forEach(favorito => {
           favorito.forEach(indexFavorito => {
   
-            this.dishList.forEach(platillo => {
-              platillo.forEach(indexPlatillo => {
-  
-                if(indexFavorito.idPlatillo == indexPlatillo.key){
-  
-                  let result = this.lista.find( platillo => platillo == indexPlatillo.key);
-  
-                  //significa no repetir datos
-                  if(result == undefined){
-  
-                    this.platillos.push({platillo:indexPlatillo, favoriteKey: indexFavorito.key });
-                    this.lista.push(indexPlatillo.key);
-  
+            if(indexFavorito.idCliente == this.auth.auth.currentUser.uid){
+
+              this.dishList.forEach(platillo => {
+                platillo.forEach(indexPlatillo => {
+    
+                  if(indexFavorito.idPlatillo == indexPlatillo.key){
+    
+                    let result = this.lista.find( platillo => platillo == indexPlatillo.key);
+    
+                    //significa no repetir datos
+                    if(result == undefined){
+    
+                      this.platillos.push({platillo:indexPlatillo, favoriteKey: indexFavorito.key });
+                      this.lista.push(indexPlatillo.key);
+    
+                    }
+    
                   }
-  
-                }
-  
+    
+                });
               });
-            });
-  
+
+            }
+              
           });
       });
 

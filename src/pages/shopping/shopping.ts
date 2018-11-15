@@ -9,7 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ShoppingPage {
 
-  pet: string = "puppies";
+  tipo: string = "Carrito";
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams) {

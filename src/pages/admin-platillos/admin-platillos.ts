@@ -134,7 +134,6 @@ export class AdminPlatillosPage {
         idRestaurante: this.restaurante.key,
         nombre: this.nombre,
         precio: this.precio,
-        //imagen: 'https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/pizza.jpg?alt=media&token=d915367c-986d-4144-96eb-d8a383628c8a'
         imagen: this.urlimg
       }
 
@@ -174,6 +173,12 @@ export class AdminPlatillosPage {
         ],
         buttons: [
           {
+            text: 'Subir nueva Imagen!',
+            handler: data => {
+              this.seleccionaImagen(); // llama funcion para elegir y subir nueva imagen
+            }
+          },
+          {
             text: 'Cancelar',
             role: 'cancel',
             handler: data => {
@@ -186,7 +191,7 @@ export class AdminPlatillosPage {
               dish.nombre = data.nombre;
               dish.descripcion= data.descripcion;
               dish.precio= data.precio;
-              console.log("Data: ",dish);
+              dish.imagen= this.urlimg;
               this.platilloService.editPlatillo(dish);
               this.actualizaPantalla();
             }
@@ -222,7 +227,7 @@ export class AdminPlatillosPage {
 
   async upload(buffer,name){
 
-    alert("Subiendo imagen ...")
+    alert("Subiendo imagen ... Por favor espere msj de confirmación!")
     let blob = new Blob([buffer],{ type: "image/jpeg"});
     // especificar mas formatos de fotos xd
     let storage = firebase.storage();

@@ -1,17 +1,9 @@
 page-see-restaurant {
     .card {
-        background-color: rgb(159, 247, 159);
-        border-radius: 4px;
-    }
-    .item {
         background-color: white;
+        border-radius: 2px;
     }
-    ion-title {
-        top: 0;
-        left: 0;
-        padding: 0 50px 1px;
-        width: 100%;
-        height: 100%;
-        text-align: center;
+    .body {
+        background-color: ghostwhite;
     }
 }

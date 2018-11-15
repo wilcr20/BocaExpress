@@ -5,29 +5,24 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-toolbar color="nav">
-
+    <ion-navbar color="nav">
         <ion-title>Home</ion-title>
-        <!--
-        <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
-        -->
-
-    </ion-toolbar>
+    </ion-navbar>
 
 </ion-header>
 
-<ion-content padding class="card-background-page">
-
+<ion-content padding class="body">
 
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
-    <ion-card *ngFor="let platillo of this.searchbarService.platilloList" (click)="verPlatillo(platillo)">
+    <div class="card-background-page">
+        <ion-card *ngFor="let platillo of this.searchbarService.platilloList" (click)="verPlatillo(platillo)">
 
-        <img src="{{platillo.platillo.imagen}}" />
-        <div class="card-title">{{platillo.platillo.nombre}}</div>
-        <div class="card-subtitle">{{platillo.platillo.precio}}</div>
+            <img src="{{platillo.platillo.imagen}}" />
+            <div class="card-title">{{platillo.platillo.nombre}}</div>
+            <div class="card-subtitle">{{platillo.platillo.precio}}</div>
 
-    </ion-card>
-
+        </ion-card>
+    </div>
 
 </ion-content>

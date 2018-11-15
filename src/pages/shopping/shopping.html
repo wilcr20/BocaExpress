@@ -7,19 +7,16 @@
 <ion-header>
 
     <ion-navbar color="nav">
-        <ion-title>shopping</ion-title>
+        <ion-title>Compras</ion-title>
     </ion-navbar>
 
     <ion-toolbar no-border-top color="nav">
-        <ion-segment [(ngModel)]="pet">
-            <ion-segment-button value="puppies">
-                Puppies
+        <ion-segment [(ngModel)]="tipo">
+            <ion-segment-button value="Carrito">
+                Carrito
             </ion-segment-button>
-            <ion-segment-button value="kittens">
-                Kittens
-            </ion-segment-button>
-            <ion-segment-button value="ducklings">
-                Ducklings
+            <ion-segment-button value="Factura">
+                Factura
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -29,8 +26,8 @@
 
 <ion-content padding>
 
-    <div [ngSwitch]="pet">
-        <ion-list *ngSwitchCase="'puppies'">
+    <div [ngSwitch]="tipo">
+        <ion-list *ngSwitchCase="'Carrito'">
             <ion-item>
                 <ion-thumbnail item-start>
                     <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
@@ -39,21 +36,12 @@
             </ion-item>
         </ion-list>
 
-        <ion-list *ngSwitchCase="'kittens'">
+        <ion-list *ngSwitchCase="'Factura'">
             <ion-item>
                 <ion-thumbnail item-start>
                     <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
                 </ion-thumbnail>
                 <h2>Luna</h2>
-            </ion-item>
-        </ion-list>
-
-        <ion-list *ngSwitchCase="'ducklings'">
-            <ion-item>
-                <ion-thumbnail item-start>
-                    <img src="https://firebasestorage.googleapis.com/v0/b/bocaexpress-3c2d9.appspot.com/o/casado.jpg?alt=media&token=58863b5c-4496-4245-8848-d6345293b5f6" />
-                </ion-thumbnail>
-                <h2>Luna2</h2>
             </ion-item>
         </ion-list>
     </div>

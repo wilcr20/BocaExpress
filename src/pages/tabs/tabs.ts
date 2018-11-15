@@ -4,10 +4,10 @@ import { IonicPage, NavController, NavParams, ViewController} from 'ionic-angula
 import { UserPrincipalPage } from '../user-principal/user-principal';
 import { ListaPage } from '../lista/lista';
 import { UserFavoritosPage } from '../user-favoritos/user-favoritos';
-import { UserCercanosPage } from '../user-cercanos/user-cercanos';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AdminHomePage } from '../admin-home/admin-home';
 import {RegistroRestaurantPage} from '../registro-restaurant/registro-restaurant';
+import {ShoppingPage} from '../shopping/shopping';
 
 
 
@@ -20,11 +20,11 @@ export class TabsPage {
 
 
   tab1Root = UserPrincipalPage;
-  tab2Root = UserCercanosPage;
   tab3Root = UserFavoritosPage;
   tab4Root = ListaPage;
   tab5Root = RegistroRestaurantPage;
   tab6Root = AdminHomePage;
+  tab7Root = ShoppingPage;
 
   public showTab: boolean = false;
 

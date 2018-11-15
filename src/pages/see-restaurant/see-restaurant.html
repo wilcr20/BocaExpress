@@ -14,7 +14,7 @@
 
 <ion-content padding class="body">
 
-    <ion-card *ngFor="let element of restauranteById">
+    <div *ngFor="let element of restauranteById">
 
         <!--
             <img src="{{element.imagenRestaurante}}" />
@@ -22,7 +22,7 @@
         -->
         <img src="{{element.imagenRestaurante}}" />
 
-        <ion-card-content color="dark">
+        <ion-card-content>
             <ion-card-title>
                 <strong>{{element.nombreRestaurante}}</strong>
             </ion-card-title>
@@ -67,6 +67,6 @@
             </ion-item>
         </ion-list>
 
-    </ion-card>
+    </div>
 
 </ion-content>

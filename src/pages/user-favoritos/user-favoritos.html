@@ -22,12 +22,14 @@
             </ion-thumbnail>
             <h2>{{platillo.platillo.nombre}}</h2>
             <p>₡{{platillo.platillo.precio}}</p>
+
             <button ion-button icon-start clear item-end (click)="removeFavorite(platillo)">
-                    <ion-icon name="ios-trash-outline"></ion-icon>
+                <ion-icon name="ios-trash-outline"></ion-icon>
             </button>
-            <button ion-button icon-start clear item-end>
-                <ion-icon name="md-cart"></ion-icon>
+            <button ion-button icon-start clear item-end (click)="verPlatillo(platillo)">
+                <ion-icon name="ios-arrow-forward-outline"></ion-icon>
             </button>
+
         </ion-item>
     </ion-list>
 

@@ -45,13 +45,13 @@ export class UserFavoritosPage {
               public auth : AngularFireAuth,
               public toastCtrl: ToastController) {
 
-      this.getDish_and_favorites();
+      this.getPlatillos();
       this.myFavorites();
 
 
   }
 
-  getDish_and_favorites(){
+  getPlatillos(){
 
     //obtengo los platillos
     this.dishList = this.platilloService.getPlatilloList()
@@ -132,7 +132,7 @@ export class UserFavoritosPage {
       this.lista.splice(platillo.favoriteKey, 1);
     });
 
-    this.getDish_and_favorites();
+    this.getPlatillos();
     this.myFavorites();
   }
 

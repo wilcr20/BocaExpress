@@ -31,4 +31,9 @@
             height: 100%;
             text-align: center;
         }
+        .toast-success {
+            >div {
+                background-color: red!important;
+            }
+        }
     }

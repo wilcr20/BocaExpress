@@ -82,6 +82,8 @@ export class UserFavoritosPage {
   //hago el inner join de las listas y creo las relaciones
   myFavorites(){
 
+    let key: string = "";
+
     if(this.auth.auth.currentUser != null){
 
       this.favoriteList.forEach(favorito => {
@@ -94,7 +96,9 @@ export class UserFavoritosPage {
     
                   if(indexFavorito.idPlatillo == indexPlatillo.key){
     
-                    let result = this.lista.find( platillo => platillo == indexPlatillo.key);
+                    key = indexPlatillo.key;
+
+                    let result = this.lista.find( platillo => platillo == key);
     
                     //significa no repetir datos
                     if(result == undefined){
@@ -130,8 +134,8 @@ export class UserFavoritosPage {
     
     this.favoriteService.removeFavorito(platillo.favoriteKey).then(ref => {
 
-      this.platillos.splice(platillo.platillo, 1);
-      this.lista.splice(platillo.favoriteKey, 1);
+      this.platillos = [];
+      this.lista     = [];
       this.getPlatillos();
       this.myFavorites();
     });

@@ -81,26 +81,50 @@ export class ShoppingPage {
 
   addCompra(){
 
-    this.compra.arrayItems = this.arrayItem;
-    this.compra.idCliente  = this.auth.auth.currentUser.uid;
-    this.compra.total      = this.total;
-    this.compra.estado     = false;
+    try {
 
-    this.compraService.addCompra(this.compra).then( ref =>{
+      if(this.total > 0){
 
-      const toast = this.toastCtrl.create({
-        message: 'Has agregado una compra!',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
+        this.compra.arrayItems = this.arrayItem;
+        this.compra.idCliente  = this.auth.auth.currentUser.uid;
+        this.compra.total      = this.total;
+        this.compra.estado     = false;
+    
+        this.compraService.addCompra(this.compra).then( ref =>{
+    
+          this.arrayItem.forEach( key =>{
 
-    });
+            this.deleteItemById(key);
 
-    //agrega compras a base de datos
+          });
 
+          this.total = 0;
 
-    //elimina todos los items
+          
+          const toast = this.toastCtrl.create({
+            message: 'Has agregado una compra!',
+            duration: 2000,
+            position: 'top'
+          });
+          toast.present();
+  
+        });
+
+      }else{
+
+          const toast = this.toastCtrl.create({
+            message: 'Debes seleccionar almenos un item!',
+            duration: 2000,
+            position: 'top'
+          });
+          toast.present();
+      }
+     
+
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   datachanged(e:any, item: any){
@@ -132,6 +156,27 @@ export class ShoppingPage {
     }
   }
 
+
+  deleteItemById(key: String){
+
+    try {
+
+      this.itemService.removeItem(key).then( ref => {
+        
+        this.platillosItems = [];
+        this.listaItems = [];
+        this.getPlatillos();
+        this.myItem();
+      });
+  
+
+    } catch (error) {
+
+      console.log(error);
+    }
+
+  }
+
   deleteItem(platillo: any){
 
     try {
@@ -146,7 +191,6 @@ export class ShoppingPage {
 
       });
       
-    
 
     } catch (error) {
 
@@ -154,7 +198,10 @@ export class ShoppingPage {
     }
   }
 
+  
   myItem(){
+
+    let key: string = "";
 
     if(this.auth.auth.currentUser != null){
 
@@ -169,11 +216,12 @@ export class ShoppingPage {
 
                   if(item.idPlatillo === platillo.key){
 
-                    let result = this.listaItems.find( platillo => platillo === platillo.key);
+                    key = platillo.key;
+
+                    let result = this.listaItems.find( platillo => platillo == key);
 
                     console.log("Item result "+result);
     
-                    console.log(result);
                     //significa no repetir datos
                     if(result == undefined){
         

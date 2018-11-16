@@ -51,11 +51,7 @@ export class ProductoPage {
         this.favoritoService.addFavorito(this.favorito).then(ref => {
 
           //muestra una notificación
-          this.loadingCtrl.create({
-            content: 'Agregando favorito...',
-            duration: 1000,
-            dismissOnPageChange: true
-          }).present();
+          this.mensajeLoading('Agregando favorito...');
   
         });
       
@@ -66,12 +62,7 @@ export class ProductoPage {
     
     }else{
         
-      const toast = this.toastCtrl.create({
-        message: 'Tienes que estar logueado para agregar a favoritos!',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
+      this.mensajeToast('Tienes que estar logueado para agregar a favoritos!');
     }
   }
 
@@ -88,12 +79,8 @@ export class ProductoPage {
 
     }else{
 
-      const toast = this.toastCtrl.create({
-        message: 'Tienes que estar logueado para agregar a shopping!',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
+      this.mensajeToast('Tienes que estar logueado para agregar a shopping!');
+    
     }
   }
 
@@ -109,11 +96,7 @@ export class ProductoPage {
       
         this.shoppingService.addPlatillo(this.favorito).then(ref => {
         
-          this.loadingCtrl.create({
-            content: 'Agregando carrito de compras...',
-            duration: 1000,
-            dismissOnPageChange: true
-          }).present();
+          this.mensajeLoading('Agregando carrito de compras...');
     
         });
 
@@ -124,15 +107,32 @@ export class ProductoPage {
 
     }else{
         
-      const toast = this.toastCtrl.create({
-        message: 'Tienes que estar logueado para agregar a carrito de compras!',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
+      this.mensajeToast('Tienes que estar logueado para agregar a carrito de compras!');
+
     }
   }
 
+
+  mensajeLoading(mensaje: any){
+
+    this.loadingCtrl.create({
+      content: mensaje,
+      duration: 200,
+      dismissOnPageChange: true
+    }).present();
+
+  }
+
+  mensajeToast(mensaje: any){
+
+    const toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 1000,
+      position: 'top'
+    });
+    toast.present();
+
+  }
 
   ionViewDidLoad() {}
 

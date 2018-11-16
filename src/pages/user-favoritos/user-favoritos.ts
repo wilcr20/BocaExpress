@@ -45,10 +45,8 @@ export class UserFavoritosPage {
               public auth : AngularFireAuth,
               public toastCtrl: ToastController) {
 
-      this.getPlatillos();
-      this.myFavorites();
-
-
+            this.getPlatillos();
+            this.myFavorites();
   }
 
   getPlatillos(){
@@ -99,8 +97,7 @@ export class UserFavoritosPage {
                     key = indexPlatillo.key;
 
                     let result = this.lista.find( platillo => platillo == key);
-    
-                    //significa no repetir datos
+
                     if(result == undefined){
     
                       this.platillos.push({platillo:indexPlatillo, favoriteKey: indexFavorito.key });
@@ -120,12 +117,7 @@ export class UserFavoritosPage {
 
     }else{
 
-      const toast = this.toastCtrl.create({
-        message: 'Tienes que estar logueado para ver tus favoritos!',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
+      this.mensajeToast('Tienes que estar logueado para ver tus favoritos!');
     }
 
   }
@@ -145,6 +137,18 @@ export class UserFavoritosPage {
     this.navCtrl.push(ProductoPage, {platillo});
   }
 
+
+
+  mensajeToast(mensaje: any){
+
+    const toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 1000,
+      position: 'top'
+    });
+    toast.present();
+
+  }
 
   ionViewDidLoad() {}
 

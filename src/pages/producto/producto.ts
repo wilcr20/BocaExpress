@@ -56,8 +56,7 @@ export class ProductoPage {
         });
       
       } catch (error) {
-        
-        console.log(error);
+        this.mensajeToast('Ha ocurrido un error intenta nuevamente!');
       }
     
     }else{
@@ -101,7 +100,7 @@ export class ProductoPage {
         });
 
       } catch (error) {
-        console.log(error);
+        this.mensajeToast('Ha ocurrido un error intenta nuevamente!');
       }
       
 

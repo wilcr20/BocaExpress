@@ -20,40 +20,37 @@ import { Compra } from '../../model/compra/compra.model';
 })
 export class ShoppingPage {
 
+  //tipo para mover el slice
   tipo: string = "Carrito";
+  //cantidad que se le agrega cuando se crea un item
+  cantidad = null;
+  //total de la compra que se le agrega a una compra
+  total = 0;
   
   //todos los shopping
   shoppingList: Observable<any[]>
   //todos los platillos
   platilloList: Observable<any[]>
+  //todos los items
+  ItemList: Observable<any[]> 
 
    //lista de platillos que si son favorotos del usuario
    platillos:  any[] = [];
-
    lista:      any[] = [];
+
+   //lista de items que si son del usuario
+   platillosItems:  any[] = [];
+   listaItems:      any[] = [];
+
+   //array que se le agrega a la compra
+   arrayItem: any[] = [];
 
    item : Item = {
     idPlatillo: '',
     idCliente:  '',
-    cantidad:   0
+    cantidad:   0,
+    estado: false
    }
-
-
-
-   cantidad = null;
-
-
-   ItemList: Observable<any[]> 
-
-  
-   platillosItems:  any[] = [];
-
-   listaItems:      any[] = [];
-
-
-   // esto es para agregar una compra
-   arrayItem: any[] = [];
-   total = 0;
 
    compra : Compra = {
     estado     : false,
@@ -79,8 +76,8 @@ export class ShoppingPage {
   }
 
 
+  //Func: agrega una compra si se cumplen las restricciones
   addCompra(){
-
     try {
 
       if(this.total > 0){
@@ -94,39 +91,33 @@ export class ShoppingPage {
     
           this.arrayItem.forEach( key =>{
 
-            this.deleteItemById(key);
+            this.updateItemById(key);
 
           });
 
-          this.total = 0;
+          this.total     = 0;
+          this.arrayItem = [];
+          this.platillosItems = [];
+          this.listaItems = [];
+          this.getPlatillos();
+          this.myItem();
 
-          
-          const toast = this.toastCtrl.create({
-            message: 'Has agregado una compra!',
-            duration: 2000,
-            position: 'top'
-          });
-          toast.present();
+          this.mensajeToast('Has agregado una compra!');
   
         });
 
       }else{
 
-          const toast = this.toastCtrl.create({
-            message: 'Debes seleccionar almenos un item!',
-            duration: 2000,
-            position: 'top'
-          });
-          toast.present();
+        this.mensajeToast('Debes seleccionar almenos un item!');
+  
       }
-     
-
     } catch (error) {
-      console.log(error);
+      this.mensajeToast('Ha ocurrido un error intenta nuevamente!');
     }
     
   }
 
+  //Func: lo que hace es obtener los checks y relizar la suma de los precios
   datachanged(e:any, item: any){
 
     let key: string = item.itemKey;
@@ -156,29 +147,34 @@ export class ShoppingPage {
     }
   }
 
-
-  deleteItemById(key: String){
-
+  updateItemById(key: String){
     try {
 
-      this.itemService.removeItem(key).then( ref => {
-        
-        this.platillosItems = [];
-        this.listaItems = [];
-        this.getPlatillos();
-        this.myItem();
+      this.ItemList.forEach( itemList => {
+        itemList.forEach( item => {
+
+          if(item.key == key){
+
+            item.estado = true;
+
+            this.itemService.updateItem(item,key).then( ref =>{
+             
+              this.platillosItems = [];
+              this.listaItems = [];
+              this.getPlatillos();
+              this.myItem();
+            });
+          }
+        });
       });
-  
 
     } catch (error) {
-
-      console.log(error);
+      this.mensajeToast('Ha ocurrido un error intenta nuevamente!');
     }
 
   }
 
   deleteItem(platillo: any){
-
     try {
 
       this.itemService.removeItem(platillo.itemKey).then( ref => {
@@ -187,24 +183,19 @@ export class ShoppingPage {
         this.listaItems.splice(platillo.platillo.key, 1);
         this.getPlatillos();
         this.myItem();
-      
-
+    
       });
-      
-
     } catch (error) {
-
-      console.log(error);
+      this.mensajeToast('Ha ocurrido un error intenta nuevamente!');
     }
   }
 
-  
+
   myItem(){
 
     let key: string = "";
 
     if(this.auth.auth.currentUser != null){
-
 
       this.ItemList.forEach( ItemList => {
           ItemList.forEach( item => {
@@ -220,18 +211,16 @@ export class ShoppingPage {
 
                     let result = this.listaItems.find( platillo => platillo == key);
 
-                    console.log("Item result "+result);
-    
-                    //significa no repetir datos
                     if(result == undefined){
         
-                      this.platillosItems.push({platillo:platillo,cantidad: item.cantidad,itemKey: item.key });
-                      this.listaItems.push(platillo.key);
+                      if(item.estado == false){
+
+                        this.platillosItems.push({platillo:platillo,cantidad: item.cantidad,itemKey: item.key });
+                        this.listaItems.push(platillo.key);
+                      }
         
                     }
-
                   }
-
                 });
               });
 
@@ -242,63 +231,41 @@ export class ShoppingPage {
 
     }else{
 
-      const toast = this.toastCtrl.create({
-        message: 'Tienes que estar logueado para ver tus Items!',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
+      this.mensajeToast('Tienes que estar logueado para ver tus Items!');
+
     }
   }
   
 
   addItem(platillo: any){
-
-
     try {
 
       if(this.cantidad != null){
 
-        
         this.item.idPlatillo = platillo.platillo.key;
         this.item.idCliente  = this.auth.auth.currentUser.uid;
         this.item.cantidad   = this.cantidad;
+        this.item.estado     = false;
 
         this.itemService.addItem(this.item).then(ref =>{
 
           this.removeElement(platillo);
           this.getPlatillos();
-
-
-          this.loadingCtrl.create({
-            content: 'Please wait...',
-            duration: 1000,
-            dismissOnPageChange: true
-        }).present();
+          this.mensajeLoading('Please wait...');
 
         });
-      
-
       }else{
 
-        const toast = this.toastCtrl.create({
-          message: 'Procura seleccionar cantidad!!!',
-          duration: 2000,
-          position: 'top'
-        });
-        toast.present();
-
+        this.mensajeToast('Procura seleccionar cantidad!!!');
       }
       
     } catch (error) {
-      console.log(error);
+      this.mensajeToast('Ha ocurrido un error intenta nuevamente!');
     }
 
   }
 
   removeElement(platillo: any){
-
-
     try {
 
       this.shoppingService.removePlatillo(platillo.shoppingKey).then(ref => {
@@ -310,14 +277,15 @@ export class ShoppingPage {
       });
 
     } catch (error) {
-
-      console.log(error);
+      this.mensajeToast('Ha ocurrido un error intenta nuevamente!');
     }
   }
   
+
   onItemSelection(selection) {
 
     this.cantidad = selection;
+
   }
 
   getPlatillos(){
@@ -376,9 +344,6 @@ export class ShoppingPage {
 
                         let result = this.lista.find( platillo => platillo === elementPlatillo.key);
 
-                        console.log("shopping result "+result);
-    
-                        //significa no repetir datos
                         if(result == undefined){
         
                           this.platillos.push({platillo:elementPlatillo, shoppingKey: elementShopping.key });
@@ -396,15 +361,32 @@ export class ShoppingPage {
 
     }else{
 
-      const toast = this.toastCtrl.create({
-        message: 'Tienes que estar logueado para ver tu carrito de compra!',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
+      this.mensajeToast('Tienes que estar logueado para ver tu carrito de compra!');
+
     }
   }
 
+
+  mensajeLoading(mensaje: any){
+
+    this.loadingCtrl.create({
+      content: mensaje,
+      duration: 200,
+      dismissOnPageChange: true
+    }).present();
+
+  }
+
+  mensajeToast(mensaje: any){
+
+    const toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 1000,
+      position: 'top'
+    });
+    toast.present();
+
+  }
 
   ionViewDidLoad() {}
 

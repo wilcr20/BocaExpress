@@ -21,4 +21,8 @@ export class ItemService {
     removeItem(key: any) {
         return this.itemListRef.remove(key);
     }
+
+    updateItem(item: any, key: any){
+        return this.itemListRef.update(key, item);
+    }
 }

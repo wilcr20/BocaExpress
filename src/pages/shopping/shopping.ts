@@ -49,7 +49,8 @@ export class ShoppingPage {
     idPlatillo: '',
     idCliente:  '',
     cantidad:   0,
-    estado: false
+    estado: false,
+    estadoRestuante: false
    }
 
    compra : Compra = {

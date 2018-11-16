@@ -3,4 +3,5 @@ export interface Item {
     idCliente: string;
     cantidad:  number;
     estado: boolean;
+    estadoRestuante: boolean;
 }

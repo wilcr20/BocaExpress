@@ -16,7 +16,6 @@ import { AdminComprasPage } from '../pages/admin-compras/admin-compras';
 import { AdminPlatillosPage } from '../pages/admin-platillos/admin-platillos';
 import { AdminBandejaPage } from '../pages/admin-bandeja/admin-bandeja';
 import { UserPrincipalPage } from '../pages/user-principal/user-principal';
-import { UserCercanosPage } from '../pages/user-cercanos/user-cercanos';
 import { UserHistorialComprasPage } from '../pages/user-historial-compras/user-historial-compras';
 import { UserFavoritosPage } from '../pages/user-favoritos/user-favoritos';
 import { ProductoPage } from '../pages/producto/producto';
@@ -51,8 +50,13 @@ import { CompraService } from '../services/compra/compra.service';
 import {adminService} from '../services/adminService/admin.service';
 import { PerfilService } from '../services/perfil/perfil.service';
 import { RestauranteService } from '../services/restaurante/restaurante.service';
+<<<<<<< HEAD
 import { ShoppingHistoryPage } from '../pages/shopping-history/shopping-history';
 
+=======
+import { ShoppingService } from '../services/shopping/shopping.service';
+import { ItemService } from '../services/item/item.service';
+>>>>>>> a9ffb9e0012c715e7abe7453e61f9a2269fccbe7
 
 @NgModule({
   declarations: [
@@ -63,7 +67,6 @@ import { ShoppingHistoryPage } from '../pages/shopping-history/shopping-history'
     AdminPlatillosPage,
     AdminBandejaPage,
     UserPrincipalPage,
-    UserCercanosPage,
     UserFavoritosPage,
     UserHistorialComprasPage,
     ProductoPage,
@@ -93,7 +96,6 @@ import { ShoppingHistoryPage } from '../pages/shopping-history/shopping-history'
     AdminPlatillosPage,
     AdminBandejaPage,
     UserPrincipalPage,
-    UserCercanosPage,
     UserFavoritosPage,
     UserHistorialComprasPage,
     ProductoPage,
@@ -121,8 +123,13 @@ import { ShoppingHistoryPage } from '../pages/shopping-history/shopping-history'
     adminService,
     PerfilService,
     RestauranteService,
+<<<<<<< HEAD
 
 
+=======
+    ShoppingService,
+    ItemService
+>>>>>>> a9ffb9e0012c715e7abe7453e61f9a2269fccbe7
   ]
 })
 export class AppModule {}

@@ -45,13 +45,11 @@ export class UserFavoritosPage {
               public auth : AngularFireAuth,
               public toastCtrl: ToastController) {
 
-      this.getDish_and_favorites();
-      this.myFavorites();
-
-
+            this.getPlatillos();
+            this.myFavorites();
   }
 
-  getDish_and_favorites(){
+  getPlatillos(){
 
     //obtengo los platillos
     this.dishList = this.platilloService.getPlatilloList()
@@ -82,6 +80,8 @@ export class UserFavoritosPage {
   //hago el inner join de las listas y creo las relaciones
   myFavorites(){
 
+    let key: string = "";
+
     if(this.auth.auth.currentUser != null){
 
       this.favoriteList.forEach(favorito => {
@@ -94,9 +94,10 @@ export class UserFavoritosPage {
     
                   if(indexFavorito.idPlatillo == indexPlatillo.key){
     
-                    let result = this.lista.find( platillo => platillo == indexPlatillo.key);
-    
-                    //significa no repetir datos
+                    key = indexPlatillo.key;
+
+                    let result = this.lista.find( platillo => platillo == key);
+
                     if(result == undefined){
     
                       this.platillos.push({platillo:indexPlatillo, favoriteKey: indexFavorito.key });
@@ -116,30 +117,38 @@ export class UserFavoritosPage {
 
     }else{
 
-      const toast = this.toastCtrl.create({
-        message: 'Tienes que estar logueado para ver tus favoritos!',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
+      this.mensajeToast('Tienes que estar logueado para ver tus favoritos!');
     }
 
   }
 
   removeFavorite(platillo: any){
+    
     this.favoriteService.removeFavorito(platillo.favoriteKey).then(ref => {
-      this.platillos.splice(platillo.platillo, 1);
-      this.lista.splice(platillo.favoriteKey, 1);
-    });
 
-    this.getDish_and_favorites();
-    this.myFavorites();
+      this.platillos = [];
+      this.lista     = [];
+      this.getPlatillos();
+      this.myFavorites();
+    });
   }
 
   verPlatillo(platillo: any){
     this.navCtrl.push(ProductoPage, {platillo});
   }
 
+
+
+  mensajeToast(mensaje: any){
+
+    const toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 1000,
+      position: 'top'
+    });
+    toast.present();
+
+  }
 
   ionViewDidLoad() {}
 

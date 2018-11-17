@@ -38,38 +38,53 @@ export class UserPrincipalPage {
               public viewCtrl: ViewController,
               public tabs: TabsPage) {
 
-                if (this.authService.auth.currentUser != null){
-                  this.tabs.showTab = true;
-                  
-                }else{
-                  this.tabs.showTab = false;
-                }
+              this.user();
 
+              this.mensajeLoading('Please wait...');
               
-              this.loadingCtrl.create({
-                  content: 'Please wait...',
-                  duration: 3000,
-                  dismissOnPageChange: true
-              }).present();
-            
-
-              this.searchbarService.platilloRef.on('value', platilloList => {
-
-                let platillos = [];
-
-                platilloList.forEach( platillo => {
-
-                  platillos.push({platillo: platillo.val(), key: platillo.key});
-
-                  return false;
-                });
-
-                this.searchbarService.platilloList = platillos;
-                this.searchbarService.loadedPlatilloList = platillos;
-              });
+              this.searhItems();
 
   }
 
+
+  user(){
+
+    if (this.authService.auth.currentUser != null){
+      this.tabs.showTab = true;
+      
+    }else{
+      this.tabs.showTab = false;
+    }
+  }
+
+  searhItems(){
+
+    this.searchbarService.platilloRef.on('value', platilloList => {
+
+      let platillos = [];
+
+      platilloList.forEach( platillo => {
+
+        platillos.push({platillo: platillo.val(), key: platillo.key});
+
+        return false;
+      });
+
+      this.searchbarService.platilloList = platillos;
+      this.searchbarService.loadedPlatilloList = platillos;
+    });
+
+  }
+
+  mensajeLoading(mensaje: any){
+
+    this.loadingCtrl.create({
+      content: mensaje,
+      duration: 1000,
+      dismissOnPageChange: true
+    }).present();
+
+  }
 
   ionViewDidLoad() {
     if (this.authService.auth.currentUser != null){
@@ -125,19 +140,17 @@ export class UserPrincipalPage {
         for(var i=0; i<restJson.length;i++){
 
           if(restJson[i].idPropietario == idUser){
-            
-            //document.getElementById("TabPrincipal").className="OcultaTab4";
+          
             return true;
           }
 
         }
-        //document.getElementById("TabPrincipal").className="OcultaTab5";
         return false;
       }
     }
 
     
-   }
+  }
 
 
   loginVentana(){

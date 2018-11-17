@@ -1,7 +1,6 @@
 export interface Compra {
-    cantidad : number,
-    estado : boolean,
-    idCliente : string,
-    idPlatillo : string,
+    estado     : boolean,
+    idCliente  : string,
+    arrayItems : any[],
     total : number
 }

@@ -1,12 +1,15 @@
-<ion-tabs color="tab" *ngIf="showTab">
-    <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="ios-search-outline" color="dark"></ion-tab>
-    <ion-tab [root]="tab3Root" tabTitle="Favoritos" tabIcon="ios-star-outline" color="dark"></ion-tab>
-    <ion-tab [root]="tab5Root" tabTitle="Restaurante" tabIcon="ios-restaurant-outline" color="dark"></ion-tab>
-    <ion-tab [root]="tab6Root" tabTitle="Administrar" tabIcon="ios-briefcase-outline" color="dark"></ion-tab>
-    <ion-tab [root]="tab4Root" tabTitle="Usuario" tabIcon="ios-contacts-outline" color="dark"></ion-tab>
+<ion-tabs color="primary" *ngIf="showTab">
+    <ion-tab [root]="tab1Root" tabTitle="All Products" tabIcon="ios-archive-outline" color="dark"></ion-tab>
+    <ion-tab [root]="tab3Root" tabTitle="Favorites" tabIcon="ios-star-outline" color="dark"></ion-tab>
+    <ion-tab [root]="tab7Root" tabTitle="Shopping" tabIcon="ios-cart-outline" color="dark"></ion-tab>
+    <!--
+    <ion-tab [root]="tab5Root" tabTitle="Restaurant" tabIcon="ios-restaurant-outline" color="dark"></ion-tab>
+    -->
+    <ion-tab [root]="tab6Root" tabTitle="Manage" tabIcon="ios-restaurant-outline" color="dark"></ion-tab>
+    <ion-tab [root]="tab4Root" tabTitle="User" tabIcon="ios-contacts-outline" color="dark"></ion-tab>
 </ion-tabs>
 
 <ion-tabs color="tab" *ngIf="!showTab">
-    <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="ios-search-outline" color="dark"></ion-tab>s
-    <ion-tab [root]="tab4Root" tabTitle="Usuario" tabIcon="ios-contacts-outline" color="dark"></ion-tab>
+    <ion-tab [root]="tab1Root" tabTitle="All Products" tabIcon="ios-search-outline" color="dark"></ion-tab>s
+    <ion-tab [root]="tab4Root" tabTitle="User" tabIcon="ios-contacts-outline" color="dark"></ion-tab>
 </ion-tabs>

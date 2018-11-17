@@ -7,6 +7,7 @@ import { AdminLocalPage } from '../admin-local/admin-local';
 import { AdminComprasPage } from '../admin-compras/admin-compras';
 import { AdminPlatillosPage } from '../admin-platillos/admin-platillos';
 import { AdminBandejaPage } from '../admin-bandeja/admin-bandeja';
+import { RegistroRestaurantPage } from '../registro-restaurant/registro-restaurant';
 
 import {adminService} from '../../services/adminService/admin.service';
 import 'rxjs/add/operator/map'
@@ -77,6 +78,11 @@ export class AdminHomePage {
     this.navCtrl.push(AdminComprasPage);
   }
 
+  ventanaCrearRestaurante(){
+    //this.obtieneRestaurantes();
+    //this.allRestaurants(4);
+    this.navCtrl.push(RegistroRestaurantPage);
+  }
 
   //// Firebase
   obtieneRestaurantes(){

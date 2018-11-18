@@ -15,4 +15,19 @@
 
 <ion-content padding>
 
+    <div *ngIf="comprasGenerales.length > 0">
+        <ion-card *ngFor="let compra of comprasGenerales">
+            <ion-card-content>
+                <p>Cliente: {{compra.cliente}}</p>
+                <hr>
+                <p>Precio Total: {{compra}}</p>
+                <hr>
+                <p>Compras: {{compra}}</p>
+            </ion-card-content>
+        </ion-card>
+    </div>
+    <div *ngIf="comprasGenerales.length == 0">
+        <h4>Ust no posse registro de compras aún!</h4>
+    </div>
+
 </ion-content>

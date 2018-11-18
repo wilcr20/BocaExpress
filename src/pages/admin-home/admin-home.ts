@@ -36,7 +36,6 @@ export class AdminHomePage {
   rest:  any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public admServ:adminService,public authService: AngularFireAuth) {
-    console.log("CONST");
 
   }
 
@@ -67,15 +66,15 @@ export class AdminHomePage {
   }
 
   ventanaBandeja(){
-    //this.obtieneRestaurantes();
-    //this.allRestaurants(3);
-    this.navCtrl.push(AdminBandejaPage);
+    this.obtieneRestaurantes();
+    this.allRestaurants(3);
+    //this.navCtrl.push(AdminBandejaPage);
   }
 
   ventanaCompras(){
-    //this.obtieneRestaurantes();
-    //this.allRestaurants(4);
-    this.navCtrl.push(AdminComprasPage);
+    this.obtieneRestaurantes();
+    this.allRestaurants(4);
+    //this.navCtrl.push(AdminComprasPage);
   }
 
   ventanaCrearRestaurante(){
@@ -122,6 +121,16 @@ existeRestauranteAdmin(idUser,page){
           }
           if(page ==2){
             this.navCtrl.push(AdminPlatillosPage,{"rest":restJson[i]});
+            break;
+            //return true;
+          }
+          if(page ==3){
+            this.navCtrl.push(AdminBandejaPage,{"rest":restJson[i]});
+            break;
+            //return true;
+          }
+          if(page ==4){
+            this.navCtrl.push(AdminComprasPage,{"rest":restJson[i]});
             break;
             //return true;
           }

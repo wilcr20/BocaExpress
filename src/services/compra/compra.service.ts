@@ -20,4 +20,8 @@ export class CompraService{
         return this.db.list('/Compra/'+idCompra, ref => ref.orderByChild('arrayItems')).valueChanges();
     }
 
+    getAllCompras(){
+      return this.compraListRef;
+  }
+
 }

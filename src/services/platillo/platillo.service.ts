@@ -27,12 +27,14 @@ export class PlatilloService {
 
 
 
-    // Made by Wilfred :v
-
     deletePlatillo(platillo){  /// borra platillo de manera general
       this.db.database.ref('Platillo/'+platillo.key).remove();
 
     }
+
+    getDishID(uid : string){
+      return this.db.list('/Platillo/',ref => ref.orderByChild("idRestaurante").equalTo(uid)).valueChanges();
+  }
 
     editPlatillo(platillo){
       this.db.database.ref('Platillo/'+platillo.key).set(platillo);

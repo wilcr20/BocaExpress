@@ -47,8 +47,11 @@
                     <ion-input placeholder="Imagen Restaurante" name="imagen" [(ngModel)]="imagen" id="imagen" type="text" required></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-input placeholder="Imagen Propietario" name="imagenP" [(ngModel)]="imagenP" id="imagenP" type="text" required></ion-input>
+                    <button ion-button color="black" type="button" full round (click)="seleccionaImagen()"> Selecionar imagen
+                        <ion-icon name="md-image"></ion-icon>
+                         </button>
                 </ion-item>
+
             </ion-list>
         </ion-col>
     </ion-row>

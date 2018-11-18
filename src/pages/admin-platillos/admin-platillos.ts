@@ -139,6 +139,7 @@ export class AdminPlatillosPage {
 
       this.platilloService.addPlatillo(dishJ);
       this.actualizaPantalla();
+      this.urlimg ="";
       alert("Platillo agregado correctamente...");
 
   }
@@ -173,12 +174,6 @@ export class AdminPlatillosPage {
         ],
         buttons: [
           {
-            text: 'Subir nueva Imagen!',
-            handler: data => {
-              this.seleccionaImagen(); // llama funcion para elegir y subir nueva imagen
-            }
-          },
-          {
             text: 'Cancelar',
             role: 'cancel',
             handler: data => {
@@ -191,7 +186,7 @@ export class AdminPlatillosPage {
               dish.nombre = data.nombre;
               dish.descripcion= data.descripcion;
               dish.precio= data.precio;
-              dish.imagen= this.urlimg;
+              //dish.imagen= this.urlimg;
               this.platilloService.editPlatillo(dish);
               this.actualizaPantalla();
             }

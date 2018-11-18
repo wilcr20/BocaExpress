@@ -50,13 +50,11 @@ import { CompraService } from '../services/compra/compra.service';
 import {adminService} from '../services/adminService/admin.service';
 import { PerfilService } from '../services/perfil/perfil.service';
 import { RestauranteService } from '../services/restaurante/restaurante.service';
-<<<<<<< HEAD
 import { ShoppingHistoryPage } from '../pages/shopping-history/shopping-history';
 
-=======
 import { ShoppingService } from '../services/shopping/shopping.service';
 import { ItemService } from '../services/item/item.service';
->>>>>>> a9ffb9e0012c715e7abe7453e61f9a2269fccbe7
+import { ShopDetailPage } from '../pages/shop-detail/shop-detail';
 
 @NgModule({
   declarations: [
@@ -78,7 +76,8 @@ import { ItemService } from '../services/item/item.service';
     SeeRestaurantPage,
     RegistroRestaurantPage,
     ShoppingPage,
-    ShoppingHistoryPage
+    ShoppingHistoryPage,
+    ShopDetailPage
   ],
   imports: [
     BrowserModule,
@@ -107,7 +106,8 @@ import { ItemService } from '../services/item/item.service';
     SeeRestaurantPage,
     RegistroRestaurantPage,
     ShoppingPage,
-    ShoppingHistoryPage
+    ShoppingHistoryPage,
+    ShopDetailPage
   ],
   providers: [
     StatusBar,
@@ -123,13 +123,10 @@ import { ItemService } from '../services/item/item.service';
     adminService,
     PerfilService,
     RestauranteService,
-<<<<<<< HEAD
 
 
-=======
     ShoppingService,
     ItemService
->>>>>>> a9ffb9e0012c715e7abe7453e61f9a2269fccbe7
   ]
 })
 export class AppModule {}

@@ -37,4 +37,9 @@ export class PlatilloService {
     editPlatillo(platillo){
       this.db.database.ref('Platillo/'+platillo.key).set(platillo);
     }
+
+
+    getPlatillo(platillo : string){
+       return this.db.database.ref('Platillo/'+platillo);
+    }
 }

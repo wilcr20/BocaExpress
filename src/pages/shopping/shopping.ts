@@ -51,13 +51,15 @@ export class ShoppingPage {
     cantidad:   0,
     estado: false,
     estadoRestuante: false
+  
    }
 
    compra : Compra = {
     estado     : false,
     idCliente  : '',
     arrayItems : [],
-    total : 0
+    total : 0,
+    fecha : new Date().toISOString()
    }
 
 

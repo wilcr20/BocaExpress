@@ -16,5 +16,8 @@ export class CompraService{
     getCompras(uid : string){
         return this.db.list('/Compra/',ref => ref.orderByChild("idCliente").equalTo(uid)).valueChanges();
     }
+    getItems(idCompra:string){
+        return this.db.list('/Compra/'+idCompra, ref => ref.orderByChild('arrayItems')).valueChanges();
+    }
 
 }

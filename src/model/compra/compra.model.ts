@@ -2,5 +2,8 @@ export interface Compra {
     estado     : boolean,
     idCliente  : string,
     arrayItems : any[],
-    total : number
+    total : number,
+    fecha : string,
+    
+
 }

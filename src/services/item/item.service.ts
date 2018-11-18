@@ -25,4 +25,8 @@ export class ItemService {
     updateItem(item: any, key: any){
         return this.itemListRef.update(key, item);
     }
+
+    getItems(idCompra : string){
+       return this.db.list('Item', ref => ref.orderByChild('idCompra').equalTo(idCompra)).valueChanges();
+    }
 }

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { CompraService } from '../../services/compra/compra.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Compra } from '../../model/compra/compra.model';
+import { ShopDetailPage } from '../shop-detail/shop-detail';
 
 /**
  * Generated class for the ShoppingHistoryPage page.
@@ -30,4 +32,8 @@ export class ShoppingHistoryPage {
     console.log('ionViewDidLoad ShoppingHistoryPage');
   }
 
+  verDetalle(compra : Compra){
+
+      this.navCtrl.push(ShopDetailPage,{compra});
+  }
 }

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ShoppingHistory</ion-title>
+    <ion-title>Historial de compras</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,13 +17,10 @@
     <ion-list>
         <ion-item *ngFor="let compra of compras | async">
 
-            <h2>{{ compra.estado }}</h2>
-            <p>
-                {{compra.idCliente}}
-            </p>
-            <p>
-                {{compra.total}}
-            </p>
+            <h1>Fecha de compra: {{compra.fecha}}</h1>
+            <h2>Total: {{compra.total}}</h2>
+              <h3 *ngIf="compra.estado == false">Cancelado</h3>  
+           
         </ion-item>
     </ion-list>
 </ion-content>

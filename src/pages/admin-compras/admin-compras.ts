@@ -148,7 +148,6 @@ export class AdminComprasPage {
       items: [],
       total: compra.total
     }
-    console.log(itemsCompra);
 
 
 
@@ -158,7 +157,6 @@ export class AdminComprasPage {
       for (var n=0;n<this.items.length;n++){  //
 
           if (itemsCompra[i] == this.items[n].key ){ // si halla el item en la compra
-            console.log("Halla item/compra")
               for (var p=0 ; p< this.platillosLocal.length;p++){
                 if(this.platillosLocal[p].idRestaurante == this.restaurantes.key && user[0].idCliente ==this.items.idCliente ){
                   let itemss={
@@ -167,8 +165,9 @@ export class AdminComprasPage {
                   }
                   itemJson.items.push(itemss);
                   this.comprasGenerales.push(itemJson); // añade a lista de json de este tipo
+                  break;
                 }
-                break;
+
 
               }
           }

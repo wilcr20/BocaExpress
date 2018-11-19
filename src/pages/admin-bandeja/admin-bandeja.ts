@@ -102,6 +102,7 @@ export class AdminBandejaPage {
    });
   }
 
+
   getPlatilloLocal(clienteP,item,platillosL){
 
       for(var y=0; y <platillosL.length;y++){
